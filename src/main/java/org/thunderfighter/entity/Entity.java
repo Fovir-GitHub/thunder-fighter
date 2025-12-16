@@ -1,7 +1,7 @@
 package org.thunderfighter.entity;
 
 import javafx.scene.canvas.GraphicsContext;
-import java.awt.geom.Dimension2D;
+import javafx.geometry.Dimension2D;
 
 public interface Entity {
   void update();
@@ -10,3 +10,4 @@ public interface Entity {
   double getSpeed();
   boolean isAlive();
 }
+
