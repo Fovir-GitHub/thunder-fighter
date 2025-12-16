@@ -1,0 +1,27 @@
+enemy:
+  normal:
+    hp: 1
+    speed: 2
+    score: 10
+    canShoot: false
+
+  elite:
+    hp: 3
+    speed: 2
+    score: 50
+    canShoot: true
+    shootInterval: 60
+    bulletType: straight
+
+boss:
+  hp: 300
+  speed: 1
+  score: 500
+
+  phases:
+    - hpThreshold: 200
+      pattern: fan
+    - hpThreshold: 100
+      pattern: spiral
+    - hpThreshold: 50
+      pattern: circle
