@@ -1,0 +1,35 @@
+interfaces:
+  - Entity
+  - Aircraft
+  - Bullet
+  - Trajectory
+
+abstract_classes:
+  - AbstractEntity
+  - AbstractAircraft
+  - AbstractBullet
+  - AbstractProp
+
+inheritance:
+  PlayerAircraft:
+    extends: AbstractAircraft
+    implements: [Aircraft]
+
+  NormalEnemy:
+    extends: EnemyAircraft
+
+  EliteEnemy:
+    extends: EnemyAircraft
+
+  BossEnemy:
+    extends: EnemyAircraft
+
+  PlayerBullet:
+    extends: AbstractBullet
+
+  EnemyBullet:
+    extends: AbstractBullet
+
+  ShieldProp:
+    extends: AbstractProp
+    implements: [Bullet]
