@@ -1,9 +1,18 @@
 package org.thunderfighter;
 
-/** Main */
-public class Main {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
-  public static void main(String[] args) {
-    System.out.println("Hello World!");
+/** Main */
+public class Main extends Application {
+  @Override
+  public void start(Stage primaryStage) {
+    Pane pane = new Pane();
+    Scene scene = new Scene(pane);
+
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 }
