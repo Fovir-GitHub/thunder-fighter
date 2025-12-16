@@ -17,10 +17,11 @@
   in {
     devShells.${system}.default = pkgs.mkShell {
       # Add packages here.
-      buildInputs = [
+      buildInputs = with pkgs; [
+        google-java-format
         jdkWithFX
-        pkgs.maven
-        pkgs.just
+        just
+        maven
       ];
 
       shellHook = ''
