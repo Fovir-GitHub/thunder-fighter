@@ -1,0 +1,16 @@
+menu:
+  title: "Thunder Fighter"
+  buttons:
+    - name: start
+      text: "Start game"
+    - name: history
+      text: "History"
+    - name: setting
+      text: "Set"
+    - name: about
+      text: "About"
+
+about:
+  text: |
+    Thunder Fighter
+    @copyright 2025
