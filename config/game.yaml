@@ -19,5 +19,3 @@ difficulty:
 audio:
   music: true
   soundEffect: true
-
-#how to use: gameConfig.getPlayerMaxHp()
