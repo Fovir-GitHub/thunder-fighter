@@ -45,7 +45,7 @@ All runtime configuration files are stored in:
 src/main/resources/config/
 ```
 
-## YAML Files Overview
+### YAML Files Overview
 
 | File        | Description                                                                        |
 | ----------- | ---------------------------------------------------------------------------------- |
@@ -56,7 +56,23 @@ src/main/resources/config/
 | prop.yaml   | Props configuration: types, effects, duration, drop rates                          |
 | ui.yaml     | UI texts, menu buttons, about info                                                 |
 
-## Example: Loading YAML in Java
+### Get Configuration Options
+
+Refer to [utils/Config.java](https://github.com/Fovir-GitHub/thunder-fighter/blob/develop/src/main/java/org/thunderfighter/utils/Config.java), to get a configuration option, for example the speed of bullets, the following code can be used:
+
+```java
+int speed =
+    (int)
+        ((Map)
+          ((Map) Config.getInstance().getConfigMapByKey("bullet").get("bullets"))
+              .get("player"))
+      .get("speed");
+System.out.println(speed);
+```
+
+> **Use this in development.**
+
+### Example: Loading YAML in Java
 
 Using SnakeYAML:
 
@@ -85,14 +101,14 @@ Add Maven Dependency:
 </dependency>
 ```
 
-### Notes
+#### Notes
 
 - All game parameters are externalized in YAML.
 - Modifying YAML files can adjust game behavior without changing Java code.
 - Recommended workflow for new team members:
   1. Place new configuration in src/main/resources/config/
   2. Update README.md to describe the new file and its purpose
-  3. Ensure Java code reads and parses it correctly via ConfigLoader
+  3. Ensure Java code reads and parses it correctly via `ConfigLoader`
 
 ## Development
 
