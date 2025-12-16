@@ -47,14 +47,14 @@ src/main/resources/config/
 
 ### YAML Files Overview
 
-| File        | Description                                                                        |
-| ----------- | ---------------------------------------------------------------------------------- |
-| entity.yaml | Entity architecture declaration: interfaces, abstract classes, subclasses          |
-| game.yaml   | Global game rules, modes, player defaults, difficulty, audio settings              |
-| enemy.yaml  | Enemy and Boss attributes: HP, speed, score, attack patterns                       |
-| bullet.yaml | Bullet types and trajectories: player bullets, enemy bullets, boss bullet patterns |
-| prop.yaml   | Props configuration: types, effects, duration, drop rates                          |
-| ui.yaml     | UI texts, menu buttons, about info                                                 |
+| File          | Description                                                                        |
+| ------------- | ---------------------------------------------------------------------------------- |
+| entity.yaml   | Entity architecture declaration: interfaces, abstract classes, subclasses          |
+| game.yaml     | Global game rules, modes, player defaults, difficulty, audio settings              |
+| aircraft.yaml | Player and Enemy attributes: HP, speed, score, attack patterns                     |
+| bullet.yaml   | Bullet types and trajectories: player bullets, enemy bullets, boss bullet patterns |
+| prop.yaml     | Props configuration: types, effects, duration, drop rates                          |
+| ui.yaml       | UI texts, menu buttons, about info                                                 |
 
 ### Get Configuration Options
 
