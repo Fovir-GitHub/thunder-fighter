@@ -75,6 +75,7 @@ Map<String, Object> data = yaml.load(is);
 int maxHp = (int) ((Map)data.get("player")).get("maxHp");
 ```
 
+Add Maven Dependency:
 ```xml
 <dependency>
     <groupId>org.yaml</groupId>
