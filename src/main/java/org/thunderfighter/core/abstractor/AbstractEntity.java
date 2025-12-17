@@ -1,8 +1,8 @@
-package org.thunderfighter.abstractor;
+package org.thunderfighter.core.abstractor;
 
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
-import org.thunderfighter.entity.Entity;
+import org.thunderfighter.core.entity.Entity;
 
 public abstract class AbstractEntity implements Entity {
   protected double x;
@@ -21,9 +21,8 @@ public abstract class AbstractEntity implements Entity {
     return speed;
   }
 
-
   @Override
-  public boolean isAlive_flag() {
+  public boolean isAlive() {
     return alive_flag;
   }
 

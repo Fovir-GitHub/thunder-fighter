@@ -1,7 +1,7 @@
-package org.thunderfighter.abstractor;
+package org.thunderfighter.core.abstractor;
 
 import javafx.geometry.Bounds;
-import org.thunderfighter.entity.Aircraft;
+import org.thunderfighter.core.entity.Aircraft;
 
 public abstract class AbstractAircraft extends AbstractEntity implements Aircraft {
   protected int hp;
@@ -15,7 +15,7 @@ public abstract class AbstractAircraft extends AbstractEntity implements Aircraf
   @Override
   public void takeDamage(int damage) {
     hp -= damage;
-    if(hp <= 0) {
+    if (hp <= 0) {
       alive_flag = false;
       onDie();
     }
@@ -28,12 +28,17 @@ public abstract class AbstractAircraft extends AbstractEntity implements Aircraf
 
   @Override
   public final void update() {
-    if(!alive_flag) return;
+    if (!alive_flag) return;
     move();
     onUpdate();
   }
 
-  protected void onDie() {};
-  protected void move() {};
-  protected void onUpdate() {};
+  protected void onDie() {}
+  ;
+
+  protected void move() {}
+  ;
+
+  protected void onUpdate() {}
+  ;
 }
