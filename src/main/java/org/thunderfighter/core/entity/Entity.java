@@ -4,13 +4,13 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 
 public interface Entity {
-  void update();
+  void update(); // update object status
 
-  void draw(GraphicsContext gc);
+  void draw(GraphicsContext gc); // used to draw objects
 
-  Dimension2D getSize();
+  Dimension2D getSize(); // get the object texture size, for drawing and collision
 
-  double getSpeed();
+  double getSpeed(); // the object's base movement speed
 
-  boolean isAlive();
+  boolean isAlive(); // is alive or not, it will be removed when it is false
 }
