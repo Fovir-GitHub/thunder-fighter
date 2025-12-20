@@ -32,7 +32,7 @@ public abstract class AbstractAircraft extends AbstractEntity implements Aircraf
   public void takeDamage(int damage) {
     hp -= damage;
     if (hp <= 0) {
-      alive_flag = false;
+      aliveFlag = false;
       onDie();
     }
   }
@@ -44,7 +44,7 @@ public abstract class AbstractAircraft extends AbstractEntity implements Aircraf
 
   @Override
   public final void update() {
-    if (!alive_flag) return;
+    if (!aliveFlag) return;
     move();
     updateCollisionBounds();
     onUpdate();
@@ -52,7 +52,7 @@ public abstract class AbstractAircraft extends AbstractEntity implements Aircraf
 
   @Override
   public void draw(GraphicsContext gc) {
-    if (!alive_flag || sprite == null) return;
+    if (!aliveFlag || sprite == null) return;
     gc.drawImage(sprite, x, y, size.getWidth(), size.getHeight());
   } // default drawing logic
 
