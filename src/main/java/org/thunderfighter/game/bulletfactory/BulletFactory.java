@@ -1,8 +1,18 @@
 package org.thunderfighter.game.bulletfactory;
 
-import org.thunderfighter.game.bullet.*;
-import org.thunderfighter.game.item.*;
-import org.thunderfighter.game.trajectory.*;
+import org.thunderfighter.game.bullet.CurveEnemyBullet;
+import org.thunderfighter.game.bullet.HomingEnemyBullet;
+import org.thunderfighter.game.bullet.LaserBullet;
+import org.thunderfighter.game.bullet.NormalEnemyBullet;
+import org.thunderfighter.game.bullet.PlayerBullet;
+import org.thunderfighter.game.item.ClearItemBullet;
+import org.thunderfighter.game.item.ClearScreenHandler;
+import org.thunderfighter.game.item.HealItemBullet;
+import org.thunderfighter.game.item.PowerItemBullet;
+import org.thunderfighter.game.item.ShieldItemBullet;
+import org.thunderfighter.game.trajectory.CurveTrajectory;
+import org.thunderfighter.game.trajectory.HomingTrajectory;
+import org.thunderfighter.game.trajectory.StraightTrajectory;
 
 /**
  * BulletFactory
@@ -57,7 +67,7 @@ public final class BulletFactory {
       double canvasW,
       double canvasH) {
     CurveEnemyBullet bullet = new CurveEnemyBullet(x, y, dx, dy, curveFactor, canvasW, canvasH);
-    bullet.setTrajectory(new LorentzCurveTrajectory(curveFactor));
+    bullet.setTrajectory(new CurveTrajectory(curveFactor));
     return bullet;
   }
 

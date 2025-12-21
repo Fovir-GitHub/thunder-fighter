@@ -6,19 +6,34 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 /**
- * 无敌道具：
- * - 无敌计时建议放在 PlayerAircraft 内维护（5s=300ticks）
+ * Shield item (invincibility item).
+ *
+ * Behavior:
+ * - This item is still a bullet-like entity (ItemBullet).
+ * - It bounces inside the canvas (handled by ItemBullet's trajectory).
+ * - When the player collides with it, it grants invincibility for a duration.
+ *
+ * Notes:
+ * - The actual invincibility timer should be maintained inside PlayerAircraft.
+ * - We apply the effect through PlayerItemEffect interface (recommended).
  */
 public class ShieldItemBullet extends ItemBullet {
 
-  public ShieldItemBullet(double x, double y, double canvasW, double canvasH) {
+  /** Invincibility duration in ticks (e.g., 5s * 60TPS = 300). */
+  private final int invincibleTicks;
+
+  public ShieldItemBullet(double x, double y, double canvasW, double canvasH, int invincibleTicks) {
     super(x, y, ItemType.SHIELD, canvasW, canvasH);
+    this.invincibleTicks = invincibleTicks;
   }
 
   @Override
   protected void applyEffect(Aircraft player) {
-    // 同上：后续你在 PlayerAircraft 加 setInvincibleTicks(int)
-    // if (player instanceof PlayerAircraft p) p.setInvincibleTicks(300);
+    // Apply effect only if the player supports item effects
+    if (player instanceof PlayerItemEffect) {
+      PlayerItemEffect p = (PlayerItemEffect) player;
+      p.setInvincibleTicks(invincibleTicks);
+    }
   }
 
   @Override

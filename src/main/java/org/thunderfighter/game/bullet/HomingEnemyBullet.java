@@ -1,11 +1,12 @@
 package org.thunderfighter.game.bullet;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.HomingTrajectory;
+
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class HomingEnemyBullet extends AbstractBullet {
 
@@ -38,7 +39,7 @@ public class HomingEnemyBullet extends AbstractBullet {
   @Override
   public void update() {
     if (trackingTicks-- <= 0) {
-      alive_flag = false;
+      aliveFlag = false;
       return;
     }
     trajectory.update(this);
@@ -48,7 +49,7 @@ public class HomingEnemyBullet extends AbstractBullet {
   @Override
   public void onHit(Aircraft target) {
     target.takeDamage(DAMAGE);
-    alive_flag = false;
+    aliveFlag = false;
   }
 
   @Override
