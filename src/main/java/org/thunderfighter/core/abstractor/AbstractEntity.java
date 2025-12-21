@@ -31,5 +31,4 @@ public abstract class AbstractEntity implements Entity {
 
   @Override
   public abstract void draw(GraphicsContext gc); // the drawing logic
-  // implemented by subclasses
 }
