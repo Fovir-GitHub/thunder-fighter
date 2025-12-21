@@ -13,7 +13,15 @@ This project aims to develop a classical game Thunder Fighter with `JavaFX`.
 │       ├── java/
 │       │   └── org/
 │       │       └── thunderfighter/
-│       │           ├── entity/
+│       │           ├── core/
+│       │           │   ├── abstractor/
+│       │           │   ├── collision/
+│       │           │   └── entity/
+│       │           ├── game/
+│       │           │   └── aircraft/
+│       │           │       ├── enemy/
+│       │           │       └── player/
+│       │           ├── utils/
 │       │           └── Main.java
 │       └── resources/
 │           ├── config/
@@ -106,8 +114,8 @@ Add Maven Dependency:
 - All game parameters are externalized in YAML.
 - Modifying YAML files can adjust game behavior without changing Java code.
 - Recommended workflow for new team members:
-  1. Place new configuration in src/main/resources/config/
-  2. Update README.md to describe the new file and its purpose
+  1. Place new configuration in `src/main/resources/config/`
+  2. Update `README.md` to describe the new file and its purpose
   3. Ensure Java code reads and parses it correctly via `ConfigLoader`
 
 ## Development
