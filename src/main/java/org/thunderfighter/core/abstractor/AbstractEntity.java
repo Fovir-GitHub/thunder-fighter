@@ -8,7 +8,7 @@ public abstract class AbstractEntity implements Entity {
   protected double x; // x coordinate on the canvas
   protected double y; // y coordinate on the canvas
   protected double speed; // movement speed
-  protected boolean alive_flag = true; // is alive or not
+  protected boolean aliveFlag = true; // is alive or not
   protected Dimension2D size; // texture size
 
   @Override
@@ -23,7 +23,7 @@ public abstract class AbstractEntity implements Entity {
 
   @Override
   public boolean isAlive() {
-    return alive_flag;
+    return aliveFlag;
   }
 
   @Override
