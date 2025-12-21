@@ -23,6 +23,6 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
   @Override
   protected void doShoot() {
-    System.out.println("Boss pattern shoot");
+    // boss enemy special shoot
   }
 }

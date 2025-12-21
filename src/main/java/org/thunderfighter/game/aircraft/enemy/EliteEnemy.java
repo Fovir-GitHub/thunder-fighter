@@ -23,6 +23,6 @@ public class EliteEnemy extends AbstractEnemyAircraft {
 
   @Override
   protected void doShoot() {
-    System.out.println("Elite enemy shoot");
+    // elite enemy special shoot
   }
 }
