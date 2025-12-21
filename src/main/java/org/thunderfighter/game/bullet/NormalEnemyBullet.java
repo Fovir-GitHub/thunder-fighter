@@ -1,11 +1,12 @@
 package org.thunderfighter.game.bullet;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.StraightTrajectory;
+
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public class NormalEnemyBullet extends AbstractBullet {
 
@@ -43,7 +44,7 @@ public class NormalEnemyBullet extends AbstractBullet {
   @Override
   public void onHit(Aircraft target) {
     target.takeDamage(DAMAGE);
-    alive_flag = false;
+    aliveFlag = false;
   }
 
   @Override

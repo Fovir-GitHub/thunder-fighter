@@ -51,7 +51,7 @@ public class LaserBullet extends AbstractBullet implements Clearable {
     x += dx;
     y += dy;
     remainTicks--;
-    if (remainTicks <= 0) alive_flag = false;
+    if (remainTicks <= 0) aliveFlag = false;
   }
 
   @Override
@@ -62,7 +62,7 @@ public class LaserBullet extends AbstractBullet implements Clearable {
 
   @Override
   public void clearImmediately() {
-    alive_flag = false;
+    aliveFlag = false;
   }
 
   @Override

@@ -1,18 +1,32 @@
 package org.thunderfighter.game.item;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.BounceTrajectory;
 
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+
 /**
- * 道具 = 子弹（重要：归属于 Bullet 体系）
- * - 只与玩家飞机发生碰撞
- * - DVD 反弹（BounceTrajectory）
- * - 存活 3 秒：默认 180 ticks（按 60 TPS）
+ * ItemBullet (Items are bullets)
+ *
+ * Requirements:
+ * - Items belong to the Bullet system.
+ * - Only collide with the player aircraft (pickup).
+ * - Bounce within canvas like a DVD logo (BounceTrajectory).
+ * - Lifetime: 3 seconds (default 180 ticks @ 60 TPS).
+ * - When picked up or expired, the item becomes not alive (removed by world cleanup).
  */
 public abstract class ItemBullet extends AbstractBullet {
+
+  /** Default ticks per second used by this module. */
+  private static final int TPS = 60;
+
+  /** Item lifetime in ticks: 3 seconds. */
+  private static final int DEFAULT_LIFE_TICKS = 3 * TPS;
+
+  /** Item base speed per tick (DVD-style). */
+  private static final double DEFAULT_PER_TICK_SPEED = 3.0;
 
   protected final ItemType type;
 
@@ -28,21 +42,25 @@ public abstract class ItemBullet extends AbstractBullet {
     this.type = type;
     this.size = new Dimension2D(18, 18);
 
-    // 3秒（如果你们 TPS 不是 60，后面统一改成 TPS*3）
-    this.lifeTicks = 180;
+    // Item lifetime (3 seconds by default)
+    this.lifeTicks = DEFAULT_LIFE_TICKS;
 
-    // 随机方向
+    // Random initial direction
     double angle = Math.random() * Math.PI * 2;
-    double perTick = 3.0;
-    this.dx = Math.cos(angle) * perTick;
-    this.dy = Math.sin(angle) * perTick;
-    this.speed = perTick;
+    this.dx = Math.cos(angle) * DEFAULT_PER_TICK_SPEED;
+    this.dy = Math.sin(angle) * DEFAULT_PER_TICK_SPEED;
+    this.speed = DEFAULT_PER_TICK_SPEED;
 
+    // Items are not fired by the player
     this.fromPlayer = false;
+
+    // DVD-style bouncing
     this.trajectory = new BounceTrajectory();
   }
 
-  public ItemType getType() { return type; }
+  public ItemType getType() {
+    return type;
+  }
 
   @Override
   public void update() {
@@ -52,11 +70,19 @@ public abstract class ItemBullet extends AbstractBullet {
 
   @Override
   public void onHit(Aircraft target) {
-    if (!target.isPlayer()) return; // 只允许玩家拾取
+    // Items can only be picked up by the player
+    if (!target.isPlayer()) return;
+
     applyEffect(target);
-    alive_flag = false;
+
+    // Mark as dead so the world removes it
+    aliveFlag = false;
   }
 
+  /**
+   * Apply the item effect to the player.
+   * Implementation depends on item type (heal/shield/power/clear).
+   */
   protected abstract void applyEffect(Aircraft player);
 
   @Override

@@ -69,13 +69,13 @@ public abstract class AbstractBullet extends AbstractEntity implements Bullet {
   protected final void tickLife() {
     if (lifeTicks > 0) {
       lifeTicks--;
-      if (lifeTicks <= 0) alive_flag = false;
+      if (lifeTicks <= 0) aliveFlag = false;
     }
   }
 
   protected final void killIfOutOfBounds() {
     if (x < 0 || x > canvasW || y < 0 || y > canvasH) {
-      alive_flag = false;
+      aliveFlag = false;
     }
   }
 
