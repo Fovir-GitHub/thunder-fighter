@@ -9,6 +9,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.thunderfighter.core.abstractor.AbstractEntity;
+import org.thunderfighter.core.manager.ScoreManager;
+import org.thunderfighter.game.aircraft.player.PlayerAircraft;
 
 /** Control and manage the game. */
 public class Game {
@@ -16,12 +18,16 @@ public class Game {
   private AnimationTimer animationTimer;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
+  private PlayerAircraft playerAircraft;
 
   // Manage all enetities.
   private List<AbstractEntity> entities = new ArrayList<>();
 
   public Game(Stage stage) {
     canvas = new Canvas();
+    canvas.widthProperty().bind(stage.widthProperty());
+    canvas.heightProperty().bind(stage.heightProperty());
+
     graphicsContext = canvas.getGraphicsContext2D();
 
     Scene scene = new Scene(new StackPane(canvas));
@@ -34,10 +40,15 @@ public class Game {
   private void initGame() {
     initEntities();
     initAnimationTimer();
+    ScoreManager.getInstance().reset();
   }
 
   /** Initialize entities and register them into the {@code entites} list. */
-  private void initEntities() {}
+  private void initEntities() {
+    // TODO: initialize `playerAircraft`
+    // playerAircraft = new PlayerAircraft();
+    entities.add(playerAircraft);
+  }
 
   private void initAnimationTimer() {
     animationTimer =
