@@ -7,12 +7,13 @@ public class NormalEnemy extends AbstractEnemyAircraft {
 
   public NormalEnemy(double x) {
     this.x = x;
-    this.y = y;
+    this.size = new Dimension2D(50, 60);
+    this.y = -size.getHeight();
+
     this.hp = 1;
     this.speed = 2;
     this.score = 10;
     this.canShoot = false;
-    this.size = new Dimension2D(50, 60);
   }
 
   @Override
@@ -22,6 +23,6 @@ public class NormalEnemy extends AbstractEnemyAircraft {
 
   @Override
   protected void doShoot() {
-    // Normal enemy doesn't shoot
+    // Normal enemy does not shoot
   }
 }
