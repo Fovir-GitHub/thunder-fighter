@@ -5,7 +5,7 @@ import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 
 public class BossEnemy extends AbstractEnemyAircraft {
 
-  public BossEnemy(double x, double y) {
+  public BossEnemy(double x) {
     this.x = x;
     this.y = y;
     this.hp = 300;

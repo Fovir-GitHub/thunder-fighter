@@ -5,7 +5,7 @@ import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 
 public class NormalEnemy extends AbstractEnemyAircraft {
 
-  public NormalEnemy(double x, double y) {
+  public NormalEnemy(double x) {
     this.x = x;
     this.y = y;
     this.hp = 1;

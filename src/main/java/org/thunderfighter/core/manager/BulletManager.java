@@ -15,7 +15,7 @@ public class BulletManager {
   } // api
 
   public void addBullet(Bullet bullet) {
-    bullets.add(bullet);
+    if(bullet != null) bullets.add(bullet);
   } // add a bullet into manager(bullets)
 
   public List<Bullet> getBullets() {
@@ -32,7 +32,11 @@ public class BulletManager {
     }
   }
 
-  public void clear() {
+  public void clearEnemyBullets() {
+    bullets.removeIf(b -> !b.isFromPlayer());
+  } // clear bullets from enemy
+
+  public void clearAll() {
     bullets.clear();
   } // clear all bullets in manager(bullets)
 }
