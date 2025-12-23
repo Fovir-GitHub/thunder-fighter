@@ -25,9 +25,7 @@ public class Game {
   private List<AbstractEntity> entities = new ArrayList<>();
 
   public Game(Stage stage) {
-    canvas = new Canvas();
-    canvas.widthProperty().bind(stage.widthProperty());
-    canvas.heightProperty().bind(stage.heightProperty());
+    canvas = new Canvas(800, 600);
 
     graphicsContext = canvas.getGraphicsContext2D();
 
@@ -35,6 +33,7 @@ public class Game {
     stage.setScene(scene);
     stage.show();
 
+    System.out.println(stage.getWidth() + " " + stage.getHeight());
     initGame();
   }
 
@@ -46,8 +45,9 @@ public class Game {
 
   /** Initialize entities and register them into the {@code entites} list. */
   private void initEntities() {
-    // TODO: initialize `playerAircraft`
-    // playerAircraft = new PlayerAircraft();
+    playerAircraft =
+        new PlayerAircraft(
+            canvas.getWidth() / 2, canvas.getHeight() - PlayerAircraft.SIZE.getHeight(), 3, 10, 20);
     entities.add(playerAircraft);
   }
 
