@@ -1,7 +1,10 @@
 package org.thunderfighter.core.abstractor;
 
+import javafx.scene.image.Image;
+
 public abstract class AbstractPlayerAircraft extends AbstractAircraft {
 
+  protected Image image;
   protected int shootInterval; // firing interval per frame
   protected int shootCooldown; // shooting cooldown
   protected boolean autoMode = true; // default auto shooting
