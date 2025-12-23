@@ -9,6 +9,13 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
   protected int shootCooldown; // shooting cooldown
   protected boolean autoMode = true; // default auto shooting
 
+  protected boolean up, down, left, right;
+
+  public void setUp(boolean up) {this.up = up;}
+  public void setDown(boolean down) {this.down = down;}
+  public void setLeft(boolean left) {this.left = left;}
+  public void setRight(boolean right) {this.right = right;}
+
   @Override
   public boolean isPlayer() {
     return true;

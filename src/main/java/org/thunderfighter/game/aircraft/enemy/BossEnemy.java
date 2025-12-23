@@ -6,7 +6,7 @@ import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 
 public class BossEnemy extends AbstractEnemyAircraft {
 
-  public static final Dimension2D SIZE = new Dimension2D(200, 150);
+  public static final Dimension2D SIZE = new Dimension2D(200, 150); // @params
 
   public BossEnemy(double x, double y) {
     this.x = x;

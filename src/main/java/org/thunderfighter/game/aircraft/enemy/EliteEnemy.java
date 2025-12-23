@@ -8,7 +8,7 @@ import org.thunderfighter.game.bullet.NormalEnemyBullet;
 
 public class EliteEnemy extends AbstractEnemyAircraft {
 
-  public static final Dimension2D SIZE = new Dimension2D(60, 80);
+  public static final Dimension2D SIZE = new Dimension2D(60, 80); // @params
 
   public EliteEnemy(double x) {
     this.size = SIZE;
@@ -33,7 +33,7 @@ public class EliteEnemy extends AbstractEnemyAircraft {
 
   @Override
   protected void doShoot() {
-    NormalEnemyBullet bullet = new NormalEnemyBullet(x + size.getWidth() / 2 - 4, y + size.getHeight());
+    NormalEnemyBullet bullet = new NormalEnemyBullet(x + size.getWidth() / 2 - 4, y + size.getHeight()); // @params
     BulletManager.getInstance().addBullet(bullet);
   }
 }
