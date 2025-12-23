@@ -11,15 +11,13 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
   public static final Dimension2D SIZE = new Dimension2D(60, 80); // @params
 
   public PlayerAircraft(double x, double y, int hp, double speed, int shootInterval) {
-      this.x = x;
-      this.y = y;
-      this.hp = hp;
-      this.speed = speed;
-      this.shootInterval = shootInterval;
-
-      this.size = SIZE;
-
-      this.image = new Image(getClass().getResourceAsStream("/images/Aircraft/PlayerAircraft.png"));
+    this.x = x;
+    this.y = y;
+    this.hp = hp;
+    this.speed = speed;
+    this.shootInterval = shootInterval;
+    this.size = SIZE;
+    this.image = new Image(getClass().getResourceAsStream("/images/Aircraft/PlayerAircraft.png"));
   }
 
   @Override
