@@ -1,6 +1,7 @@
 package org.thunderfighter.game;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
@@ -70,8 +71,13 @@ public class Game {
   }
 
   public void update() {
-    for (AbstractEntity entity : entities) {
+    Iterator<AbstractEntity> it = entities.iterator();
+    while (it.hasNext()) {
+      AbstractEntity entity = it.next();
       entity.update();
+      if (!entity.isAlive()) {
+        it.remove();
+      }
     }
   }
 
