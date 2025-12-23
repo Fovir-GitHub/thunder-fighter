@@ -1,7 +1,7 @@
 package org.thunderfighter.core.abstractor;
 
-import javafx.geometry.Bounds;
 import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.entity.Aircraft;
@@ -13,7 +13,7 @@ public abstract class AbstractAircraft extends AbstractEntity implements Aircraf
   protected Image sprite; // aircraft texture
 
   protected void updateCollisionBounds() {
-    if(size != null) {
+    if (size != null) {
       collisionBounds = new BoundingBox(x, y, size.getWidth(), size.getHeight());
     }
   }
@@ -26,7 +26,7 @@ public abstract class AbstractAircraft extends AbstractEntity implements Aircraf
   @Override
   public void takeDamage(int damage) {
     hp -= damage;
-    if(hp <= 0) {
+    if (hp <= 0) {
       aliveFlag = false;
       onDie();
     }
@@ -39,7 +39,7 @@ public abstract class AbstractAircraft extends AbstractEntity implements Aircraf
 
   @Override
   public final void update() {
-    if(!aliveFlag) return;
+    if (!aliveFlag) return;
     move();
     updateCollisionBounds();
     onUpdate();
@@ -47,11 +47,13 @@ public abstract class AbstractAircraft extends AbstractEntity implements Aircraf
 
   @Override
   public void draw(GraphicsContext gc) {
-    if(!aliveFlag || sprite == null) return;
+    if (!aliveFlag) return;
     gc.drawImage(sprite, x, y, size.getWidth(), size.getHeight());
   }
 
   protected void onDie() {} // aircraft death callback
+
   protected abstract void move(); // aircraft movement logic
+
   protected void onUpdate() {} // extra logic per frame, like shooting, AI, etc.
 }
