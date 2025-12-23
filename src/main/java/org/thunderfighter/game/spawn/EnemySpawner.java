@@ -72,7 +72,7 @@ public class EnemySpawner {
 
   private void spawnBoss() {
     bossSpawned = true;
-    listener.onSpawn(new BossEnemy(canvasW / 2 - 100));
+    listener.onSpawn(new BossEnemy(canvasW / 2 - 100, 0));
   }
 
   private double randomX() {
