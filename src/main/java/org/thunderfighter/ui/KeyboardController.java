@@ -26,12 +26,12 @@ public class KeyboardController {
                     case S, DOWN -> player.setDown(true);
                     case A, LEFT -> player.setLeft(true);
                     case D, RIGHT -> player.setRight(true);
-                    case SPACE -> player.shoot();
+                    case SPACE -> player.setShooting(true);
                     default -> {}
                 }
             }
         });
-        //When users press the key board, operate the player aircraft
+        //When users press the keyboard, operate the player aircraft
 
         scene.setOnKeyReleased(new EventHandler<>() {
             @Override
@@ -42,18 +42,19 @@ public class KeyboardController {
                     case S, DOWN -> player.setDown(false);
                     case A, LEFT -> player.setLeft(false);
                     case D, RIGHT -> player.setRight(false);
+                    case SPACE -> player.setShooting(false);
                     default -> {}
                 }
             }
         });
-        // when users release the key board, stop the operation of the player aircraft
+        // when users release the keyboard, stop the operation of the player aircraft
     }
     // Enable users to operate by the keyboard
 
     /*
     Notes:
     The reason why I write the same method twice is to realize two operations:
-    Control the player aircraft when users press the key board
-    Stop controlling the player aircraft when users release the key board
+    Control the player aircraft when users press the keyboard
+    Stop controlling the player aircraft when users release the keyboard
     */
 }

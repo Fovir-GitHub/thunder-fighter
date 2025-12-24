@@ -3,8 +3,11 @@ package org.thunderfighter.game.aircraft.enemy;
 import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
+import org.thunderfighter.core.entity.Entity;
 import org.thunderfighter.core.manager.BulletManager;
 import org.thunderfighter.game.bullet.NormalEnemyBullet;
+
+import java.util.List;
 
 public class EliteEnemy extends AbstractEnemyAircraft {
 
@@ -32,8 +35,8 @@ public class EliteEnemy extends AbstractEnemyAircraft {
   }
 
   @Override
-  protected void doShoot() {
+  protected void doShoot(List<Entity> worldEntities) {
     NormalEnemyBullet bullet = new NormalEnemyBullet(x + size.getWidth() / 2 - 4, y + size.getHeight()); // @params
-    BulletManager.getInstance().addBullet(bullet);
+    worldEntities.add(bullet);
   }
 }

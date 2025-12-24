@@ -3,6 +3,9 @@ package org.thunderfighter.game.aircraft.enemy;
 import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
+import org.thunderfighter.core.entity.Entity;
+
+import java.util.List;
 
 public class NormalEnemy extends AbstractEnemyAircraft {
 
@@ -28,7 +31,7 @@ public class NormalEnemy extends AbstractEnemyAircraft {
   }
 
   @Override
-  protected void doShoot() {
+  protected void doShoot(List<Entity> worldEntities) {
     // Normal enemy does not shoot
   }
 }

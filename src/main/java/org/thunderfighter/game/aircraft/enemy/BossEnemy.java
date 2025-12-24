@@ -3,8 +3,11 @@ package org.thunderfighter.game.aircraft.enemy;
 import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
+import org.thunderfighter.core.entity.Entity;
 import org.thunderfighter.core.manager.BulletManager;
 import org.thunderfighter.game.bulletfactory.BulletFactory;
+
+import java.util.List;
 
 public class BossEnemy extends AbstractEnemyAircraft {
 
@@ -69,50 +72,44 @@ public class BossEnemy extends AbstractEnemyAircraft {
   }
 
   @Override
-  protected void doShoot() {
+  protected void doShoot(List<Entity> worldEntities) {
     switch (stage) {
       case stage1:
-        shootStage1();
+        shootStage1(worldEntities);
         break;
       case stage2:
-        shootStage2();
+        shootStage2(worldEntities);
         break;
       case stage3:
-        shootStage3();
+        shootStage3(worldEntities);
         break;
     }
   }
 
-  private void shootStage1() {
+  private void shootStage1(List<Entity> worldEntities) {
     double cx = x + size.getWidth() / 2; // @params
     double by = y + size.getHeight();
 
-    BulletManager bm = BulletManager.getInstance();
-
     for(int i = -1; i <= 1; i++) {
-      bm.addBullet(BulletFactory.createEnemyBullet(cx + i * 25, by, i * 0.6, 3.5, false, SCREEN_WIDTH, 600));
+      worldEntities.add(BulletFactory.createEnemyBullet(cx + i * 25, by, i * 0.6, 3.5, false, SCREEN_WIDTH, 600));
     }
   }
 
-  private void shootStage2() {
+  private void shootStage2(List<Entity> worldEntities) {
     double cx = x + size.getWidth() / 2;
     double by = y + size.getHeight();
-
-    BulletManager bm = BulletManager.getInstance();
 
     for(int i = -3; i <= 3; i++) {
-      bm.addBullet(BulletFactory.createEnemyBullet(cx, by, i * 0.8, 4, i == 0, SCREEN_WIDTH, 600));
+      worldEntities.add(BulletFactory.createEnemyBullet(cx, by, i * 0.8, 4, i == 0, SCREEN_WIDTH, 600));
     }
   }
 
-  private void shootStage3() {
+  private void shootStage3(List<Entity> worldEntities) {
     double cx = x + size.getWidth() / 2;
     double by = y + size.getHeight();
 
-    BulletManager bm = BulletManager.getInstance();
-
-    bm.addBullet(BulletFactory.createCurvedEnemyBullet(cx - 60, by, -1.5, 3.5, 0.06, SCREEN_WIDTH, 600));
-    bm.addBullet(BulletFactory.createCurvedEnemyBullet(cx - 60, by, -1.5, 3.5, -0.06, SCREEN_WIDTH, 600));
-    bm.addBullet(BulletFactory.createEnemyBullet(cx, by, 0, 5, true, SCREEN_WIDTH, 600));
+    worldEntities.add(BulletFactory.createCurvedEnemyBullet(cx - 60, by, -1.5, 3.5, 0.06, SCREEN_WIDTH, 600));
+    worldEntities.add(BulletFactory.createCurvedEnemyBullet(cx - 60, by, -1.5, 3.5, -0.06, SCREEN_WIDTH, 600));
+    worldEntities.add(BulletFactory.createEnemyBullet(cx, by, 0, 5, true, SCREEN_WIDTH, 600));
   }
 }
