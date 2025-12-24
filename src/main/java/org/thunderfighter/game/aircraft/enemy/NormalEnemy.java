@@ -19,7 +19,7 @@ public class NormalEnemy extends AbstractEnemyAircraft {
     this.score = 10;
     this.canShoot = false;
 
-    this.image = new Image(getClass().getResourceAsStream("/images/Aircraft/NormalEnemy.png"));
+    this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/NormalEnemy.png"));
   }
 
   @Override

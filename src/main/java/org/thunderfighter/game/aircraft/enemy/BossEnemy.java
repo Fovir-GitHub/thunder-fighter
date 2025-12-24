@@ -19,7 +19,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
     this.size = SIZE;
 
-    this.image = new Image(getClass().getResourceAsStream("/images/Aircraft/BossEnemy.png"));
+    this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/BossEnemy.png"));
 
   }
 

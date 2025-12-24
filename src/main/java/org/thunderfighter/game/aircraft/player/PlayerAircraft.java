@@ -17,6 +17,7 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
     this.speed = speed;
     this.shootInterval = shootInterval;
     this.size = SIZE;
+
     this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/PlayerAircraft.png"));
   }
 

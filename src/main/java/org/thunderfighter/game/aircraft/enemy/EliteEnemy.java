@@ -22,7 +22,7 @@ public class EliteEnemy extends AbstractEnemyAircraft {
     this.canShoot = true;
     this.shootInterval = 60;
 
-    this.image = new Image(getClass().getResourceAsStream("/images/Aircraft/EliteEnemy.png"));
+    this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/EliteEnemy.png"));
 
   }
 
