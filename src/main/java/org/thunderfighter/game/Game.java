@@ -33,7 +33,6 @@ public class Game {
     stage.setScene(scene);
     stage.show();
 
-    System.out.println(stage.getWidth() + " " + stage.getHeight());
     initGame();
   }
 
