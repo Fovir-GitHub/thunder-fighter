@@ -23,12 +23,20 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
 
   public boolean wantToShoot() {
     return wantToShoot;
-  }
+  } // shooting info
 
   @Override
   public boolean isPlayer() {
     return true;
   }
+
+  public boolean isAutoMode() {
+    return autoMode;
+  }
+
+  public void setAutoMode(boolean autoMode) {
+    this.autoMode = autoMode;
+  } // auto or hand
 
   @Override
   public void shoot(List<Entity> worldEntities) {

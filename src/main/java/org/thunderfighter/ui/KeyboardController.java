@@ -26,6 +26,7 @@ public class KeyboardController {
                     case S, DOWN -> player.setDown(true);
                     case A, LEFT -> player.setLeft(true);
                     case D, RIGHT -> player.setRight(true);
+                    case F -> player.setAutoMode(!player.isAutoMode()); // F for mode transition
                     case SPACE -> player.setShooting(true);
                     default -> {}
                 }
