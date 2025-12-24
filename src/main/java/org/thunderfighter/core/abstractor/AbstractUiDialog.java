@@ -1,5 +1,7 @@
 package org.thunderfighter.core.abstractor;
-import org.thunderfighter.core.ui.UiDialog;
+
+import org.thunderfighter.ui.UiDialog;
+
 /*
 Define the show() workflow for Dialog UI components.
 show() = before → onShow → after
@@ -13,11 +15,14 @@ public abstract class AbstractUiDialog implements UiDialog {
     onAfterShow();
   }
 
-
-//The subclass should implement the actual show behavior.
+  // The subclass should implement the actual show behavior.
   protected abstract void onShow();
-  //before show hook
-  protected void onBeforeShow(){};
-  //after show hook
-  protected void onAfterShow(){};
+
+  // before show hook
+  protected void onBeforeShow() {}
+  ;
+
+  // after show hook
+  protected void onAfterShow() {}
+  ;
 }
