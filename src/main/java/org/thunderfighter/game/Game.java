@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.aircraft.player.PlayerAircraft;
+import org.thunderfighter.game.spawn.EnemySpawner;
+import org.thunderfighter.utils.Constant;
 
 /** Control and manage the game. */
 public class Game {
@@ -23,6 +25,9 @@ public class Game {
 
   // Manage all enetities.
   private List<AbstractEntity> entities = new ArrayList<>();
+
+  private EnemySpawner enemySpawner;
+  private int numberOfEnemy = 0;
 
   public Game(Stage stage) {
     canvas = new Canvas(800, 600);
@@ -37,6 +42,7 @@ public class Game {
   }
 
   private void initGame() {
+    enemySpawner = new EnemySpawner(canvas.getWidth(), entities);
     initEntities();
     initAnimationTimer();
     ScoreManager.getInstance().reset();
@@ -70,6 +76,7 @@ public class Game {
   }
 
   public void update() {
+    generateEnemy();
     Iterator<AbstractEntity> it = entities.iterator();
     while (it.hasNext()) {
       AbstractEntity entity = it.next();
@@ -84,6 +91,22 @@ public class Game {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     for (AbstractEntity entity : entities) {
       entity.draw(graphicsContext);
+    }
+  }
+
+  private void generateEnemy() {
+    if (numberOfEnemy >= Constant.ENEMY_NUMBER_LIMIT) {
+      return;
+    }
+
+    int currentScore = ScoreManager.getInstance().getScore() % Constant.SCORE_PER_ROUND;
+    if (currentScore >= Constant.GENERATE_BOSS_SCORE) {
+      enemySpawner.spawnBoss();
+    } else if (currentScore >= Constant.GENERATE_ELITE_SCORE) {
+      enemySpawner.spawnElite();
+      enemySpawner.spawnNormal();
+    } else {
+      enemySpawner.spawnNormal();
     }
   }
 }
