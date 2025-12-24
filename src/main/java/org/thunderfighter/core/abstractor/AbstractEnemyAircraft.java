@@ -4,7 +4,7 @@ public abstract class AbstractEnemyAircraft extends AbstractAircraft {
 
   protected boolean canShoot; // can shoot or not
   protected int shootInterval; // firing interval per frame
-  protected int shootCooldown; // shooting cd
+  protected int shootCooldown; // shooting cooldown
   protected int score; // destruction score
 
   @Override
@@ -14,8 +14,8 @@ public abstract class AbstractEnemyAircraft extends AbstractAircraft {
 
   @Override
   public void shoot() {
-    if (!canShoot) return;
-    if (shootCooldown <= 0) {
+    if(!canShoot) return;
+    if(shootCooldown <= 0) {
       doShoot();
       shootCooldown = shootInterval;
     }
@@ -23,10 +23,9 @@ public abstract class AbstractEnemyAircraft extends AbstractAircraft {
 
   @Override
   protected void onUpdate() {
-    shootCooldown--;
+    if(shootCooldown > 0) shootCooldown--;
     shoot();
   }
 
-  protected abstract void doShoot();
-  // actual firing behavior varies depending on the enemy aircraft, so there is no default implementation.
+  protected abstract void doShoot(); // implemented by subclass
 }

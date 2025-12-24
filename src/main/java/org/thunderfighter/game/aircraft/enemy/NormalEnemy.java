@@ -1,18 +1,25 @@
 package org.thunderfighter.game.aircraft.enemy;
 
 import javafx.geometry.Dimension2D;
+import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 
 public class NormalEnemy extends AbstractEnemyAircraft {
 
-  public NormalEnemy(double x, double y) {
+  public static final Dimension2D SIZE = new Dimension2D(50, 60); // @params
+
+  public NormalEnemy(double x) {
+    this.size = SIZE;
+
     this.x = x;
-    this.y = y;
+    this.y = -size.getHeight();
+
     this.hp = 1;
     this.speed = 2;
     this.score = 10;
     this.canShoot = false;
-    this.size = new Dimension2D(50, 60);
+
+    this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/NormalEnemy.png"));
   }
 
   @Override
@@ -22,6 +29,6 @@ public class NormalEnemy extends AbstractEnemyAircraft {
 
   @Override
   protected void doShoot() {
-    // Normal enemy doesn't shoot
+    // Normal enemy does not shoot
   }
 }

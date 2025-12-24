@@ -34,6 +34,10 @@ public class NormalEnemyBullet extends AbstractBullet {
     this.lifeTicks = -1;
   }
 
+  public NormalEnemyBullet(double startX, double startY) {
+    super();
+  }
+
   @Override
   public void update() {
     trajectory.update(this);

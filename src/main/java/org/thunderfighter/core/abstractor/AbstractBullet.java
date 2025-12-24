@@ -18,9 +18,6 @@ public abstract class AbstractBullet extends AbstractEntity implements Bullet {
   protected double canvasW;
   protected double canvasH;
 
-  // -------------------------
-  // Collision (required)
-  // -------------------------
   @Override
   public final Bounds getCollisionBounds() {
     return new BoundingBox(x, y, size.getWidth(), size.getHeight());
@@ -63,9 +60,6 @@ public abstract class AbstractBullet extends AbstractEntity implements Bullet {
     this.lifeTicks = ticks;
   }
 
-  // -------------------------
-  // Common helpers
-  // -------------------------
   protected final void tickLife() {
     if (lifeTicks > 0) {
       lifeTicks--;
@@ -74,15 +68,11 @@ public abstract class AbstractBullet extends AbstractEntity implements Bullet {
   }
 
   protected final void killIfOutOfBounds() {
-    if (x < 0 || x > canvasW || y < 0 || y > canvasH) {
-      aliveFlag = false;
-    }
+    if (x < 0 || x > canvasW || y < 0 || y > canvasH) aliveFlag = false;
   }
 
   protected final void moveOnce() {
-    if (trajectory != null) {
-      trajectory.update(this);
-    }
+    if (trajectory != null) trajectory.update(this);
   }
 
   @Override

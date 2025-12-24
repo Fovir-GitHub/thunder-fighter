@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.core.entity.Bullet;
-import org.thunderfighter.game.bulletfactory.BulletFactory; // ✅ correct package
+import org.thunderfighter.game.bulletfactory.BulletFactory;
 import org.thunderfighter.game.item.ClearScreenHandler;
 import org.thunderfighter.game.item.ItemType;
 

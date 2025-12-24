@@ -26,10 +26,17 @@ public abstract class AbstractEntity implements Entity {
     return aliveFlag;
   }
 
+  public double getX() {
+    return this.x;
+  }
+
+  public double getY() {
+    return this.y;
+  }
+
   @Override
   public abstract void update(); // the update logic is implemented by the subclass
 
   @Override
   public abstract void draw(GraphicsContext gc); // the drawing logic
-  // implemented by subclasses
 }

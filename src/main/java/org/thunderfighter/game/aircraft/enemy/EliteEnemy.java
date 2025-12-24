@@ -1,19 +1,29 @@
 package org.thunderfighter.game.aircraft.enemy;
 
 import javafx.geometry.Dimension2D;
+import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
+import org.thunderfighter.core.manager.BulletManager;
+import org.thunderfighter.game.bullet.NormalEnemyBullet;
 
 public class EliteEnemy extends AbstractEnemyAircraft {
 
-  public EliteEnemy(double x, double y) {
+  public static final Dimension2D SIZE = new Dimension2D(60, 80); // @params
+
+  public EliteEnemy(double x) {
+    this.size = SIZE;
+
     this.x = x;
-    this.y = y;
+    this.y = -size.getHeight();
+
     this.hp = 3;
     this.speed = 2;
     this.score = 50;
     this.canShoot = true;
     this.shootInterval = 60;
-    this.size = new Dimension2D(60, 80);
+
+    this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/EliteEnemy.png"));
+
   }
 
   @Override
@@ -23,6 +33,7 @@ public class EliteEnemy extends AbstractEnemyAircraft {
 
   @Override
   protected void doShoot() {
-    System.out.println("Elite enemy shoot");
+    NormalEnemyBullet bullet = new NormalEnemyBullet(x + size.getWidth() / 2 - 4, y + size.getHeight()); // @params
+    BulletManager.getInstance().addBullet(bullet);
   }
 }
