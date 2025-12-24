@@ -45,3 +45,6 @@ buildNumber.properties
 .settings
 
 bin/
+
+.idea/
+.vscode/
