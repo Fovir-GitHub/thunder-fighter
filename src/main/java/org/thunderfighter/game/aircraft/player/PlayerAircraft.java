@@ -1,13 +1,11 @@
 package org.thunderfighter.game.aircraft.player;
 
+import java.util.List;
 import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractPlayerAircraft;
 import org.thunderfighter.core.entity.Entity;
-import org.thunderfighter.core.manager.BulletManager;
 import org.thunderfighter.game.bullet.PlayerBullet;
-
-import java.util.List;
 
 public class PlayerAircraft extends AbstractPlayerAircraft {
 
