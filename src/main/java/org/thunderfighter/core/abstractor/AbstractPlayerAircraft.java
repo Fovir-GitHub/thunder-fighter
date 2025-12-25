@@ -1,8 +1,7 @@
 package org.thunderfighter.core.abstractor;
 
-import org.thunderfighter.core.entity.Entity;
-
 import java.util.List;
+import org.thunderfighter.core.entity.Entity;
 
 public abstract class AbstractPlayerAircraft extends AbstractAircraft {
 
@@ -12,10 +11,21 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
   protected boolean wantToShoot = false;
   protected boolean up, down, left, right;
 
-  public void setUp(boolean up) {this.up = up;}
-  public void setDown(boolean down) {this.down = down;}
-  public void setLeft(boolean left) {this.left = left;}
-  public void setRight(boolean right) {this.right = right;}
+  public void setUp(boolean up) {
+    this.up = up;
+  }
+
+  public void setDown(boolean down) {
+    this.down = down;
+  }
+
+  public void setLeft(boolean left) {
+    this.left = left;
+  }
+
+  public void setRight(boolean right) {
+    this.right = right;
+  }
 
   public void setShooting(boolean shooting) {
     this.wantToShoot = shooting;
@@ -48,7 +58,9 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
 
   @Override
   protected void onUpdate() {
-    if (shootCooldown > 0) shootCooldown--;
+    if (shootCooldown > 0) {
+      shootCooldown--;
+    }
   }
 
   protected abstract void doShoot(List<Entity> worldEntities); // implemented by subclass
