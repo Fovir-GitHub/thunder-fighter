@@ -26,6 +26,8 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
   protected void move() {
     double dx = 0;
     double dy = 0;
+    double tempX = this.x;
+    double tempY = this.y;
 
     if (up) {
       dy -= 1;
@@ -46,8 +48,18 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
       dy /= length;
     }
 
-    x += dx * speed;
-    y += dy * speed;
+    tempX += dx * speed;
+    tempY += dy * speed;
+
+    if (tempX <= 0
+        || tempX + this.size.getWidth() >= canvas.getWidth()
+        || tempY <= 0
+        || tempY + this.size.getHeight() >= canvas.getHeight()) {
+      return;
+    }
+
+    this.x = tempX;
+    this.y = tempY;
   } // to prevent the aircraft from traveling faster at an angle than straight.
 
   @Override

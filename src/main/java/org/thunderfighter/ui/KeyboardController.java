@@ -2,6 +2,7 @@ package org.thunderfighter.ui;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.thunderfighter.core.abstractor.AbstractPlayerAircraft;
@@ -17,7 +18,8 @@ public class KeyboardController {
 
   // create a keyboard controller for the player aircraft
 
-  public void operation(Scene scene) {
+  public void operation(Scene scene, Canvas canvas) {
+    player.setCanvas(canvas);
     scene.setOnKeyPressed(
         new EventHandler<>() {
           @Override

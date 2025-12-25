@@ -1,6 +1,7 @@
 package org.thunderfighter.core.abstractor;
 
 import java.util.List;
+import javafx.scene.canvas.Canvas;
 import org.thunderfighter.core.entity.Entity;
 
 public abstract class AbstractPlayerAircraft extends AbstractAircraft {
@@ -10,6 +11,11 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
   protected boolean autoMode = true; // default auto shooting
   protected boolean wantToShoot = false;
   protected boolean up, down, left, right;
+  protected Canvas canvas;
+
+  public void setCanvas(Canvas canvas) {
+    this.canvas = canvas;
+  }
 
   public void setUp(boolean up) {
     this.up = up;

@@ -46,7 +46,7 @@ public class Game {
     enemySpawner = new EnemySpawner(canvas.getWidth(), entities);
     initEntities();
     this.keyboardController = new KeyboardController(playerAircraft);
-    keyboardController.operation(scene);
+    keyboardController.operation(scene, canvas);
 
     initAnimationTimer();
     ScoreManager.getInstance().reset();
