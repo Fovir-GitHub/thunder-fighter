@@ -13,6 +13,7 @@ import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.aircraft.player.PlayerAircraft;
 import org.thunderfighter.game.spawn.EnemySpawner;
+import org.thunderfighter.ui.KeyboardController;
 import org.thunderfighter.utils.Constant;
 
 /** Control and manage the game. */
@@ -22,6 +23,7 @@ public class Game {
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private PlayerAircraft playerAircraft;
+  private KeyboardController keyboardController;
 
   // Manage all enetities.
   private List<AbstractEntity> entities = new ArrayList<>();
@@ -31,19 +33,21 @@ public class Game {
 
   public Game(Stage stage) {
     canvas = new Canvas(800, 600);
-
     graphicsContext = canvas.getGraphicsContext2D();
-
     Scene scene = new Scene(new StackPane(canvas));
+
+    initGame(scene);
+
     stage.setScene(scene);
     stage.show();
-
-    initGame();
   }
 
-  private void initGame() {
+  private void initGame(Scene scene) {
     enemySpawner = new EnemySpawner(canvas.getWidth(), entities);
     initEntities();
+    this.keyboardController = new KeyboardController(playerAircraft);
+    keyboardController.operation(scene);
+
     initAnimationTimer();
     ScoreManager.getInstance().reset();
   }
