@@ -32,6 +32,8 @@ public class Game {
   private int numberOfEnemy = 0;
 
   public Game(Stage stage) {
+    // TODO:
+    //  - Enable `canvas` to resize by following the window size change.
     canvas = new Canvas(800, 600);
     graphicsContext = canvas.getGraphicsContext2D();
     Scene scene = new Scene(new StackPane(canvas));
