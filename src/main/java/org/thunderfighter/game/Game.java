@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.aircraft.player.PlayerAircraft;
+import org.thunderfighter.game.item.ClearScreenHandler;
+import org.thunderfighter.game.item.PlayerItemInventory;
 import org.thunderfighter.game.spawn.EnemySpawner;
 import org.thunderfighter.ui.KeyboardController;
 import org.thunderfighter.utils.Constant;
@@ -26,6 +28,8 @@ public class Game {
   private KeyboardController keyboardController;
   private Scene scene;
   private StackPane root;
+  private PlayerItemInventory inventory;
+  private ClearScreenHandler clearScreenHandler;
 
   // Manage all enetities.
   private List<AbstractEntity> entities = new ArrayList<>();
@@ -48,13 +52,16 @@ public class Game {
   }
 
   private void initGame() {
+    inventory = new PlayerItemInventory();
     enemySpawner = new EnemySpawner(canvas.getWidth(), entities);
     initEntities();
-    this.keyboardController = new KeyboardController(playerAircraft);
-    keyboardController.operation(this.scene, this.canvas);
 
-    initAnimationTimer();
+    // TODO: Add `ClearScreenHandler`.
+    this.keyboardController = new KeyboardController(playerAircraft, inventory, null);
+    keyboardController.operation(this.scene);
+
     ScoreManager.getInstance().reset();
+    initAnimationTimer();
   }
 
   /** Initialize entities and register them into the {@code entites} list. */
@@ -65,7 +72,8 @@ public class Game {
             canvas.getHeight() - PlayerAircraft.SIZE.getHeight() - 10,
             3,
             10,
-            20);
+            20,
+            canvas);
     entities.add(playerAircraft);
   }
 
