@@ -12,10 +12,6 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
   protected boolean up, down, left, right;
   protected Canvas canvas;
 
-  public void setCanvas(Canvas canvas) {
-    this.canvas = canvas;
-  }
-
   public void setUp(boolean up) {
     this.up = up;
   }

@@ -2,6 +2,7 @@ package org.thunderfighter.game.aircraft.player;
 
 import java.util.List;
 import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.abstractor.AbstractPlayerAircraft;
@@ -11,7 +12,8 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
 
   public static final Dimension2D SIZE = new Dimension2D(60, 80); // @params
 
-  public PlayerAircraft(double x, double y, int hp, double speed, int shootInterval) {
+  public PlayerAircraft(
+      double x, double y, int hp, double speed, int shootInterval, Canvas canvas) {
     this.x = x;
     this.y = y;
     this.hp = hp;
@@ -20,6 +22,7 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
     this.size = SIZE;
 
     this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/PlayerAircraft.png"));
+    this.canvas = canvas;
   }
 
   @Override
