@@ -20,18 +20,22 @@ import org.thunderfighter.utils.Constant;
 /** Control and manage the game. */
 public class Game {
 
+  // GUI related.
   private AnimationTimer animationTimer;
   private Canvas canvas;
   private GraphicsContext graphicsContext;
-  private PlayerAircraft playerAircraft;
-  private KeyboardController keyboardController;
   private Scene scene;
   private StackPane root;
   private PlayerItemInventory inventory;
+  private KeyboardController keyboardController;
+
+  // Player.
+  private PlayerAircraft playerAircraft;
 
   // Manage all enetities.
   private List<AbstractEntity> entities = new ArrayList<>();
 
+  // Spawn enemies.
   private EnemySpawner enemySpawner;
   private int numberOfEnemy = 0;
 
