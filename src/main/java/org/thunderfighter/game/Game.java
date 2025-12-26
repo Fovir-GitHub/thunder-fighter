@@ -13,6 +13,7 @@ import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.aircraft.player.PlayerAircraft;
 import org.thunderfighter.game.spawn.EnemySpawner;
+import org.thunderfighter.ui.KeyboardController;
 import org.thunderfighter.utils.Constant;
 
 /** Control and manage the game. */
@@ -22,6 +23,9 @@ public class Game {
   private Canvas canvas;
   private GraphicsContext graphicsContext;
   private PlayerAircraft playerAircraft;
+  private KeyboardController keyboardController;
+  private Scene scene;
+  private StackPane root;
 
   // Manage all enetities.
   private List<AbstractEntity> entities = new ArrayList<>();
@@ -30,12 +34,14 @@ public class Game {
   private int numberOfEnemy = 0;
 
   public Game(Stage stage) {
+    // TODO:
+    //  - Enable `canvas` to resize by following the window size change.
     canvas = new Canvas(800, 600);
-
     graphicsContext = canvas.getGraphicsContext2D();
+    root = new StackPane(canvas);
+    this.scene = new Scene(root);
 
-    Scene scene = new Scene(new StackPane(canvas));
-    stage.setScene(scene);
+    stage.setScene(this.scene);
     stage.show();
 
     initGame();
@@ -44,6 +50,9 @@ public class Game {
   private void initGame() {
     enemySpawner = new EnemySpawner(canvas.getWidth(), entities);
     initEntities();
+    this.keyboardController = new KeyboardController(playerAircraft);
+    keyboardController.operation(this.scene, this.canvas);
+
     initAnimationTimer();
     ScoreManager.getInstance().reset();
   }
@@ -52,7 +61,11 @@ public class Game {
   private void initEntities() {
     playerAircraft =
         new PlayerAircraft(
-            canvas.getWidth() / 2, canvas.getHeight() - PlayerAircraft.SIZE.getHeight(), 3, 10, 20);
+            canvas.getWidth() / 2,
+            canvas.getHeight() - PlayerAircraft.SIZE.getHeight() - 10,
+            3,
+            10,
+            20);
     entities.add(playerAircraft);
   }
 
@@ -77,6 +90,11 @@ public class Game {
 
   public void update() {
     generateEnemy();
+
+    if (playerAircraft.wantToShoot()) {
+      playerAircraft.shoot(entities);
+    }
+
     Iterator<AbstractEntity> it = entities.iterator();
     while (it.hasNext()) {
       AbstractEntity entity = it.next();

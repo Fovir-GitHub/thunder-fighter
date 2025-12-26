@@ -1,5 +1,7 @@
 package org.thunderfighter.core.abstractor;
 
+import java.util.List;
+
 public abstract class AbstractEnemyAircraft extends AbstractAircraft {
 
   protected boolean canShoot; // can shoot or not
@@ -13,19 +15,18 @@ public abstract class AbstractEnemyAircraft extends AbstractAircraft {
   }
 
   @Override
-  public void shoot() {
-    if(!canShoot) return;
-    if(shootCooldown <= 0) {
-      doShoot();
+  public void shoot(List<AbstractEntity> worldEntities) {
+    if (!canShoot) return;
+    if (shootCooldown <= 0) {
+      doShoot(worldEntities);
       shootCooldown = shootInterval;
     }
   }
 
   @Override
   protected void onUpdate() {
-    if(shootCooldown > 0) shootCooldown--;
-    shoot();
+    if (shootCooldown > 0) shootCooldown--;
   }
 
-  protected abstract void doShoot(); // implemented by subclass
+  protected abstract void doShoot(List<AbstractEntity> worldEntities); // implemented by subclass
 }
