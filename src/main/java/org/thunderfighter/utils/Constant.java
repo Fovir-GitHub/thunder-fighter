@@ -16,4 +16,11 @@ public class Constant {
     ELITE,
     BOSS
   }
+
+  public static enum GAME_STATE {
+    MENU,
+    RUNNING,
+    PAUSE,
+    OVER,
+  }
 }
