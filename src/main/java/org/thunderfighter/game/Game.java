@@ -25,6 +25,7 @@ public class Game {
   private PlayerAircraft playerAircraft;
   private KeyboardController keyboardController;
   private Scene scene;
+  private StackPane root;
 
   // Manage all enetities.
   private List<AbstractEntity> entities = new ArrayList<>();
@@ -37,7 +38,8 @@ public class Game {
     //  - Enable `canvas` to resize by following the window size change.
     canvas = new Canvas(800, 600);
     graphicsContext = canvas.getGraphicsContext2D();
-    this.scene = new Scene(new StackPane(canvas));
+    root = new StackPane(canvas);
+    this.scene = new Scene(root);
 
     stage.setScene(this.scene);
     stage.show();
