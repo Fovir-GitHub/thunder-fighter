@@ -1,12 +1,11 @@
 package org.thunderfighter.game.bullet;
 
-import org.thunderfighter.core.abstractor.AbstractBullet;
-import org.thunderfighter.core.entity.Aircraft;
-import org.thunderfighter.game.trajectory.StraightTrajectory;
-
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.thunderfighter.core.abstractor.AbstractBullet;
+import org.thunderfighter.core.entity.Aircraft;
+import org.thunderfighter.game.trajectory.StraightTrajectory;
 
 public class PlayerBullet extends AbstractBullet {
 
@@ -23,7 +22,7 @@ public class PlayerBullet extends AbstractBullet {
 
     this.size = new Dimension2D(6, 12); // 小号子弹
     this.dx = 0;
-    this.dy = -12;                      // 向上
+    this.dy = -12; // 向上
     this.speed = 12;
 
     this.fromPlayer = true;

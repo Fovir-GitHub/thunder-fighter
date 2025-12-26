@@ -1,8 +1,7 @@
 package org.thunderfighter.core.manager;
 
-import org.thunderfighter.core.entity.Bullet;
-
 import java.util.*;
+import org.thunderfighter.core.entity.Bullet;
 
 public class BulletManager {
   private static BulletManager instance = new BulletManager();
@@ -15,7 +14,7 @@ public class BulletManager {
   } // api
 
   public void addBullet(Bullet bullet) {
-    if(bullet != null) bullets.add(bullet);
+    if (bullet != null) bullets.add(bullet);
   } // add a bullet into manager(bullets)
 
   public List<Bullet> getBullets() {
@@ -25,10 +24,10 @@ public class BulletManager {
   public void update() {
     Iterator<Bullet> it = bullets.iterator(); // iterator to traverse
 
-    while(it.hasNext()) {
+    while (it.hasNext()) {
       Bullet b = it.next();
       b.update();
-      if(!b.isAlive()) it.remove(); // remove from manager(bullets) if it die
+      if (!b.isAlive()) it.remove(); // remove from manager(bullets) if it die
     }
   }
 

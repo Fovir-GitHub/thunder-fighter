@@ -3,8 +3,7 @@ package org.thunderfighter.game.item;
 /**
  * PlayerItemEffect
  *
- * Capability interface for player aircraft.
- * Any Aircraft that wants to receive item effects
+ * <p>Capability interface for player aircraft. Any Aircraft that wants to receive item effects
  * should implement this interface.
  */
 public interface PlayerItemEffect {

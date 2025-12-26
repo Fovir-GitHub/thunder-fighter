@@ -1,30 +1,30 @@
 package org.thunderfighter.game.bullet;
 
-import org.thunderfighter.core.abstractor.AbstractBullet;
-import org.thunderfighter.core.entity.Aircraft;
-
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.thunderfighter.core.abstractor.AbstractBullet;
+import org.thunderfighter.core.entity.Aircraft;
 
 /**
- * 激光：
- * - 持续 ticks（由 boss 传入）
- * - 斩杀：takeDamage(Integer.MAX_VALUE)
- * - 清屏：clearImmediately() 立刻消失
+ * 激光： - 持续 ticks（由 boss 传入） - 斩杀：takeDamage(Integer.MAX_VALUE) - 清屏：clearImmediately() 立刻消失
  *
- * 备注：红线预警/扇形扫射标记是 UI/画布层，不在这里做。
+ * <p>备注：红线预警/扇形扫射标记是 UI/画布层，不在这里做。
  */
 public class LaserBullet extends AbstractBullet implements Clearable {
 
   private int remainTicks;
   private final double thickness;
 
-  public LaserBullet(double startX, double startY,
-                     double dx, double dy,
-                     int durationTicks,
-                     double thickness,
-                     double canvasW, double canvasH) {
+  public LaserBullet(
+      double startX,
+      double startY,
+      double dx,
+      double dy,
+      int durationTicks,
+      double thickness,
+      double canvasW,
+      double canvasH) {
     this.x = startX;
     this.y = startY;
     this.originX = startX;
@@ -44,7 +44,9 @@ public class LaserBullet extends AbstractBullet implements Clearable {
     this.remainTicks = Math.max(1, durationTicks);
   }
 
-  public double getThickness() { return thickness; }
+  public double getThickness() {
+    return thickness;
+  }
 
   @Override
   public void update() {

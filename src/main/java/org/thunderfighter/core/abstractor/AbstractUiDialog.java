@@ -1,5 +1,5 @@
 package org.thunderfighter.core.abstractor;
 
 public abstract class AbstractUiDialog {
-    public abstract void showDialog();
+  public abstract void showDialog();
 }

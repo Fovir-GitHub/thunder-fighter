@@ -1,21 +1,18 @@
 package org.thunderfighter.game.item;
 
-import org.thunderfighter.core.entity.Aircraft;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.thunderfighter.core.entity.Aircraft;
 
 /**
  * Shield item (invincibility item).
  *
- * Behavior:
- * - This item is still a bullet-like entity (ItemBullet).
- * - It bounces inside the canvas (handled by ItemBullet's trajectory).
- * - When the player collides with it, it grants invincibility for a duration.
+ * <p>Behavior: - This item is still a bullet-like entity (ItemBullet). - It bounces inside the
+ * canvas (handled by ItemBullet's trajectory). - When the player collides with it, it grants
+ * invincibility for a duration.
  *
- * Notes:
- * - The actual invincibility timer should be maintained inside PlayerAircraft.
- * - We apply the effect through PlayerItemEffect interface (recommended).
+ * <p>Notes: - The actual invincibility timer should be maintained inside PlayerAircraft. - We apply
+ * the effect through PlayerItemEffect interface (recommended).
  */
 public class ShieldItemBullet extends ItemBullet {
 

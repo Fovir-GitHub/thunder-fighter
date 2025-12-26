@@ -6,15 +6,12 @@ import org.thunderfighter.core.entity.Aircraft;
 /**
  * PlayerItemInventory
  *
- * Rule:
- * - Player can hold at most ONE item at a time.
- * - Picking up another item replaces the currently held item.
- * - Item can be used via a key press (world/input system triggers useHeld()).
+ * <p>Rule: - Player can hold at most ONE item at a time. - Picking up another item replaces the
+ * currently held item. - Item can be used via a key press (world/input system triggers useHeld()).
  *
- * Notes:
- * - You can choose whether HEAL triggers immediately or is stored.
- *   Here we implement "store then use", because your BR explicitly asked for inventory + release key.
- *   If your team decides HEAL should be immediate, you can special-case it in pickup().
+ * <p>Notes: - You can choose whether HEAL triggers immediately or is stored. Here we implement
+ * "store then use", because your BR explicitly asked for inventory + release key. If your team
+ * decides HEAL should be immediate, you can special-case it in pickup().
  */
 public class PlayerItemInventory {
 
@@ -35,10 +32,7 @@ public class PlayerItemInventory {
     heldType = null;
   }
 
-  /**
-   * Pick up an item.
-   * Rule: replace existing held item if any.
-   */
+  /** Pick up an item. Rule: replace existing held item if any. */
   public void pickup(ItemType type) {
     heldType = type;
   }
@@ -46,9 +40,8 @@ public class PlayerItemInventory {
   /**
    * Use currently held item (trigger effect) and clear inventory.
    *
-   * Requirements:
-   * - Player can still pick up and use items during invincibility.
-   * - Clear-screen requires world handler cooperation.
+   * <p>Requirements: - Player can still pick up and use items during invincibility. - Clear-screen
+   * requires world handler cooperation.
    */
   public void useHeld(Aircraft player, ClearScreenHandler world) {
     if (heldType == null) return;

@@ -1,21 +1,18 @@
 package org.thunderfighter.game.item;
 
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.BounceTrajectory;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-
 /**
  * ItemBullet (Items are bullets)
  *
- * Requirements:
- * - Items belong to the Bullet system.
- * - Only collide with the player aircraft (pickup).
- * - Bounce within canvas like a DVD logo (BounceTrajectory).
- * - Lifetime: 3 seconds (default 180 ticks @ 60 TPS).
- * - When picked up or expired, the item becomes not alive (removed by world cleanup).
+ * <p>Requirements: - Items belong to the Bullet system. - Only collide with the player aircraft
+ * (pickup). - Bounce within canvas like a DVD logo (BounceTrajectory). - Lifetime: 3 seconds
+ * (default 180 ticks @ 60 TPS). - When picked up or expired, the item becomes not alive (removed by
+ * world cleanup).
  */
 public abstract class ItemBullet extends AbstractBullet {
 
@@ -30,7 +27,8 @@ public abstract class ItemBullet extends AbstractBullet {
 
   protected final ItemType type;
 
-  protected ItemBullet(double startX, double startY, ItemType type, double canvasW, double canvasH) {
+  protected ItemBullet(
+      double startX, double startY, ItemType type, double canvasW, double canvasH) {
     this.x = startX;
     this.y = startY;
     this.originX = startX;
@@ -80,8 +78,8 @@ public abstract class ItemBullet extends AbstractBullet {
   }
 
   /**
-   * Apply the item effect to the player.
-   * Implementation depends on item type (heal/shield/power/clear).
+   * Apply the item effect to the player. Implementation depends on item type
+   * (heal/shield/power/clear).
    */
   protected abstract void applyEffect(Aircraft player);
 

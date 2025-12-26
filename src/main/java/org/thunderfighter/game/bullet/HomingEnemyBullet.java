@@ -1,23 +1,26 @@
 package org.thunderfighter.game.bullet;
 
-import org.thunderfighter.core.abstractor.AbstractBullet;
-import org.thunderfighter.core.entity.Aircraft;
-import org.thunderfighter.game.trajectory.HomingTrajectory;
-
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.thunderfighter.core.abstractor.AbstractBullet;
+import org.thunderfighter.core.entity.Aircraft;
+import org.thunderfighter.game.trajectory.HomingTrajectory;
 
 public class HomingEnemyBullet extends AbstractBullet {
 
   private static final int DAMAGE = 1;
   private int trackingTicks;
 
-  public HomingEnemyBullet(double startX, double startY,
-                           double initDx, double initDy,
-                           int trackingTicks,
-                           HomingTrajectory.TargetProvider provider,
-                           double canvasW, double canvasH) {
+  public HomingEnemyBullet(
+      double startX,
+      double startY,
+      double initDx,
+      double initDy,
+      int trackingTicks,
+      HomingTrajectory.TargetProvider provider,
+      double canvasW,
+      double canvasH) {
     this.x = startX;
     this.y = startY;
     this.originX = startX;

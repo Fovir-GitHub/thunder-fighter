@@ -4,10 +4,9 @@ import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Trajectory;
 
 /**
- * DVD-style bouncing trajectory.
- * Bullet reflects when reaching canvas boundaries.
+ * DVD-style bouncing trajectory. Bullet reflects when reaching canvas boundaries.
  *
- * Used by item bullets.
+ * <p>Used by item bullets.
  */
 public class BounceTrajectory implements Trajectory {
 

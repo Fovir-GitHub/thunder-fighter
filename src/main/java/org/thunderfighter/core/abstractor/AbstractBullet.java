@@ -1,11 +1,10 @@
 package org.thunderfighter.core.abstractor;
 
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.core.entity.Bullet;
 import org.thunderfighter.core.entity.Trajectory;
-
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
 
 public abstract class AbstractBullet extends AbstractEntity implements Bullet {
   protected double dx;
@@ -28,19 +27,53 @@ public abstract class AbstractBullet extends AbstractEntity implements Bullet {
     return fromPlayer;
   }
 
-  public final double getX() { return x; }
-  public final double getY() { return y; }
-  public final double getDx() { return dx; }
-  public final double getDy() { return dy; }
-  public final double getOriginX() { return originX; }
-  public final double getOriginY() { return originY; }
-  public final double getCanvasW() { return canvasW; }
-  public final double getCanvasH() { return canvasH; }
+  public final double getX() {
+    return x;
+  }
 
-  public final void setX(double x) { this.x = x; }
-  public final void setY(double y) { this.y = y; }
-  public final void setDx(double dx) { this.dx = dx; }
-  public final void setDy(double dy) { this.dy = dy; }
+  public final double getY() {
+    return y;
+  }
+
+  public final double getDx() {
+    return dx;
+  }
+
+  public final double getDy() {
+    return dy;
+  }
+
+  public final double getOriginX() {
+    return originX;
+  }
+
+  public final double getOriginY() {
+    return originY;
+  }
+
+  public final double getCanvasW() {
+    return canvasW;
+  }
+
+  public final double getCanvasH() {
+    return canvasH;
+  }
+
+  public final void setX(double x) {
+    this.x = x;
+  }
+
+  public final void setY(double y) {
+    this.y = y;
+  }
+
+  public final void setDx(double dx) {
+    this.dx = dx;
+  }
+
+  public final void setDy(double dy) {
+    this.dy = dy;
+  }
 
   public final void setCanvasSize(double canvasW, double canvasH) {
     this.canvasW = canvasW;

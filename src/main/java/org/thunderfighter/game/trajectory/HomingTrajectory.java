@@ -4,18 +4,16 @@ import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Trajectory;
 
 /**
- * Homing trajectory.
- * Gradually rotates the velocity vector toward a moving target.
+ * Homing trajectory. Gradually rotates the velocity vector toward a moving target.
  *
- * turnStrength:
- *   0.05 ~ 0.20 recommended.
- *   Higher value = stronger turning.
+ * <p>turnStrength: 0.05 ~ 0.20 recommended. Higher value = stronger turning.
  */
 public class HomingTrajectory implements Trajectory {
 
   /** Provides real-time target position (usually the player) */
   public interface TargetProvider {
     double getTargetX();
+
     double getTargetY();
   }
 

@@ -1,8 +1,8 @@
 package org.thunderfighter.game.item;
 
 public enum ItemType {
-  POWER,   
-  HEAL,    
-  SHIELD,  
-  CLEAR   
+  POWER,
+  HEAL,
+  SHIELD,
+  CLEAR
 }

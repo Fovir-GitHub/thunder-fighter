@@ -3,8 +3,8 @@ package org.thunderfighter.game.bullet;
 /**
  * BulletType
  *
- * Useful for boss/elite pattern selection and readable configs.
- * This enum does not create bullets; BulletFactory does.
+ * <p>Useful for boss/elite pattern selection and readable configs. This enum does not create
+ * bullets; BulletFactory does.
  */
 public enum BulletType {
   PLAYER_NORMAL,

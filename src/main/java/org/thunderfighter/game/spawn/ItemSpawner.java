@@ -1,7 +1,6 @@
 package org.thunderfighter.game.spawn;
 
 import java.util.Random;
-
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.core.entity.Bullet;
 import org.thunderfighter.game.bulletfactory.BulletFactory;
@@ -11,14 +10,12 @@ import org.thunderfighter.game.item.ItemType;
 /**
  * ItemSpawner
  *
- * Spawns item-bullets (items are bullets) based on BR:
- * - Spawn interval: random integer seconds between 15 and 20
- * - Spawn position: distance to player >= 1/3 of canvas max diagonal distance
- * - Prefer the opposite half of the canvas relative to player's region
- * - Boss fight has higher priority than HP rules:
- *   1) In boss fight, reduce SHIELD and CLEAR probability first
- *   2) Then adjust HEAL probability (between high-HP and low-HP non-boss values)
- * - Item exists for 3 seconds; next spawn timer starts only after item disappears or is picked up
+ * <p>Spawns item-bullets (items are bullets) based on BR: - Spawn interval: random integer seconds
+ * between 15 and 20 - Spawn position: distance to player >= 1/3 of canvas max diagonal distance -
+ * Prefer the opposite half of the canvas relative to player's region - Boss fight has higher
+ * priority than HP rules: 1) In boss fight, reduce SHIELD and CLEAR probability first 2) Then
+ * adjust HEAL probability (between high-HP and low-HP non-boss values) - Item exists for 3 seconds;
+ * next spawn timer starts only after item disappears or is picked up
  */
 public class ItemSpawner {
 
@@ -76,8 +73,7 @@ public class ItemSpawner {
 
     double[] pos =
         computeSpawnPosition(
-            player.getCollisionBounds().getMinX(),
-            player.getCollisionBounds().getMinY());
+            player.getCollisionBounds().getMinX(), player.getCollisionBounds().getMinY());
 
     double x = pos[0];
     double y = pos[1];
@@ -93,29 +89,33 @@ public class ItemSpawner {
   }
 
   /**
-   * Create an item bullet via BulletFactory.
-   * NOTE: BulletFactory methods are static. Call them by class name.
+   * Create an item bullet via BulletFactory. NOTE: BulletFactory methods are static. Call them by
+   * class name.
    */
-  private Bullet createItemBullet(ItemType type, double x, double y, ClearScreenHandler clearHandler) {
+  private Bullet createItemBullet(
+      ItemType type, double x, double y, ClearScreenHandler clearHandler) {
     return switch (type) {
       case HEAL -> BulletFactory.createHealItem(x, y, canvasW, canvasH);
 
-      case SHIELD -> BulletFactory.createShieldItem(
-          x, y, canvasW, canvasH,
-          5 * TPS // 5 seconds invincibility
-      );
+      case SHIELD ->
+          BulletFactory.createShieldItem(
+              x, y, canvasW, canvasH, 5 * TPS // 5 seconds invincibility
+              );
 
-      case POWER -> BulletFactory.createPowerItem(
-          x, y, canvasW, canvasH,
-          10 * TPS, // 10 seconds buff
-          1         // +1 bonus damage (adjust if needed)
-      );
+      case POWER ->
+          BulletFactory.createPowerItem(
+              x,
+              y,
+              canvasW,
+              canvasH,
+              10 * TPS, // 10 seconds buff
+              1 // +1 bonus damage (adjust if needed)
+              );
 
-      case CLEAR -> BulletFactory.createClearItem(
-          x, y, canvasW, canvasH,
-          clearHandler,
-          1 * TPS // 1 second clear window
-      );
+      case CLEAR ->
+          BulletFactory.createClearItem(
+              x, y, canvasW, canvasH, clearHandler, 1 * TPS // 1 second clear window
+              );
     };
   }
 
@@ -183,8 +183,7 @@ public class ItemSpawner {
     }
 
     return new double[] {
-      playerX < canvasW / 2.0 ? canvasW - 20 : 20,
-      playerY < canvasH / 2.0 ? canvasH - 20 : 20
+      playerX < canvasW / 2.0 ? canvasW - 20 : 20, playerY < canvasH / 2.0 ? canvasH - 20 : 20
     };
   }
 }

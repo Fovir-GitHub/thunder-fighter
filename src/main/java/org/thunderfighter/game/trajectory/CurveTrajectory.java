@@ -4,15 +4,12 @@ import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Trajectory;
 
 /**
- * Lorentz-style curved trajectory.
- * Acceleration is perpendicular to velocity, causing smooth curvature.
+ * Lorentz-style curved trajectory. Acceleration is perpendicular to velocity, causing smooth
+ * curvature.
  *
- * factor:
- *   Controls curvature strength.
- *   Recommended range: 0.01 ~ 0.05
+ * <p>factor: Controls curvature strength. Recommended range: 0.01 ~ 0.05
  *
- * keepSpeed:
- *   Keeps the speed magnitude constant while changing direction.
+ * <p>keepSpeed: Keeps the speed magnitude constant while changing direction.
  */
 public class CurveTrajectory implements Trajectory {
 
@@ -35,7 +32,7 @@ public class CurveTrajectory implements Trajectory {
 
     // Acceleration perpendicular to velocity
     double ax = -vy * factor;
-    double ay =  vx * factor;
+    double ay = vx * factor;
 
     double newVx = vx + ax;
     double newVy = vy + ay;

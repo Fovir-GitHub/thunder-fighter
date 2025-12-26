@@ -10,7 +10,8 @@ public class PowerItemBullet extends ItemBullet {
   private final int buffTicks;
   private final int bonusDamage;
 
-  public PowerItemBullet(double x, double y, double canvasW, double canvasH, int buffTicks, int bonusDamage) {
+  public PowerItemBullet(
+      double x, double y, double canvasW, double canvasH, int buffTicks, int bonusDamage) {
     super(x, y, ItemType.POWER, canvasW, canvasH);
     this.buffTicks = buffTicks;
     this.bonusDamage = bonusDamage;

@@ -1,21 +1,24 @@
 package org.thunderfighter.game.bullet;
 
-import org.thunderfighter.core.abstractor.AbstractBullet;
-import org.thunderfighter.core.entity.Aircraft;
-import org.thunderfighter.game.trajectory.StraightTrajectory;
-
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.thunderfighter.core.abstractor.AbstractBullet;
+import org.thunderfighter.core.entity.Aircraft;
+import org.thunderfighter.game.trajectory.StraightTrajectory;
 
 public class NormalEnemyBullet extends AbstractBullet {
 
   private static final int DAMAGE = 1;
 
-  public NormalEnemyBullet(double startX, double startY,
-                           double dx, double dy,
-                           boolean large,
-                           double canvasW, double canvasH) {
+  public NormalEnemyBullet(
+      double startX,
+      double startY,
+      double dx,
+      double dy,
+      boolean large,
+      double canvasW,
+      double canvasH) {
     this.x = startX;
     this.y = startY;
     this.originX = startX;

@@ -1,14 +1,10 @@
 package org.thunderfighter.game.item;
 
-import org.thunderfighter.core.entity.Aircraft;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.thunderfighter.core.entity.Aircraft;
 
-/**
- * 回血道具：
- * - 真正的“加血上限=3”逻辑建议放在 PlayerAircraft 里实现（更干净）
- */
+/** 回血道具： - 真正的“加血上限=3”逻辑建议放在 PlayerAircraft 里实现（更干净） */
 public class HealItemBullet extends ItemBullet {
 
   public HealItemBullet(double x, double y, double canvasW, double canvasH) {

@@ -1,10 +1,9 @@
 package org.thunderfighter.core.manager;
 
-import org.thunderfighter.core.entity.Bullet;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.thunderfighter.core.entity.Bullet;
 
 // same architecture as BulletManager.java
 
