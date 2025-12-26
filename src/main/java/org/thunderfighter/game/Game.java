@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.aircraft.player.PlayerAircraft;
-import org.thunderfighter.game.item.ClearScreenHandler;
 import org.thunderfighter.game.item.PlayerItemInventory;
 import org.thunderfighter.game.spawn.EnemySpawner;
 import org.thunderfighter.ui.KeyboardController;
@@ -29,7 +28,6 @@ public class Game {
   private Scene scene;
   private StackPane root;
   private PlayerItemInventory inventory;
-  private ClearScreenHandler clearScreenHandler;
 
   // Manage all enetities.
   private List<AbstractEntity> entities = new ArrayList<>();
