@@ -83,6 +83,11 @@ public class Game {
 
   public void update() {
     generateEnemy();
+
+    if (playerAircraft.wantToShoot()) {
+      playerAircraft.shoot(entities);
+    }
+
     Iterator<AbstractEntity> it = entities.iterator();
     while (it.hasNext()) {
       AbstractEntity entity = it.next();
