@@ -1,13 +1,11 @@
 package org.thunderfighter.game.aircraft.enemy;
 
+import java.util.List;
 import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
-import org.thunderfighter.core.entity.Entity;
-import org.thunderfighter.core.manager.BulletManager;
+import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.game.bulletfactory.BulletFactory;
-
-import java.util.List;
 
 public class BossEnemy extends AbstractEnemyAircraft {
 
@@ -21,6 +19,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     stage2,
     stage3
   }
+
   private Stage stage = Stage.stage1;
 
   public BossEnemy(double x, double y) {
@@ -37,7 +36,9 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
     this.size = SIZE;
 
-    this.sprite = new Image(getClass().getResourceAsStream("src/main/resources/images/Aircraft/BossEnemy.png"));
+    this.sprite =
+        new Image(
+            getClass().getResourceAsStream("src/main/resources/images/Aircraft/BossEnemy.png"));
   }
 
   @Override
@@ -45,12 +46,12 @@ public class BossEnemy extends AbstractEnemyAircraft {
     double LEFT_BOUND = SCREEN_WIDTH * 0.25;
     double RIGHT_BOUND = SCREEN_WIDTH * 0.75 - size.getWidth();
 
-    if(movingRight) {
+    if (movingRight) {
       x += speed;
-      if(x >= RIGHT_BOUND) movingRight = false;
+      if (x >= RIGHT_BOUND) movingRight = false;
     } else {
       x -= speed;
-      if(x <= LEFT_BOUND) movingRight = true;
+      if (x <= LEFT_BOUND) movingRight = true;
     }
   }
 
@@ -72,7 +73,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
   }
 
   @Override
-  protected void doShoot(List<Entity> worldEntities) {
+  protected void doShoot(List<AbstractEntity> worldEntities) {
     switch (stage) {
       case stage1:
         shootStage1(worldEntities);
@@ -86,30 +87,34 @@ public class BossEnemy extends AbstractEnemyAircraft {
     }
   }
 
-  private void shootStage1(List<Entity> worldEntities) {
+  private void shootStage1(List<AbstractEntity> worldEntities) {
     double cx = x + size.getWidth() / 2; // @params
     double by = y + size.getHeight();
 
-    for(int i = -1; i <= 1; i++) {
-      worldEntities.add(BulletFactory.createEnemyBullet(cx + i * 25, by, i * 0.6, 3.5, false, SCREEN_WIDTH, 600));
+    for (int i = -1; i <= 1; i++) {
+      worldEntities.add(
+          BulletFactory.createEnemyBullet(cx + i * 25, by, i * 0.6, 3.5, false, SCREEN_WIDTH, 600));
     }
   }
 
-  private void shootStage2(List<Entity> worldEntities) {
+  private void shootStage2(List<AbstractEntity> worldEntities) {
     double cx = x + size.getWidth() / 2;
     double by = y + size.getHeight();
 
-    for(int i = -3; i <= 3; i++) {
-      worldEntities.add(BulletFactory.createEnemyBullet(cx, by, i * 0.8, 4, i == 0, SCREEN_WIDTH, 600));
+    for (int i = -3; i <= 3; i++) {
+      worldEntities.add(
+          BulletFactory.createEnemyBullet(cx, by, i * 0.8, 4, i == 0, SCREEN_WIDTH, 600));
     }
   }
 
-  private void shootStage3(List<Entity> worldEntities) {
+  private void shootStage3(List<AbstractEntity> worldEntities) {
     double cx = x + size.getWidth() / 2;
     double by = y + size.getHeight();
 
-    worldEntities.add(BulletFactory.createCurvedEnemyBullet(cx - 60, by, -1.5, 3.5, 0.06, SCREEN_WIDTH, 600));
-    worldEntities.add(BulletFactory.createCurvedEnemyBullet(cx - 60, by, -1.5, 3.5, -0.06, SCREEN_WIDTH, 600));
+    worldEntities.add(
+        BulletFactory.createCurvedEnemyBullet(cx - 60, by, -1.5, 3.5, 0.06, SCREEN_WIDTH, 600));
+    worldEntities.add(
+        BulletFactory.createCurvedEnemyBullet(cx - 60, by, -1.5, 3.5, -0.06, SCREEN_WIDTH, 600));
     worldEntities.add(BulletFactory.createEnemyBullet(cx, by, 0, 5, true, SCREEN_WIDTH, 600));
   }
 }

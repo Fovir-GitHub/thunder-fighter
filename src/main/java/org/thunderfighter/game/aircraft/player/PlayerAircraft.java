@@ -3,8 +3,8 @@ package org.thunderfighter.game.aircraft.player;
 import java.util.List;
 import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
+import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.abstractor.AbstractPlayerAircraft;
-import org.thunderfighter.core.entity.Entity;
 import org.thunderfighter.game.bullet.PlayerBullet;
 
 public class PlayerAircraft extends AbstractPlayerAircraft {
@@ -63,7 +63,7 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
   } // to prevent the aircraft from traveling faster at an angle than straight.
 
   @Override
-  protected void doShoot(List<Entity> worldEntities) {
+  protected void doShoot(List<AbstractEntity> worldEntities) {
     PlayerBullet bullet = new PlayerBullet(x + size.getWidth() / 2 - 4, y - 10); // @params
     worldEntities.add(bullet); // by manager instance to manage it.
   }

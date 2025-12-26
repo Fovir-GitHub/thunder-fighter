@@ -2,7 +2,6 @@ package org.thunderfighter.core.abstractor;
 
 import java.util.List;
 import javafx.scene.canvas.Canvas;
-import org.thunderfighter.core.entity.Entity;
 
 public abstract class AbstractPlayerAircraft extends AbstractAircraft {
 
@@ -55,7 +54,7 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
   } // auto or hand
 
   @Override
-  public void shoot(List<Entity> worldEntities) {
+  public void shoot(List<AbstractEntity> worldEntities) {
     if (shootCooldown <= 0) {
       doShoot(worldEntities);
       shootCooldown = shootInterval;
@@ -69,5 +68,5 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
     }
   }
 
-  protected abstract void doShoot(List<Entity> worldEntities); // implemented by subclass
+  protected abstract void doShoot(List<AbstractEntity> worldEntities); // implemented by subclass
 }
