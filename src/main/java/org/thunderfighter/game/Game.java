@@ -24,6 +24,7 @@ public class Game {
   private GraphicsContext graphicsContext;
   private PlayerAircraft playerAircraft;
   private KeyboardController keyboardController;
+  private Scene scene;
 
   // Manage all enetities.
   private List<AbstractEntity> entities = new ArrayList<>();
@@ -36,19 +37,19 @@ public class Game {
     //  - Enable `canvas` to resize by following the window size change.
     canvas = new Canvas(800, 600);
     graphicsContext = canvas.getGraphicsContext2D();
-    Scene scene = new Scene(new StackPane(canvas));
+    this.scene = new Scene(new StackPane(canvas));
 
-    initGame(scene);
-
-    stage.setScene(scene);
+    stage.setScene(this.scene);
     stage.show();
+
+    initGame();
   }
 
-  private void initGame(Scene scene) {
+  private void initGame() {
     enemySpawner = new EnemySpawner(canvas.getWidth(), entities);
     initEntities();
     this.keyboardController = new KeyboardController(playerAircraft);
-    keyboardController.operation(scene, canvas);
+    keyboardController.operation(this.scene, this.canvas);
 
     initAnimationTimer();
     ScoreManager.getInstance().reset();
