@@ -15,7 +15,10 @@ import org.thunderfighter.game.aircraft.player.PlayerAircraft;
 import org.thunderfighter.game.item.PlayerItemInventory;
 import org.thunderfighter.game.spawn.EnemySpawner;
 import org.thunderfighter.ui.KeyboardController;
+import org.thunderfighter.ui.UiMenu;
+import org.thunderfighter.ui.UiOverlay;
 import org.thunderfighter.utils.Constant;
+import org.thunderfighter.utils.Constant.GAME_STATE;
 
 /** Control and manage the game. */
 public class Game {
@@ -28,6 +31,8 @@ public class Game {
   private StackPane root;
   private PlayerItemInventory inventory;
   private KeyboardController keyboardController;
+  private UiOverlay overlay;
+  private UiMenu menu;
 
   // Player.
   private PlayerAircraft playerAircraft;
@@ -39,12 +44,18 @@ public class Game {
   private EnemySpawner enemySpawner;
   private int numberOfEnemy = 0;
 
+  GAME_STATE gameState;
+
   public Game(Stage stage) {
     // TODO:
     //  - Enable `canvas` to resize by following the window size change.
+    overlay = new UiOverlay();
+    menu = new UiMenu(this);
     canvas = new Canvas(800, 600);
     graphicsContext = canvas.getGraphicsContext2D();
-    root = new StackPane(canvas);
+    root = new StackPane(canvas, overlay, menu);
+    gameState = GAME_STATE.MENU;
+
     this.scene = new Scene(root);
 
     stage.setScene(this.scene);
@@ -79,13 +90,32 @@ public class Game {
     entities.add(playerAircraft);
   }
 
+  public void setGameState(GAME_STATE gameState) {
+    this.gameState = gameState;
+  }
+
   private void initAnimationTimer() {
+    // TODO: Implement `OVER` operation.
     animationTimer =
         new AnimationTimer() {
           @Override
           public void handle(long now) {
-            update();
-            draw();
+            switch (gameState) {
+              case MENU:
+                menu.setVisible(true);
+                overlay.setVisible(false);
+                break;
+              case RUNNING:
+                update();
+                draw();
+                break;
+              case PAUSE:
+                menu.setVisible(false);
+                overlay.setVisible(true);
+                break;
+              case OVER:
+                break;
+            }
           }
         };
   }
