@@ -61,7 +61,11 @@ public class Game {
   private void initEntities() {
     playerAircraft =
         new PlayerAircraft(
-            canvas.getWidth() / 2, canvas.getHeight() - PlayerAircraft.SIZE.getHeight(), 3, 10, 20);
+            canvas.getWidth() / 2,
+            canvas.getHeight() - PlayerAircraft.SIZE.getHeight() - 10,
+            3,
+            10,
+            20);
     entities.add(playerAircraft);
   }
 
