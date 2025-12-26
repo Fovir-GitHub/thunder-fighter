@@ -11,7 +11,7 @@ public class Constant {
 
   public static final int TPS = 60;
 
-  public static enum Phase {
+  public static enum PHASE {
     NORMAL,
     ELITE,
     BOSS
