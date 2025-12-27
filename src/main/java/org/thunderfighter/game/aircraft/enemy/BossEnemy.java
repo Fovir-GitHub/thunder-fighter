@@ -72,6 +72,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
       speed = 1.8;
     } else {
       ScoreManager.getInstance().addScore(1000);
+      aliveFlag = false;
     }
   }
 
