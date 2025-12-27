@@ -112,7 +112,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     if (c == null) return;
 
     for (int i = -3; i <= 3; i++) {
-      worldEntities.add(BulletFactory.createEnemyBullet(c, cx, by, i * 0.8, 4, i == 0));
+      worldEntities.add(BulletFactory.createEnemyBullet(c, cx, by + 4, i * 0.8, 4, i == 0));
     }
   }
 
@@ -123,8 +123,8 @@ public class BossEnemy extends AbstractEnemyAircraft {
     Canvas c = getCanvas();
     if (c == null) return;
 
-    worldEntities.add(BulletFactory.createCurvedEnemyBullet(c, cx - 60, by, -1.5, 3.5, 0.06));
-    worldEntities.add(BulletFactory.createCurvedEnemyBullet(c, cx - 60, by, -1.5, 3.5, -0.06));
-    worldEntities.add(BulletFactory.createEnemyBullet(c, cx, by, 0, 5, true));
+    worldEntities.add(BulletFactory.createCurvedEnemyBullet(c, cx - 60, by + 4, -1.5, 3.5, 0.06));
+    worldEntities.add(BulletFactory.createCurvedEnemyBullet(c, cx - 60, by + 4, -1.5, 3.5, -0.06));
+    worldEntities.add(BulletFactory.createEnemyBullet(c, cx, by + 4, 0, 5, true));
   }
 }
