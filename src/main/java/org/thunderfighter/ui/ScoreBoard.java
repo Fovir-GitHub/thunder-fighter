@@ -7,14 +7,21 @@ import javafx.scene.layout.VBox;
 import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.aircraft.player.PlayerAircraft;
 
+/** Board to display score and lives. */
 public class ScoreBoard {
 
   private StackPane pane;
   private Label scoreLabel;
   private Label livesLabel;
-  private PlayerAircraft playerAircraft;
+  private final PlayerAircraft playerAircraft;
 
-  public ScoreBoard(StackPane root, PlayerAircraft playerAircraft) {
+  /**
+   * Constructor of {@code ScoreBoard}.
+   *
+   * @param root The root pane.
+   * @param playerAircraft Player's aircraft to display the lives.
+   */
+  public ScoreBoard(StackPane root, final PlayerAircraft playerAircraft) {
     this.playerAircraft = playerAircraft;
     pane = new StackPane();
     StackPane.setAlignment(pane, Pos.TOP_RIGHT);
@@ -23,6 +30,7 @@ public class ScoreBoard {
     initScoreBoard();
   }
 
+  /** Initialize the score board. */
   private void initScoreBoard() {
     pane.getChildren().clear();
     VBox vBox = new VBox(8);
