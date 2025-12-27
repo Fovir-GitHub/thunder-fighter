@@ -15,6 +15,16 @@ public class UiSceneManager {
     this.overlay = overlay;
     root.getChildren().addAll(menu, overlay);
     scene = new Scene(root, 800, 600);
+    overlay.hideMenu();
+  }
+
+  public void togglePause() {
+    if (overlay.isVisible()) {
+      hideOverlay();
+    } 
+    else {
+      showOverlay();
+    }
   }
 
   public Scene getScene() {

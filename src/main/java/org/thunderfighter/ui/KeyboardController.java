@@ -6,20 +6,24 @@ import org.thunderfighter.core.abstractor.AbstractPlayerAircraft;
 import org.thunderfighter.game.item.ClearScreenHandler;
 import org.thunderfighter.game.item.PlayerItemInventory;
 
+
 // Keyboard input controller for player aircraft, enable operations based on key presses
 public class KeyboardController {
 
   private final AbstractPlayerAircraft player;
   private final PlayerItemInventory inventory;
   private final ClearScreenHandler clearScreenHandler;
+  private final UiSceneManager uiSceneManager;
 
   public KeyboardController(
-      AbstractPlayerAircraft player,
-      PlayerItemInventory inventory,
-      ClearScreenHandler clearScreenHandler) {
+    AbstractPlayerAircraft player,
+    PlayerItemInventory inventory,
+    ClearScreenHandler clearScreenHandler,
+    UiSceneManager uiSceneManager) {
     this.player = player;
     this.inventory = inventory;
     this.clearScreenHandler = clearScreenHandler;
+    this.uiSceneManager = uiSceneManager;
   } // create a keyboard controller for the player aircraft
 
   public void operation(Scene scene) {
@@ -36,6 +40,10 @@ public class KeyboardController {
             case SPACE -> {
               player.setShooting(true);
               event.consume();
+            }
+            case P ->{
+              uiSceneManager.togglePause();
+              event.consume(); 
             }
             case E -> {
               if (inventory.hasItem()) {
