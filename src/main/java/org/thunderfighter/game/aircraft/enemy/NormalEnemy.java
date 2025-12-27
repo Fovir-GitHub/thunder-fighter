@@ -28,10 +28,6 @@ public class NormalEnemy extends AbstractEnemyAircraft {
   @Override
   protected void onUpdate(List<AbstractEntity> worldEntities) {
     super.onUpdate(worldEntities);
-    if (hp == 0) {
-      ScoreManager.getInstance().addScore(10);
-      aliveFlag = false;
-    }
   }
 
   @Override
