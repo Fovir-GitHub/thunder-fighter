@@ -1,18 +1,17 @@
 package org.thunderfighter.ui;
 
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import org.thunderfighter.core.abstractor.AbstractUiMenu;
 
 public class UiOverlay extends AbstractUiMenu {
+    public Text title = new Text("Paused");
     public Button continueButton = new Button("Continue");
     public Button historyButton = new Button("History Score");
     public Button aboutButton = new Button("About");
     public Button ruleButton = new Button("Game Rule");
 
     public UiOverlay() {
-        Text title = new Text("Game Paused");
         this.title.setFont(javafx.scene.text.Font.font(30));
         this.title.setTranslateX(320);
         this.title.setTranslateY(100);
