@@ -3,16 +3,14 @@ package org.thunderfighter.core.manager;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.thunderfighter.core.entity.Bullet;
-
 import javafx.scene.canvas.GraphicsContext;
+import org.thunderfighter.core.entity.Bullet;
 
 /**
  * BulletManager (Singleton)
  *
- * Owns all bullets in the game and updates/removes them each tick.
- * Rendering can also be handled here to keep bullet logic centralized.
+ * <p>Owns all bullets in the game and updates/removes them each tick. Rendering can also be handled
+ * here to keep bullet logic centralized.
  */
 public class BulletManager {
 
@@ -28,7 +26,9 @@ public class BulletManager {
 
   /** Adds a bullet into manager list. */
   public void addBullet(Bullet bullet) {
-    if (bullet != null) bullets.add(bullet);
+    if (bullet != null) {
+      bullets.add(bullet);
+    }
   }
 
   /** Returns the internal bullet list (read-only usage recommended). */
@@ -42,7 +42,9 @@ public class BulletManager {
     while (it.hasNext()) {
       Bullet b = it.next();
       b.update();
-      if (!b.isAlive()) it.remove();
+      if (!b.isAlive()) {
+        it.remove();
+      }
     }
   }
 
