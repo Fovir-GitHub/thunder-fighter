@@ -142,7 +142,6 @@ public class Game {
     if (animationTimer != null) {
       animationTimer.start();
     }
-    ;
   }
 
   public void stop() {
