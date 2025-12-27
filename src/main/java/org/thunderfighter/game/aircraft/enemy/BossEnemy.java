@@ -57,10 +57,10 @@ public class BossEnemy extends AbstractEnemyAircraft {
   protected void onUpdate() {
     super.onUpdate();
 
-    if (hp > 200) {
+    if (hp >= 40) {
       stage = Stage.stage1;
       shootInterval = 60;
-    } else if (hp > 100) {
+    } else if (hp >= 20) {
       stage = Stage.stage2;
       shootInterval = 40;
     } else if (hp > 0) {
