@@ -5,7 +5,6 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
-import org.thunderfighter.core.manager.ScoreManager;
 
 public class NormalEnemy extends AbstractEnemyAircraft {
 
