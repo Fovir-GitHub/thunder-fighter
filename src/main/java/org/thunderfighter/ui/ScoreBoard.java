@@ -2,7 +2,6 @@ package org.thunderfighter.ui;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.thunderfighter.core.manager.ScoreManager;
@@ -10,14 +9,14 @@ import org.thunderfighter.game.aircraft.player.PlayerAircraft;
 
 public class ScoreBoard {
 
-  private Pane pane;
+  private StackPane pane;
   private Label scoreLabel;
   private Label livesLabel;
   private PlayerAircraft playerAircraft;
 
   public ScoreBoard(StackPane root, PlayerAircraft playerAircraft) {
     this.playerAircraft = playerAircraft;
-    pane = new Pane();
+    pane = new StackPane();
     StackPane.setAlignment(pane, Pos.TOP_RIGHT);
     root.getChildren().add(pane);
 
