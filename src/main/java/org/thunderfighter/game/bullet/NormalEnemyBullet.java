@@ -91,8 +91,8 @@ public class NormalEnemyBullet extends AbstractBullet {
 
     // Size based on bullet type
     this.size = large
-        ? new Dimension2D(12, 24)
-        : new Dimension2D(6, 12);
+        ? new Dimension2D(24, 48)
+        : new Dimension2D(12, 24);
 
     // Velocity per tick
     this.dx = dx;

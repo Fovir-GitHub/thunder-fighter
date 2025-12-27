@@ -4,19 +4,14 @@ import org.thunderfighter.core.entity.Aircraft;
 
 import javafx.scene.image.Image;
 
-/**
- * Power item:
- * - Adds bonus damage for a duration (buffTicks)
- */
 public class PowerItemBullet extends ItemBullet {
 
-  private static final Image SPRITE =
-      new Image(PowerItemBullet.class.getResourceAsStream("/images/Item/power.png"));
-
+  private static Image sprite;
   private final int buffTicks;
   private final int bonusDamage;
 
-  public PowerItemBullet(double x, double y, double canvasW, double canvasH, int buffTicks, int bonusDamage) {
+  public PowerItemBullet(
+      double x, double y, double canvasW, double canvasH, int buffTicks, int bonusDamage) {
     super(x, y, ItemType.POWER, canvasW, canvasH);
     this.buffTicks = buffTicks;
     this.bonusDamage = bonusDamage;
@@ -31,6 +26,14 @@ public class PowerItemBullet extends ItemBullet {
 
   @Override
   protected Image getSprite() {
-    return SPRITE;
+    if (sprite != null) return sprite;
+    try {
+      var is = PowerItemBullet.class.getResourceAsStream("/images/Item/power.png");
+      if (is == null) return null;
+      sprite = new Image(is);
+      return sprite;
+    } catch (Throwable ignored) {
+      return null;
+    }
   }
 }

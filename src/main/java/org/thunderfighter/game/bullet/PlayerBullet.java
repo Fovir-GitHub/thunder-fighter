@@ -60,7 +60,7 @@ public class PlayerBullet extends AbstractBullet {
     this.canvasH = canvasH;
 
     // Keep your original bullet size (if your sprite is round, you can make it 12x12)
-    this.size = new Dimension2D(6, 12);
+    this.size = new Dimension2D(12, 24);
 
     // Straight upward
     this.dx = 0.0;
