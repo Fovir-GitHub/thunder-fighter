@@ -20,6 +20,7 @@ import org.thunderfighter.ui.KeyboardController;
 import org.thunderfighter.ui.ScoreBoard;
 import org.thunderfighter.ui.UiMenu;
 import org.thunderfighter.ui.UiOverlay;
+import org.thunderfighter.ui.UiSceneManager;
 import org.thunderfighter.utils.Constant;
 import org.thunderfighter.utils.Constant.GAME_STATE;
 
@@ -36,6 +37,7 @@ public class Game {
   private KeyboardController keyboardController;
   private UiOverlay overlay;
   private UiMenu menu;
+  private UiSceneManager uiSceneManager;
   private ScoreBoard scoreBoard;
 
   // Player.
@@ -55,6 +57,7 @@ public class Game {
     //  - Enable `canvas` to resize by following the window size change.
     overlay = new UiOverlay();
     menu = new UiMenu(this, overlay);
+    uiSceneManager = new UiSceneManager(menu, overlay);
     canvas = new Canvas(800, 600);
     graphicsContext = canvas.getGraphicsContext2D();
     root = new StackPane(canvas, overlay, menu);
@@ -75,7 +78,8 @@ public class Game {
     scoreBoard = new ScoreBoard(root, playerAircraft);
 
     // TODO: Add `ClearScreenHandler`.
-    this.keyboardController = new KeyboardController(playerAircraft, inventory, null);
+    this.keyboardController =
+        new KeyboardController(playerAircraft, inventory, null, uiSceneManager);
     keyboardController.operation(this.scene);
 
     ScoreManager.getInstance().reset();
