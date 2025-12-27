@@ -12,8 +12,7 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
 
   public static final Dimension2D SIZE = new Dimension2D(60, 80); // @params
 
-  public PlayerAircraft(
-      double x, double y, int hp, double speed, int shootInterval, Canvas canvas) {
+  public PlayerAircraft(double x, double y, int hp, double speed, int shootInterval, Canvas canvas) {
     this.x = x;
     this.y = y;
     this.hp = hp;
@@ -67,7 +66,12 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
 
   @Override
   protected void doShoot(List<AbstractEntity> worldEntities) {
-    PlayerBullet bullet = new PlayerBullet(x + size.getWidth() / 2 - 4, y - 10); // @params
+    PlayerBullet bullet = new PlayerBullet(
+      x + size.getWidth() / 2 - 4,
+      y - 10,
+      canvas.getWidth(),
+      canvas.getHeight()
+    ); // @params
     worldEntities.add(bullet); // by manager instance to manage it.
   }
 }

@@ -30,10 +30,6 @@ public class PlayerBullet extends AbstractBullet {
     this.lifeTicks = -1; // 出界消失
   }
 
-  public PlayerBullet(double startX, double startY) {
-    super();
-  }
-
   @Override
   public void update() {
     trajectory.update(this);
