@@ -171,27 +171,44 @@ public class Game {
     }
   }
 
+  private Constant.PHASE enemyStage = Constant.PHASE.NORMAL;
+
   private void generateEnemy() {
     if (numberOfEnemy >= Constant.ENEMY_NUMBER_LIMIT) {
       return;
     }
 
     int currentScore = ScoreManager.getInstance().getScore();
-    if (currentScore >= Constant.GENERATE_BOSS_SCORE) {
-      if (enemySpawner.spawnBoss()) {
+
+    switch (enemyStage) {
+      case NORMAL:
+        if (currentScore >= Constant.GENERATE_ELITE_SCORE) {
+          enemyStage = Constant.PHASE.ELITE;
+          break;
+        }
+        enemySpawner.spawnNormal();
         numberOfEnemy++;
-      }
-    } else if (currentScore >= Constant.GENERATE_ELITE_SCORE) {
-      if (enemySpawner.spawnElite()) {
-        numberOfEnemy++;
-      }
-      if (enemySpawner.spawnNormal()) {
-        numberOfEnemy++;
-      }
-    } else {
-      if (enemySpawner.spawnNormal()) {
-        numberOfEnemy++;
-      }
+        break;
+
+      case ELITE:
+        if (currentScore >= Constant.GENERATE_BOSS_SCORE) {
+          enemyStage = Constant.PHASE.BOSS;
+          break;
+        }
+        if (enemySpawner.spawnElite()) {
+          numberOfEnemy++;
+        }
+        if (enemySpawner.spawnNormal()) {
+          numberOfEnemy++;
+        }
+        break;
+
+
+      case BOSS:
+        if (enemySpawner.spawnBoss()) {
+          numberOfEnemy++;
+        }
+        break;
     }
   }
 }
