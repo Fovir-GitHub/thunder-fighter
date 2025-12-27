@@ -9,7 +9,6 @@ import org.thunderfighter.core.entity.Aircraft;
 public abstract class AbstractAircraft extends AbstractEntity implements Aircraft {
 
   protected int hp; // current health
-  protected Bounds collisionBounds; // current collision boundary
   protected Image sprite; // aircraft texture
 
   protected void updateCollisionBounds() {
