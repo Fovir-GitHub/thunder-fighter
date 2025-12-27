@@ -1,5 +1,7 @@
 package org.thunderfighter.core.abstractor;
 
+import org.thunderfighter.core.manager.ScoreManager;
+
 import java.util.List;
 
 public abstract class AbstractEnemyAircraft extends AbstractAircraft {
@@ -26,6 +28,11 @@ public abstract class AbstractEnemyAircraft extends AbstractAircraft {
   @Override
   protected void onUpdate() {
     if (shootCooldown > 0) shootCooldown--;
+  }
+
+  @Override
+  protected void onDie() {
+    ScoreManager.getInstance().addScore(this.score);
   }
 
   protected abstract void doShoot(List<AbstractEntity> worldEntities); // implemented by subclass
