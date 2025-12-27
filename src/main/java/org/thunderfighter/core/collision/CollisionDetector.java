@@ -83,11 +83,10 @@ public class CollisionDetector {
         bullet = (AbstractBullet) a;
       }
 
-      // Prevent the player from suicide.
-      if (aircraft.isPlayer() && bullet.isFromPlayer()) {
+      // Prevent player and enemy from suicide.
+      if (!(aircraft.isPlayer() ^ bullet.isFromPlayer())) {
         return;
       }
-
       bullet.onHit(aircraft);
     }
   }
