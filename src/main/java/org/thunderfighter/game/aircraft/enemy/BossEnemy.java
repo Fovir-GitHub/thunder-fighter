@@ -17,7 +17,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
   public static final Dimension2D SIZE = new Dimension2D(200, 150); // @params
 
   private boolean movingRight = true;
-  private static final double SCREEN_WIDTH = 800;// @params
+  private static final double SCREEN_WIDTH = 800; // @params
   private Game game;
 
   private enum Stage {
@@ -28,7 +28,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
   private Stage stage = Stage.stage1;
 
-  public BossEnemy(double x, double y) {
+  public BossEnemy(double x, double y, Game game) {
     this.x = x;
     this.y = y; // birth coordinates
 
@@ -43,6 +43,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     this.size = SIZE;
 
     this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/BossEnemy.png"));
+    this.game = game;
   }
 
   @Override
