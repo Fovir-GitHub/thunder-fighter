@@ -1,5 +1,6 @@
 package org.thunderfighter.core.entity;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -13,4 +14,6 @@ public interface Entity {
   double getSpeed(); // the object's base movement speed
 
   boolean isAlive(); // is alive or not, it will be removed when it is false
+
+  Bounds getCollisionBounds();
 }

@@ -1,7 +1,6 @@
 package org.thunderfighter.core.entity;
 
 import java.util.List;
-import javafx.geometry.Bounds;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 
 public interface Aircraft extends Entity {
@@ -15,6 +14,4 @@ public interface Aircraft extends Entity {
 
   // fire bullets, but only declares the "behavior", does not create the bullets
   // all bullet are managed by worldEntity list
-
-  Bounds getCollisionBounds(); // obtain the boundary required for collision detection
 }

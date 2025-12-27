@@ -1,8 +1,11 @@
 package org.thunderfighter.core.manager;
 
+import org.thunderfighter.game.bullet.*;
+import org.thunderfighter.core.abstractor.AbstractBullet;
+
 public class ScoreManager {
   private static ScoreManager instance = new ScoreManager();
-  private int score = 0;
+  private static int score = 0;
 
   private ScoreManager() {}
 

@@ -5,6 +5,7 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
+import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.bulletfactory.BulletFactory;
 
 public class BossEnemy extends AbstractEnemyAircraft {
@@ -65,10 +66,13 @@ public class BossEnemy extends AbstractEnemyAircraft {
     } else if (hp > 100) {
       stage = Stage.stage2;
       shootInterval = 40;
-    } else {
+    } else if (hp > 0){
       stage = Stage.stage3;
       shootInterval = 25;
       speed = 1.8;
+    } else {
+      ScoreManager.getInstance().addScore(1000);
+      aliveFlag = false;
     }
   }
 
