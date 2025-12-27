@@ -54,7 +54,7 @@ public class Game {
     // TODO:
     //  - Enable `canvas` to resize by following the window size change.
     overlay = new UiOverlay();
-    menu = new UiMenu(this);
+    menu = new UiMenu(this.overlay);
     canvas = new Canvas(800, 600);
     graphicsContext = canvas.getGraphicsContext2D();
     root = new StackPane(canvas, overlay, menu);

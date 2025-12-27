@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import javafx.scene.canvas.Canvas;
 import org.thunderfighter.core.abstractor.AbstractEntity;
+import org.thunderfighter.game.Game;
 import org.thunderfighter.game.aircraft.enemy.*;
 import org.thunderfighter.utils.Constant;
 
@@ -12,6 +13,7 @@ public class EnemySpawner {
   private final Random rng = new Random();
   private final Canvas canvas;
   private List<AbstractEntity> entities;
+  private Game game;
 
   private int normalCd = 0;
   private int eliteCd = 0;
@@ -46,7 +48,7 @@ public class EnemySpawner {
     if (boss != null && boss.isAlive()) {
       return false;
     }
-    boss = new BossEnemy(canvas.getWidth() / 2 - 100, 0);
+    boss = new BossEnemy(canvas.getWidth() / 2 - 100, 0, game);
     entities.add(boss);
 
     return true;

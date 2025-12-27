@@ -29,17 +29,12 @@ public class CurveEnemyBullet extends AbstractBullet {
       double startY,
       double dx,
       double dy,
-      double curveFactor,
-      double canvasW,
-      double canvasH) {
+      double curveFactor) {
 
     this.x = startX;
     this.y = startY;
     this.originX = startX;
     this.originY = startY;
-
-    this.canvasW = canvasW;
-    this.canvasH = canvasH;
 
     this.size = new Dimension2D(6, 12);
     this.dx = dx;

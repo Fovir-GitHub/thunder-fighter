@@ -1,6 +1,7 @@
 package org.thunderfighter.game.bullet;
 
 import org.thunderfighter.core.abstractor.AbstractBullet;
+import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.StraightTrajectory;
 
@@ -74,6 +75,7 @@ public class NormalEnemyBullet extends AbstractBullet {
     tickLife();
     killIfOutOfBounds(); // now depends on injected canvas size
   }
+
 
   @Override
   public void onHit(Aircraft target) {

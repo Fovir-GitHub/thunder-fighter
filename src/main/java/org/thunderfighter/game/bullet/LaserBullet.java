@@ -1,6 +1,7 @@
 package org.thunderfighter.game.bullet;
 
 import org.thunderfighter.core.abstractor.AbstractBullet;
+import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.entity.Aircraft;
 
 import javafx.geometry.BoundingBox;
