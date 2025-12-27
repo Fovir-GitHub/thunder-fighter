@@ -10,6 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.thunderfighter.core.abstractor.AbstractEntity;
+import org.thunderfighter.core.collision.CollisionDetector;
 import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.aircraft.player.PlayerAircraft;
 import org.thunderfighter.game.item.PlayerItemInventory;
@@ -134,6 +135,8 @@ public class Game {
     if (playerAircraft.wantToShoot()) {
       playerAircraft.shoot(entities);
     }
+
+    CollisionDetector.detectCollision(entities);
 
     Iterator<AbstractEntity> it = entities.iterator();
     while (it.hasNext()) {
