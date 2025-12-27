@@ -4,7 +4,10 @@ import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.core.entity.Bullet;
+import org.thunderfighter.core.entity.Entity;
 import org.thunderfighter.core.entity.Trajectory;
+
+import java.util.List;
 
 /**
  * AbstractBullet
@@ -140,7 +143,7 @@ public abstract class AbstractBullet extends AbstractEntity implements Bullet {
   }
 
   @Override
-  public abstract void update();
+  public abstract void update(List<AbstractEntity> worldEntities);
 
   @Override
   public abstract void onHit(Aircraft target);

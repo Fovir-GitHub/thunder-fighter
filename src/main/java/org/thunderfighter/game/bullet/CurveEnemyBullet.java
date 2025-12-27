@@ -4,8 +4,11 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractBullet;
+import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.CurveTrajectory;
+
+import java.util.List;
 
 /**
  * CurveEnemyBullet
@@ -49,7 +52,7 @@ public class CurveEnemyBullet extends AbstractBullet {
   }
 
   @Override
-  public void update() {
+  public void update(List<AbstractEntity> worldEntities) {
     if (!aliveFlag) return;
     moveOnce();
     tickLife();

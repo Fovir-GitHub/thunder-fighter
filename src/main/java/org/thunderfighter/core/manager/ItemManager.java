@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
+import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.entity.Bullet;
 
 /**
@@ -32,11 +33,11 @@ public class ItemManager {
     return items;
   }
 
-  public void update() {
+  public void update(List<AbstractEntity> worldEntities) {
     Iterator<Bullet> it = items.iterator();
     while (it.hasNext()) {
       Bullet b = it.next();
-      b.update();
+      b.update(worldEntities);
       if (!b.isAlive()) it.remove();
     }
   }

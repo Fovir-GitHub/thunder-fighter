@@ -147,7 +147,7 @@ public class Game {
     Iterator<AbstractEntity> it = entities.iterator();
     while (it.hasNext()) {
       AbstractEntity entity = it.next();
-      entity.update();
+      entity.update(entities);
       if (!entity.isAlive()) {
         it.remove();
         if (entity instanceof AbstractEnemyAircraft) {
