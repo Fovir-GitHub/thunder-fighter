@@ -118,7 +118,9 @@ public class Game {
                 menu.setVisible(false);
                 overlay.setVisible(true);
                 break;
-              case OVER:
+              case SUCCESS:
+                break;
+              case FAIL:
                 break;
             }
           }

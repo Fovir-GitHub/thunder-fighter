@@ -20,6 +20,7 @@ public class Constant {
     MENU,
     RUNNING,
     PAUSE,
-    OVER,
+    SUCCESS,
+    FAIL,
   }
 }
