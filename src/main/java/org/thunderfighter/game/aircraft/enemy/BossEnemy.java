@@ -5,7 +5,6 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
-import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.bulletfactory.BulletFactory;
 
 public class BossEnemy extends AbstractEnemyAircraft {
@@ -29,7 +28,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
     this.hp = 300;
     this.speed = 1;
-    this.score = 500; // kill reward
+    this.score = 3000; // kill reward
 
     this.canShoot = true;
     this.shootInterval = 60; // the number of frames are needed between two shots
@@ -39,7 +38,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
     this.sprite =
         new Image(
-            getClass().getResourceAsStream("src/main/resources/images/Aircraft/BossEnemy.png"));
+            getClass().getResourceAsStream("/images/Aircraft/BossEnemy.png"));
   }
 
   @Override
@@ -70,9 +69,6 @@ public class BossEnemy extends AbstractEnemyAircraft {
       stage = Stage.stage3;
       shootInterval = 25;
       speed = 1.8;
-    } else {
-      ScoreManager.getInstance().addScore(1000);
-      aliveFlag = false;
     }
   }
 
