@@ -1,48 +1,35 @@
 package org.thunderfighter.ui;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.thunderfighter.core.abstractor.AbstractUiMenu;
 
 public class UiOverlay extends AbstractUiMenu {
-    public Text title = new Text("Paused");
-    public Button continueButton = new Button("Continue");
-    public Button historyButton = new Button("History Score");
-    public Button aboutButton = new Button("About");
-    public Button ruleButton = new Button("Game Rule");
+    public final Text title = new Text("Paused");
+    public final Button continueButton = new Button("Continue");
+    public final Button historyButton = new Button("History Score");
+    public final Button aboutButton = new Button("About");
+    public final Button ruleButton = new Button("Game Rule");
 
     public UiOverlay() {
-        this.title.setFont(javafx.scene.text.Font.font(30));
-        this.title.setTranslateX(320);
-        this.title.setTranslateY(100);
+        this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        this.setPickOnBounds(true);
 
-        this.continueButton.setPrefWidth(100);
-        this.continueButton.setPrefHeight(30);
-        this.continueButton.setTranslateX(350);
-        this.continueButton.setTranslateY(200);
-        this.continueButton.setFont(javafx.scene.text.Font.font(20));
-    
-        this.historyButton.setPrefWidth(100);
-        this.historyButton.setPrefHeight(30);
-        this.historyButton.setTranslateX(350);
-        this.historyButton.setTranslateY(250);
-        this.historyButton.setFont(javafx.scene.text.Font.font(20));
-
-        this.ruleButton.setPrefWidth(100);
-        this.ruleButton.setPrefHeight(30);
-        this.ruleButton.setTranslateX(350);
-        this.ruleButton.setTranslateY(300);
-        this.ruleButton.setFont(javafx.scene.text.Font.font(20));
-
-        this.aboutButton.setPrefWidth(100);
-        this.aboutButton.setPrefHeight(30);
-        this.aboutButton.setTranslateX(350);
-        this.aboutButton.setTranslateY(350);
-        this.aboutButton.setFont(javafx.scene.text.Font.font(20));
-
+        this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
-        this.getChildren().addAll(title, continueButton, historyButton, ruleButton, aboutButton);
-        this.setVisible(false);
+
+        this.title.setFont(Font.font(30));
+
+        createButton(continueButton);
+        createButton(historyButton);
+        createButton(ruleButton);
+        createButton(aboutButton);
+
+        this.getChildren().setAll(title, continueButton, historyButton, ruleButton, aboutButton);
+
+        hideMenu();
 
         continueButton.setOnAction(e -> this.hideMenu());
         historyButton.setOnAction(e -> UiScoreStorage.showScoreDialog());
@@ -50,13 +37,22 @@ public class UiOverlay extends AbstractUiMenu {
         aboutButton.setOnAction(e -> UiDialog.showAboutDialog());
     }
 
+    private void createButton(Button button) {
+        button.setFont(Font.font(20));
+        button.setPrefWidth(220);
+        button.setPrefHeight(40);
+        button.setFocusTraversable(true);
+    }
+
     @Override
     public void showMenu() {
         this.setVisible(true);
+        this.setManaged(true);
     }
 
     @Override
     public void hideMenu() {
         this.setVisible(false);
+        this.setManaged(false);
     }
 }
