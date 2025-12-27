@@ -171,12 +171,20 @@ public class Game {
 
     int currentScore = ScoreManager.getInstance().getScore();
     if (currentScore >= Constant.GENERATE_BOSS_SCORE) {
-      enemySpawner.spawnBoss();
+      if (enemySpawner.spawnBoss()) {
+        numberOfEnemy++;
+      }
     } else if (currentScore >= Constant.GENERATE_ELITE_SCORE) {
-      enemySpawner.spawnElite();
-      enemySpawner.spawnNormal();
+      if (enemySpawner.spawnElite()) {
+        numberOfEnemy++;
+      }
+      if (enemySpawner.spawnNormal()) {
+        numberOfEnemy++;
+      }
     } else {
-      enemySpawner.spawnNormal();
+      if (enemySpawner.spawnNormal()) {
+        numberOfEnemy++;
+      }
     }
   }
 }

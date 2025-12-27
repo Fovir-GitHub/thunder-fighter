@@ -22,29 +22,34 @@ public class EnemySpawner {
     this.entities = entities;
   }
 
-  public void spawnNormal() {
+  public boolean spawnNormal() {
     if (normalCd-- > 0) {
-      return;
+      return false;
     }
     normalCd = 2 * Constant.TPS;
     entities.add(new NormalEnemy(randomX()));
+
+    return true;
   }
 
-  public void spawnElite() {
+  public boolean spawnElite() {
     if (eliteCd-- > 0) {
-      return;
+      return false;
     }
     eliteCd = 5 * Constant.TPS;
     entities.add(new EliteEnemy(randomX()));
+
+    return true;
   }
 
-  public void spawnBoss() {
+  public boolean spawnBoss() {
     if (boss != null && boss.isAlive()) {
-      return;
+      return false;
     }
-
     boss = new BossEnemy(canvas.getWidth() / 2 - 100, 0);
     entities.add(boss);
+
+    return true;
   }
 
   private double randomX() {
