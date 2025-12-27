@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
+import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.bullet.NormalEnemyBullet;
 
 import javafx.geometry.Dimension2D;
@@ -26,6 +27,12 @@ public class EliteEnemy extends AbstractEnemyAircraft {
     this.shootInterval = 60;
 
     this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/EliteEnemy.png"));
+  }
+
+  @Override
+  protected void onUpdate() {
+    super.onUpdate();
+    if(hp == 0) ScoreManager.getInstance().addScore(50);
   }
 
   @Override

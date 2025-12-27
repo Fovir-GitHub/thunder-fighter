@@ -5,6 +5,7 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
+import org.thunderfighter.core.manager.ScoreManager;
 
 public class NormalEnemy extends AbstractEnemyAircraft {
 
@@ -22,6 +23,12 @@ public class NormalEnemy extends AbstractEnemyAircraft {
     this.canShoot = false;
 
     this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/NormalEnemy.png"));
+  }
+
+  @Override
+  protected void onUpdate() {
+    super.onUpdate();
+    if(hp == 0) ScoreManager.getInstance().addScore(10);
   }
 
   @Override
