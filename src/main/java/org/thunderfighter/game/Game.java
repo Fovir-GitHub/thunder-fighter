@@ -54,7 +54,7 @@ public class Game {
     // TODO:
     //  - Enable `canvas` to resize by following the window size change.
     overlay = new UiOverlay();
-    menu = new UiMenu(this ,overlay);
+    menu = new UiMenu(this, overlay);
     canvas = new Canvas(800, 600);
     graphicsContext = canvas.getGraphicsContext2D();
     root = new StackPane(canvas, overlay, menu);
@@ -133,7 +133,8 @@ public class Game {
   public void start() {
     if (animationTimer != null) {
       animationTimer.start();
-    };
+    }
+    ;
   }
 
   public void stop() {
@@ -186,8 +187,9 @@ public class Game {
           enemyStage = Constant.PHASE.ELITE;
           break;
         }
-        enemySpawner.spawnNormal();
-        numberOfEnemy++;
+        if (enemySpawner.spawnNormal()) {
+          numberOfEnemy++;
+        }
         break;
 
       case ELITE:
@@ -202,7 +204,6 @@ public class Game {
           numberOfEnemy++;
         }
         break;
-
 
       case BOSS:
         if (enemySpawner.spawnBoss()) {
