@@ -1,8 +1,15 @@
 package org.thunderfighter.game.item;
 
-import javafx.scene.image.Image;
 import org.thunderfighter.core.entity.Aircraft;
 
+import javafx.scene.image.Image;
+
+/**
+ * ClearItemBullet
+ *
+ * Item bullet that clears enemy bullets and enemies on pickup.
+ * Canvas bounds are handled via AbstractEntity.setCanvas(...).
+ */
 public class ClearItemBullet extends ItemBullet {
 
   private static Image sprite;
@@ -10,15 +17,21 @@ public class ClearItemBullet extends ItemBullet {
   private final ClearScreenHandler handler;
   private final int clearWindowTicks;
 
+  /**
+   * Constructor.
+   *
+   * @param x spawn x
+   * @param y spawn y
+   * @param handler clear-screen handler (game-world level)
+   * @param clearWindowTicks duration of the clear window
+   */
   public ClearItemBullet(
       double x,
       double y,
-      double canvasW,
-      double canvasH,
       ClearScreenHandler handler,
       int clearWindowTicks) {
 
-    super(x, y, ItemType.CLEAR, canvasW, canvasH);
+    super(x, y, ItemType.CLEAR);
     this.handler = handler;
     this.clearWindowTicks = clearWindowTicks;
   }
@@ -35,6 +48,7 @@ public class ClearItemBullet extends ItemBullet {
   @Override
   protected Image getSprite() {
     if (sprite != null) return sprite;
+
     try {
       var is = ClearItemBullet.class.getResourceAsStream("/images/Item/clear.png");
       if (is == null) return null;

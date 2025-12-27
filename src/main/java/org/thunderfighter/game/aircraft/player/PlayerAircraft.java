@@ -1,12 +1,14 @@
 package org.thunderfighter.game.aircraft.player;
 
 import java.util.List;
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.image.Image;
+
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.abstractor.AbstractPlayerAircraft;
 import org.thunderfighter.game.bullet.PlayerBullet;
+
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 
 public class PlayerAircraft extends AbstractPlayerAircraft {
 
@@ -69,7 +71,8 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
   protected void doShoot(List<AbstractEntity> worldEntities) {
     PlayerBullet bullet =
         new PlayerBullet(
-            x + size.getWidth() / 2 - 4, y - 10, canvas.getWidth(), canvas.getHeight()); // @params
+            x + size.getWidth() / 2 - 4, y - 10); // @params
+    bullet.setCanvas(canvas);
     worldEntities.add(bullet); // by manager instance to manage it.
   }
 }

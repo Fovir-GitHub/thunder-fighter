@@ -1,17 +1,18 @@
 package org.thunderfighter.game.bullet;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.CurveTrajectory;
 
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
 /**
  * CurveEnemyBullet
  *
- * <p>A curved bullet used for area control (restrict player movement). Curvature is controlled by
- * curveFactor.
+ * A curved bullet used for area control (restrict player movement).
+ * Curvature is controlled by curveFactor.
  */
 public class CurveEnemyBullet extends AbstractBullet {
 
@@ -26,25 +27,24 @@ public class CurveEnemyBullet extends AbstractBullet {
       double startY,
       double dx,
       double dy,
-      double curveFactor,
-      double canvasW,
-      double canvasH) {
+      double curveFactor) {
 
     this.x = startX;
     this.y = startY;
     this.originX = startX;
     this.originY = startY;
 
-    this.canvasW = canvasW;
-    this.canvasH = canvasH;
+ 
+    this.size = new Dimension2D(12, 24);
 
-    this.size = new Dimension2D(6, 12);
     this.dx = dx;
     this.dy = dy;
     this.speed = Math.hypot(dx, dy);
 
     this.fromPlayer = false;
     this.trajectory = new CurveTrajectory(curveFactor);
+
+   
     this.lifeTicks = -1;
   }
 
@@ -53,7 +53,7 @@ public class CurveEnemyBullet extends AbstractBullet {
     if (!aliveFlag) return;
     moveOnce();
     tickLife();
-    killIfOutOfBounds();
+    killIfOutOfBounds(); 
   }
 
   @Override

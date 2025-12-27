@@ -1,11 +1,14 @@
 package org.thunderfighter.game.aircraft.enemy;
 
 import java.util.List;
-import javafx.geometry.Dimension2D;
-import javafx.scene.image.Image;
+
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.game.bulletfactory.BulletFactory;
+
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.image.Image;
 
 public class BossEnemy extends AbstractEnemyAircraft {
 
@@ -91,9 +94,12 @@ public class BossEnemy extends AbstractEnemyAircraft {
     double cx = x + size.getWidth() / 2; // @params
     double by = y + size.getHeight();
 
+    Canvas c = getCanvas();
+    if (c == null) return;
+
     for (int i = -1; i <= 1; i++) {
       worldEntities.add(
-          BulletFactory.createEnemyBullet(cx + i * 25, by, i * 0.6, 3.5, false, SCREEN_WIDTH, 600));
+          BulletFactory.createEnemyBullet(c, cx + i * 25, by, i * 0.6, 3.5, false));
     }
   }
 
@@ -101,9 +107,12 @@ public class BossEnemy extends AbstractEnemyAircraft {
     double cx = x + size.getWidth() / 2;
     double by = y + size.getHeight();
 
+    Canvas c = getCanvas();
+    if (c == null) return;
+
     for (int i = -3; i <= 3; i++) {
       worldEntities.add(
-          BulletFactory.createEnemyBullet(cx, by, i * 0.8, 4, i == 0, SCREEN_WIDTH, 600));
+          BulletFactory.createEnemyBullet(c, cx, by, i * 0.8, 4, i == 0));
     }
   }
 
@@ -111,10 +120,14 @@ public class BossEnemy extends AbstractEnemyAircraft {
     double cx = x + size.getWidth() / 2;
     double by = y + size.getHeight();
 
+    Canvas c = getCanvas();
+    if (c == null) return;
+
     worldEntities.add(
-        BulletFactory.createCurvedEnemyBullet(cx - 60, by, -1.5, 3.5, 0.06, SCREEN_WIDTH, 600));
+        BulletFactory.createCurvedEnemyBullet(c, cx - 60, by, -1.5, 3.5, 0.06));
     worldEntities.add(
-        BulletFactory.createCurvedEnemyBullet(cx - 60, by, -1.5, 3.5, -0.06, SCREEN_WIDTH, 600));
-    worldEntities.add(BulletFactory.createEnemyBullet(cx, by, 0, 5, true, SCREEN_WIDTH, 600));
+        BulletFactory.createCurvedEnemyBullet(c, cx - 60, by, -1.5, 3.5, -0.06));
+    worldEntities.add(
+        BulletFactory.createEnemyBullet(c, cx, by, 0, 5, true));
   }
 }

@@ -1,14 +1,15 @@
 package org.thunderfighter.game.item;
 
-import javafx.scene.image.Image;
 import org.thunderfighter.core.entity.Aircraft;
+
+import javafx.scene.image.Image;
 
 public class HealItemBullet extends ItemBullet {
 
-  private static Image sprite; // lazy
+  private static Image sprite; // lazy-loaded
 
-  public HealItemBullet(double x, double y, double canvasW, double canvasH) {
-    super(x, y, ItemType.HEAL, canvasW, canvasH);
+  public HealItemBullet(double x, double y) {
+    super(x, y, ItemType.HEAL);
   }
 
   @Override
@@ -21,6 +22,7 @@ public class HealItemBullet extends ItemBullet {
   @Override
   protected Image getSprite() {
     if (sprite != null) return sprite;
+
     try {
       var is = HealItemBullet.class.getResourceAsStream("/images/Item/heal.png");
       if (is == null) return null;
