@@ -14,6 +14,9 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
 
   public static final Dimension2D SIZE = new Dimension2D(60, 80); // @params
 
+  private long lastDamageTime = 0; // last damage
+  private final long damageCooldown = 1000; // damage cd
+
   public PlayerAircraft(
       double x, double y, int hp, double speed, int shootInterval, Canvas canvas) {
     this.x = x;
@@ -74,5 +77,13 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
             x + size.getWidth() / 2 - 4, y - 10); // @params
     bullet.setCanvas(canvas);
     worldEntities.add(bullet); // by manager instance to manage it.
+  }
+
+  public void takeDamage(int amount) {
+    long currentTime = System.currentTimeMillis();
+    if (currentTime - lastDamageTime >= damageCooldown) {
+      this.hp -= amount;
+      lastDamageTime = currentTime; // update damage cd time
+    }
   }
 }
