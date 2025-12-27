@@ -26,7 +26,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     this.x = x;
     this.y = y; // birth coordinates
 
-    this.hp = 300;
+    this.hp = 50;
     this.speed = 1;
     this.score = 3000; // kill reward
 
@@ -36,9 +36,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
     this.size = SIZE;
 
-    this.sprite =
-        new Image(
-            getClass().getResourceAsStream("/images/Aircraft/BossEnemy.png"));
+    this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/BossEnemy.png"));
   }
 
   @Override
