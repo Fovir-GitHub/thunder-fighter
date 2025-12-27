@@ -40,7 +40,7 @@ public class EliteEnemy extends AbstractEnemyAircraft {
   protected void doShoot(List<AbstractEntity> worldEntities) {
     NormalEnemyBullet bullet =
         new NormalEnemyBullet(
-            x + size.getWidth() / 2 - 4, y + size.getHeight(), 0, 1, false); // @params
+            x + size.getWidth() / 2 - 4, y + size.getHeight() + 4, 0, 4, false); // @params
     worldEntities.add(bullet);
   }
 }
