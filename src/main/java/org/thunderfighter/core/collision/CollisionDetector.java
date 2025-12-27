@@ -6,7 +6,6 @@ import org.thunderfighter.core.abstractor.AbstractAircraft;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
-import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.core.entity.Bullet;
 
 /** Collisoin Detector */
@@ -70,7 +69,7 @@ public class CollisionDetector {
    * @param b Another entity.
    */
   private static void handleCollision(AbstractEntity a, AbstractEntity b) {
-    if (a instanceof Aircraft && b instanceof Aircraft) {
+    if (a instanceof AbstractAircraft && b instanceof AbstractAircraft) {
       ((AbstractAircraft) a).takeDamage(1);
       ((AbstractAircraft) b).takeDamage(1);
     } else {

@@ -7,6 +7,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
@@ -49,6 +50,9 @@ public class Game {
   // Spawn enemies.
   private EnemySpawner enemySpawner;
   private int numberOfEnemy = 0;
+
+  private Image backgroundImage =
+      new Image(getClass().getResourceAsStream("/images/Background/bg.png"));
 
   GAME_STATE gameState;
 
@@ -170,12 +174,14 @@ public class Game {
         }
       }
     }
+    entities.addAll(tempList);
 
     scoreBoard.update();
   }
 
   public void draw() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    graphicsContext.drawImage(backgroundImage, 0, 0, canvas.getWidth(), canvas.getHeight());
     for (AbstractEntity entity : entities) {
       entity.draw(graphicsContext);
     }
