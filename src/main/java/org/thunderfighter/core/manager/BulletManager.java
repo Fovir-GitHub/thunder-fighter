@@ -3,10 +3,8 @@ package org.thunderfighter.core.manager;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.thunderfighter.core.entity.Bullet;
-
 import javafx.scene.canvas.GraphicsContext;
+import org.thunderfighter.core.entity.Bullet;
 
 /**
  * BulletManager (Singleton)

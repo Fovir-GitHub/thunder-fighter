@@ -1,18 +1,17 @@
 package org.thunderfighter.game.bullet;
 
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.CurveTrajectory;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
 /**
  * CurveEnemyBullet
  *
- * A curved bullet used for area control (restrict player movement).
- * Curvature is controlled by curveFactor.
+ * <p>A curved bullet used for area control (restrict player movement). Curvature is controlled by
+ * curveFactor.
  */
 public class CurveEnemyBullet extends AbstractBullet {
 

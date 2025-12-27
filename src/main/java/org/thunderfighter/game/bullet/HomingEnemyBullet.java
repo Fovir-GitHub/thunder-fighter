@@ -1,18 +1,17 @@
 package org.thunderfighter.game.bullet;
 
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.HomingTrajectory;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
 /**
  * HomingEnemyBullet
  *
- * Tracks player for a limited time (trackingTicks).
- * Slower than normal bullets by design (tune initDx/initDy and homing factor).
+ * <p>Tracks player for a limited time (trackingTicks). Slower than normal bullets by design (tune
+ * initDx/initDy and homing factor).
  */
 public class HomingEnemyBullet extends AbstractBullet {
 

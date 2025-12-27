@@ -1,7 +1,6 @@
 package org.thunderfighter.game.spawn;
 
 import java.util.Random;
-
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.core.entity.Bullet;
 import org.thunderfighter.core.manager.ItemManager;
@@ -60,7 +59,8 @@ public class ItemSpawner {
     };
   }
 
-  private Bullet createItemBullet(ItemType type, double x, double y, ClearScreenHandler clearHandler) {
+  private Bullet createItemBullet(
+      ItemType type, double x, double y, ClearScreenHandler clearHandler) {
     return switch (type) {
       case HEAL -> BulletFactory.createHealItem(x, y, canvasW, canvasH);
       case SHIELD -> BulletFactory.createShieldItem(x, y, canvasW, canvasH, 300);

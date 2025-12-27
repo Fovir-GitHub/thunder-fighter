@@ -66,7 +66,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     } else if (hp > 100) {
       stage = Stage.stage2;
       shootInterval = 40;
-    } else if (hp > 0){
+    } else if (hp > 0) {
       stage = Stage.stage3;
       shootInterval = 25;
       speed = 1.8;

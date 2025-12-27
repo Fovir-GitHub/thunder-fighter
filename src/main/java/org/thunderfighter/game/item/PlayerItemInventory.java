@@ -1,20 +1,16 @@
 package org.thunderfighter.game.item;
 
 import java.util.Optional;
-
 import org.thunderfighter.core.entity.Aircraft;
 
 /**
  * PlayerItemInventory
  *
- * Rules:
- * - Player can hold at most ONE item
- * - Picking up another item replaces the current held one
- * - Use item via key press (E)
+ * <p>Rules: - Player can hold at most ONE item - Picking up another item replaces the current held
+ * one - Use item via key press (E)
  *
- * Note:
- * - This version stores ALL items until used.
- *   If your team decides HEAL should be immediate, special-case it in pickup().
+ * <p>Note: - This version stores ALL items until used. If your team decides HEAL should be
+ * immediate, special-case it in pickup().
  */
 public class PlayerItemInventory {
 

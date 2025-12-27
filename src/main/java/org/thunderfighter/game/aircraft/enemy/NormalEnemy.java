@@ -28,7 +28,7 @@ public class NormalEnemy extends AbstractEnemyAircraft {
   @Override
   protected void onUpdate() {
     super.onUpdate();
-    if(hp == 0) {
+    if (hp == 0) {
       ScoreManager.getInstance().addScore(10);
       aliveFlag = false;
     }

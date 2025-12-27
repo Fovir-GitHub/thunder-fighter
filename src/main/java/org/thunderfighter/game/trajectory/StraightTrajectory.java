@@ -6,7 +6,7 @@ import org.thunderfighter.core.entity.Trajectory;
 /**
  * StraightTrajectory
  *
- * Each tick moves the bullet by its velocity vector (dx, dy).
+ * <p>Each tick moves the bullet by its velocity vector (dx, dy).
  */
 public class StraightTrajectory implements Trajectory {
 

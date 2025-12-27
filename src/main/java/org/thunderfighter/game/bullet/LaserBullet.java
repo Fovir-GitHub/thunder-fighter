@@ -1,25 +1,21 @@
 package org.thunderfighter.game.bullet;
 
-import org.thunderfighter.core.abstractor.AbstractBullet;
-import org.thunderfighter.core.entity.Aircraft;
-
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import org.thunderfighter.core.abstractor.AbstractBullet;
+import org.thunderfighter.core.entity.Aircraft;
 
 /**
  * LaserBullet
  *
- * Design:
- * - Sprite default direction is DOWN (+Y).
- * - Laser is a "beam": it does NOT travel as a small projectile.
- * - It grows to the canvas boundary within 0.5~0.7s (configurable).
- * - It stays for durationTicks, and can be cleared immediately by CLEAR item.
- * - Execute mechanic: takeDamage(Integer.MAX_VALUE).
+ * <p>Design: - Sprite default direction is DOWN (+Y). - Laser is a "beam": it does NOT travel as a
+ * small projectile. - It grows to the canvas boundary within 0.5~0.7s (configurable). - It stays
+ * for durationTicks, and can be cleared immediately by CLEAR item. - Execute mechanic:
+ * takeDamage(Integer.MAX_VALUE).
  *
- * Note:
- * - UI warning lines / fan sweep markers belong to UI/World, not here.
+ * <p>Note: - UI warning lines / fan sweep markers belong to UI/World, not here.
  */
 public class LaserBullet extends AbstractBullet implements Clearable {
 
@@ -43,6 +39,7 @@ public class LaserBullet extends AbstractBullet implements Clearable {
 
   /** Normalized direction (unit vector). */
   private final double dirX;
+
   private final double dirY;
 
   /** Beam full length to the canvas boundary (computed once). */
@@ -50,6 +47,7 @@ public class LaserBullet extends AbstractBullet implements Clearable {
 
   /** Beam start anchor (muzzle point). */
   private final double startX;
+
   private final double startY;
 
   public LaserBullet(
@@ -103,7 +101,8 @@ public class LaserBullet extends AbstractBullet implements Clearable {
     this.speed = 0; // beam does not "move"; it grows
 
     // Compute full beam length until it hits canvas boundary
-    this.fullLength = computeRayLengthToBounds(this.startX, this.startY, this.dirX, this.dirY, canvasW, canvasH);
+    this.fullLength =
+        computeRayLengthToBounds(this.startX, this.startY, this.dirX, this.dirY, canvasW, canvasH);
   }
 
   /** Beam thickness in pixels. */
@@ -147,10 +146,8 @@ public class LaserBullet extends AbstractBullet implements Clearable {
   }
 
   /**
-   * Important:
-   * Default AbstractBullet collision is a small rectangle at (x,y).
-   * For laser beam we override it using an axis-aligned bounding box.
-   * (Approximation good enough for most projects.)
+   * Important: Default AbstractBullet collision is a small rectangle at (x,y). For laser beam we
+   * override it using an axis-aligned bounding box. (Approximation good enough for most projects.)
    */
   @Override
   public Bounds getCollisionBounds() {

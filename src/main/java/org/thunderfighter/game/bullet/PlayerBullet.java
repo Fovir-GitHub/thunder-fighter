@@ -1,22 +1,18 @@
 package org.thunderfighter.game.bullet;
 
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.StraightTrajectory;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
 /**
  * PlayerBullet
  *
- * Straight bullet fired by the player.
- * - Damage: 1
- * - Dies when out of canvas bounds
+ * <p>Straight bullet fired by the player. - Damage: 1 - Dies when out of canvas bounds
  *
- * Compatibility:
- * - Provides (startX, startY) constructor to match existing Aircraft.doShoot(...)
+ * <p>Compatibility: - Provides (startX, startY) constructor to match existing Aircraft.doShoot(...)
  * - Provides full (startX, startY, canvasW, canvasH) constructor for correct canvas bounds
  */
 public class PlayerBullet extends AbstractBullet {
@@ -25,6 +21,7 @@ public class PlayerBullet extends AbstractBullet {
 
   /** Default canvas size fallback for legacy constructor. */
   private static final double DEFAULT_CANVAS_W = 800.0;
+
   private static final double DEFAULT_CANVAS_H = 600.0;
 
   /** Default per-tick speed upward. */
@@ -34,10 +31,7 @@ public class PlayerBullet extends AbstractBullet {
   private static final Image SPRITE =
       new Image(PlayerBullet.class.getResourceAsStream("/images/Bullet/player_bullet.png"));
 
-  /**
-   * Legacy constructor (compatibility).
-   * Matches your current code: new PlayerBullet(x, y)
-   */
+  /** Legacy constructor (compatibility). Matches your current code: new PlayerBullet(x, y) */
   public PlayerBullet(double startX, double startY) {
     this(startX, startY, DEFAULT_CANVAS_W, DEFAULT_CANVAS_H);
   }

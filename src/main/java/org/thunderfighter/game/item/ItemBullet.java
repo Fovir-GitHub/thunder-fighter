@@ -1,28 +1,22 @@
 package org.thunderfighter.game.item;
 
-import org.thunderfighter.core.abstractor.AbstractBullet;
-import org.thunderfighter.core.entity.Aircraft;
-import org.thunderfighter.game.trajectory.BounceTrajectory;
-
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import org.thunderfighter.core.abstractor.AbstractBullet;
+import org.thunderfighter.core.entity.Aircraft;
+import org.thunderfighter.game.trajectory.BounceTrajectory;
 
 /**
  * ItemBullet (Items are bullets)
  *
- * Design:
- * - Items belong to Bullet system
- * - Only interact with player aircraft (pickup)
- * - DVD-style bouncing inside the canvas
- * - Lifetime: 3 seconds by default
- * - Visual: larger than normal bullets, circular semantic
+ * <p>Design: - Items belong to Bullet system - Only interact with player aircraft (pickup) -
+ * DVD-style bouncing inside the canvas - Lifetime: 3 seconds by default - Visual: larger than
+ * normal bullets, circular semantic
  *
- * Notes:
- * - Does NOT implement ItemLike anymore
- * - Item lifecycle is fully handled by BulletManager via aliveFlag
- * - draw() is FINAL to guarantee visibility even if sprite missing
+ * <p>Notes: - Does NOT implement ItemLike anymore - Item lifecycle is fully handled by
+ * BulletManager via aliveFlag - draw() is FINAL to guarantee visibility even if sprite missing
  */
 public abstract class ItemBullet extends AbstractBullet {
 
@@ -41,11 +35,7 @@ public abstract class ItemBullet extends AbstractBullet {
   protected final ItemType type;
 
   protected ItemBullet(
-      double startX,
-      double startY,
-      ItemType type,
-      double canvasW,
-      double canvasH) {
+      double startX, double startY, ItemType type, double canvasW, double canvasH) {
 
     // position & origin
     this.x = startX;
@@ -134,7 +124,8 @@ public abstract class ItemBullet extends AbstractBullet {
     Image sprite = null;
     try {
       sprite = getSprite();
-    } catch (Throwable ignored) {}
+    } catch (Throwable ignored) {
+    }
 
     if (sprite != null) {
       gc.drawImage(sprite, x, y, size.getWidth(), size.getHeight());

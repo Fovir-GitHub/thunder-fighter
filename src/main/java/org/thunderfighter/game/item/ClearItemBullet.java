@@ -1,8 +1,7 @@
 package org.thunderfighter.game.item;
 
-import org.thunderfighter.core.entity.Aircraft;
-
 import javafx.scene.image.Image;
+import org.thunderfighter.core.entity.Aircraft;
 
 public class ClearItemBullet extends ItemBullet {
 

@@ -1,16 +1,14 @@
 package org.thunderfighter.game.item;
 
-import org.thunderfighter.core.entity.Aircraft;
-
 import javafx.scene.image.Image;
+import org.thunderfighter.core.entity.Aircraft;
 
 public class ShieldItemBullet extends ItemBullet {
 
   private static Image sprite;
   private final int invincibleTicks;
 
-  public ShieldItemBullet(
-      double x, double y, double canvasW, double canvasH, int invincibleTicks) {
+  public ShieldItemBullet(double x, double y, double canvasW, double canvasH, int invincibleTicks) {
     super(x, y, ItemType.SHIELD, canvasW, canvasH);
     this.invincibleTicks = invincibleTicks;
   }
