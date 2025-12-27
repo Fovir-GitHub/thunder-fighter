@@ -5,6 +5,8 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import org.thunderfighter.core.entity.Entity;
 
+import java.util.List;
+
 public abstract class AbstractEntity implements Entity {
   protected double x; // x coordinate on the canvas
   protected double y; // y coordinate on the canvas
@@ -42,7 +44,7 @@ public abstract class AbstractEntity implements Entity {
   }
 
   @Override
-  public abstract void update(); // the update logic is implemented by the subclass
+  public abstract void update(List<AbstractEntity> worldEntities); // the update logic is implemented by the subclass
 
   @Override
   public abstract void draw(GraphicsContext gc); // the drawing logic
