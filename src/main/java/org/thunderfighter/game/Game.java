@@ -206,7 +206,7 @@ public class Game {
         break;
 
       case BOSS:
-        if (enemySpawner.spawnBoss()) {
+        if (enemySpawner.spawnBoss(this)) {
           numberOfEnemy++;
         }
         break;

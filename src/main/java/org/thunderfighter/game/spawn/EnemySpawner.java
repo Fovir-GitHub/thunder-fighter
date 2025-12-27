@@ -13,7 +13,6 @@ public class EnemySpawner {
   private final Random rng = new Random();
   private final Canvas canvas;
   private List<AbstractEntity> entities;
-  private Game game;
 
   private int normalCd = 0;
   private int eliteCd = 0;
@@ -44,7 +43,7 @@ public class EnemySpawner {
     return true;
   }
 
-  public boolean spawnBoss() {
+  public boolean spawnBoss(Game game) {
     if (boss != null && boss.isAlive()) {
       return false;
     }
