@@ -1,13 +1,11 @@
 package org.thunderfighter.core.abstractor;
 
+import java.util.List;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import java.util.*;
 import org.thunderfighter.core.entity.Aircraft;
-
-import java.util.List;
 
 public abstract class AbstractAircraft extends AbstractEntity implements Aircraft {
 
@@ -57,5 +55,6 @@ public abstract class AbstractAircraft extends AbstractEntity implements Aircraf
 
   protected abstract void move(); // aircraft movement logic
 
-  protected void onUpdate(List<AbstractEntity> worldEntities) {} // extra logic per frame, like shooting, AI, etc.
+  protected void onUpdate(
+      List<AbstractEntity> worldEntities) {} // extra logic per frame, like shooting, AI, etc.
 }
