@@ -1,5 +1,6 @@
 package org.thunderfighter.game.item;
 
+import java.util.List;
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -9,22 +10,14 @@ import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.BounceTrajectory;
 
-import java.util.List;
-
 /**
  * ItemBullet (Items are bullets)
  *
- * <p>Design:
- * - Items belong to Bullet system
- * - Only interact with player aircraft (pickup)
- * - DVD-style bouncing inside the canvas
- * - Lifetime: 3 seconds by default
- * - Visual: sprite-based only
+ * <p>Design: - Items belong to Bullet system - Only interact with player aircraft (pickup) -
+ * DVD-style bouncing inside the canvas - Lifetime: 3 seconds by default - Visual: sprite-based only
  *
- * <p>Notes:
- * - Item lifecycle is fully handled by BulletManager via aliveFlag
- * - draw() is FINAL
- * - If sprite is missing, item will not be rendered (no fallback graphics)
+ * <p>Notes: - Item lifecycle is fully handled by BulletManager via aliveFlag - draw() is FINAL - If
+ * sprite is missing, item will not be rendered (no fallback graphics)
  */
 public abstract class ItemBullet extends AbstractBullet {
 
@@ -54,10 +47,6 @@ public abstract class ItemBullet extends AbstractBullet {
     this.y = startY;
     this.originX = startX;
     this.originY = startY;
-
-    // canvas bounds
-    this.canvasW = canvasW;
-    this.canvasH = canvasH;
 
     // item metadata
     this.type = type;
