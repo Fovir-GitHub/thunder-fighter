@@ -71,7 +71,7 @@ public class Game {
   private void initGame() {
     initEntities();
     inventory = new PlayerItemInventory();
-    enemySpawner = new EnemySpawner(canvas, entities);
+    enemySpawner = new EnemySpawner(canvas, entities, this);
     scoreBoard = new ScoreBoard(root, playerAircraft);
 
     // TODO: Add `ClearScreenHandler`.

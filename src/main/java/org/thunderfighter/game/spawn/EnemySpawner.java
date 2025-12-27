@@ -13,14 +13,16 @@ public class EnemySpawner {
   private final Random rng = new Random();
   private final Canvas canvas;
   private List<AbstractEntity> entities;
+  private Game game;
 
   private int normalCd = 0;
   private int eliteCd = 0;
   private BossEnemy boss = null;
 
-  public EnemySpawner(Canvas canvas, List<AbstractEntity> entities) {
+  public EnemySpawner(Canvas canvas, List<AbstractEntity> entities, Game game) {
     this.canvas = canvas;
     this.entities = entities;
+    this.game = game;
   }
 
   public boolean spawnNormal() {
@@ -28,7 +30,10 @@ public class EnemySpawner {
       return false;
     }
     normalCd = 2 * Constant.TPS;
-    entities.add(new NormalEnemy(randomX()));
+
+    NormalEnemy enemy = new NormalEnemy(randomX());
+    enemy.setCanvas(canvas);
+    entities.add(enemy);
 
     return true;
   }
@@ -38,7 +43,10 @@ public class EnemySpawner {
       return false;
     }
     eliteCd = 5 * Constant.TPS;
-    entities.add(new EliteEnemy(randomX()));
+
+    EliteEnemy enemy = new EliteEnemy(randomX());
+    enemy.setCanvas(canvas);
+    entities.add(enemy);
 
     return true;
   }
@@ -48,6 +56,7 @@ public class EnemySpawner {
       return false;
     }
     boss = new BossEnemy(canvas.getWidth() / 2 - 100, 0, game);
+    boss.setCanvas(canvas);
     entities.add(boss);
 
     return true;
