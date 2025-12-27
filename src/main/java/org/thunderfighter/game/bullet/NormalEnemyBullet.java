@@ -37,7 +37,7 @@ public class NormalEnemyBullet extends AbstractBullet {
   private static final Image SPRITE =
       new Image(
           NormalEnemyBullet.class.getResourceAsStream(
-              "/images/bullets/enemy_bullet.png"));
+              "/images/Bullet/enemy_bullet.png"));
 
   /**
    * Legacy constructor.

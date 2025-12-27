@@ -27,7 +27,7 @@ public class LaserBullet extends AbstractBullet implements Clearable {
   // Sprite (change path if needed)
   // ------------------------------------------------------------
   private static final Image LASER_SPRITE =
-      new Image(LaserBullet.class.getResourceAsStream("/images/bullets/laser.png"));
+      new Image(LaserBullet.class.getResourceAsStream("/images/Bullet/laser.png"));
 
   // ------------------------------------------------------------
   // Parameters

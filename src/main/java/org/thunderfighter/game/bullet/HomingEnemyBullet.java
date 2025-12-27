@@ -1,11 +1,12 @@
 package org.thunderfighter.game.bullet;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.HomingTrajectory;
+
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 /**
  * HomingEnemyBullet
@@ -19,7 +20,7 @@ public class HomingEnemyBullet extends AbstractBullet {
 
   /** Homing bullet sprite. */
   private static final Image SPRITE =
-      new Image(HomingEnemyBullet.class.getResourceAsStream("/images/bullets/enemy_bullet.png"));
+      new Image(HomingEnemyBullet.class.getResourceAsStream("/images/Bullet/enemy_bullet.png"));
 
   private int trackingTicks;
 

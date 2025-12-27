@@ -25,7 +25,7 @@ public class ClearItemBullet extends ItemBullet {
 
   /** Sprite for clear item. */
   private static final Image SPRITE =
-      new Image(ClearItemBullet.class.getResourceAsStream("/images/item/clear.png"));
+      new Image(ClearItemBullet.class.getResourceAsStream("/images/Item/clear.png"));
 
   private final ClearScreenHandler handler;
   private final int clearWindowTicks;

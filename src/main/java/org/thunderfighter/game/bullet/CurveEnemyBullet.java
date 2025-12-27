@@ -1,15 +1,26 @@
 package org.thunderfighter.game.bullet;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.CurveTrajectory;
 
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
+/**
+ * CurveEnemyBullet
+ *
+ * A curved bullet used for area control (restrict player movement).
+ * Curvature is controlled by curveFactor.
+ */
 public class CurveEnemyBullet extends AbstractBullet {
 
   private static final int DAMAGE = 1;
+
+  /** Curved bullet sprite. */
+  private static final Image SPRITE =
+      new Image(CurveEnemyBullet.class.getResourceAsStream("/images/Bullet/enemy_bullet.png"));
 
   public CurveEnemyBullet(
       double startX,
@@ -19,6 +30,7 @@ public class CurveEnemyBullet extends AbstractBullet {
       double curveFactor,
       double canvasW,
       double canvasH) {
+
     this.x = startX;
     this.y = startY;
     this.originX = startX;
@@ -39,7 +51,9 @@ public class CurveEnemyBullet extends AbstractBullet {
 
   @Override
   public void update() {
-    trajectory.update(this);
+    if (!aliveFlag) return;
+    moveOnce();
+    tickLife();
     killIfOutOfBounds();
   }
 
@@ -51,7 +65,7 @@ public class CurveEnemyBullet extends AbstractBullet {
 
   @Override
   public void draw(GraphicsContext gc) {
-    gc.setFill(Color.DARKORANGE);
-    gc.fillRect(x, y, size.getWidth(), size.getHeight());
+    if (!aliveFlag) return;
+    gc.drawImage(SPRITE, x, y, size.getWidth(), size.getHeight());
   }
 }

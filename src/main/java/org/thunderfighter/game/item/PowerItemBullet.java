@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 public class PowerItemBullet extends ItemBullet {
 
   private static final Image SPRITE =
-      new Image(PowerItemBullet.class.getResourceAsStream("/images/item/power.png"));
+      new Image(PowerItemBullet.class.getResourceAsStream("/images/Item/power.png"));
 
   private final int buffTicks;
   private final int bonusDamage;

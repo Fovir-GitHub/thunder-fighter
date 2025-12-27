@@ -32,7 +32,7 @@ public class PlayerBullet extends AbstractBullet {
 
   /** Player bullet sprite. Make sure this exists in resources. */
   private static final Image SPRITE =
-      new Image(PlayerBullet.class.getResourceAsStream("/images/bullets/player_bullet.png"));
+      new Image(PlayerBullet.class.getResourceAsStream("/images/Bullet/player_bullet.png"));
 
   /**
    * Legacy constructor (compatibility).

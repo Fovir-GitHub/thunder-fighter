@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 public class ShieldItemBullet extends ItemBullet {
 
   private static final Image SPRITE =
-      new Image(ShieldItemBullet.class.getResourceAsStream("/images/item/shield.png"));
+      new Image(ShieldItemBullet.class.getResourceAsStream("/images/Item/shield.png"));
 
   private final int invincibleTicks;
 

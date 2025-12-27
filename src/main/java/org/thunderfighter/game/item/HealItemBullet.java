@@ -19,7 +19,7 @@ public class HealItemBullet extends ItemBullet {
 
   /** Sprite for heal item (ensure the file exists under resources). */
   private static final Image SPRITE =
-      new Image(HealItemBullet.class.getResourceAsStream("/images/item/heal.png"));
+      new Image(HealItemBullet.class.getResourceAsStream("/images/Item/heal.png"));
 
   public HealItemBullet(double x, double y, double canvasW, double canvasH) {
     super(x, y, ItemType.HEAL, canvasW, canvasH);
