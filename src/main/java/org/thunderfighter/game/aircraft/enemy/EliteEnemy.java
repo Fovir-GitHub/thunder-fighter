@@ -1,11 +1,13 @@
 package org.thunderfighter.game.aircraft.enemy;
 
 import java.util.List;
-import javafx.geometry.Dimension2D;
-import javafx.scene.image.Image;
+
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.game.bullet.NormalEnemyBullet;
+
+import javafx.geometry.Dimension2D;
+import javafx.scene.image.Image;
 
 public class EliteEnemy extends AbstractEnemyAircraft {
 

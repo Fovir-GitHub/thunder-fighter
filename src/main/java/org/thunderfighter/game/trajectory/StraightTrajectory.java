@@ -3,7 +3,11 @@ package org.thunderfighter.game.trajectory;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Trajectory;
 
-/** Straight line movement. Each tick moves the bullet by its velocity vector (dx, dy). */
+/**
+ * StraightTrajectory
+ *
+ * Each tick moves the bullet by its velocity vector (dx, dy).
+ */
 public class StraightTrajectory implements Trajectory {
 
   @Override

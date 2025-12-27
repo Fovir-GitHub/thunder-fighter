@@ -1,34 +1,45 @@
 package org.thunderfighter.game.item;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.BounceTrajectory;
 
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+
 /**
  * ItemBullet (Items are bullets)
  *
- * <p>Requirements: - Items belong to the Bullet system. - Only collide with the player aircraft
- * (pickup). - Bounce within canvas like a DVD logo (BounceTrajectory). - Lifetime: 3 seconds
- * (default 180 ticks @ 60 TPS). - When picked up or expired, the item becomes not alive (removed by
- * world cleanup).
+ * Rules:
+ * - Items belong to Bullet system (managed by BulletManager if you want)
+ * - Only interact with player aircraft (pickup)
+ * - DVD-style bouncing in canvas (BounceTrajectory)
+ * - Lifetime: 3 seconds by default
+ * - Visual: bigger than bullets, use sprite if provided
+ *
+ * Design choice:
+ * - draw(...) is FINAL and unified here to avoid "not overriding draw" errors.
+ * - Subclasses ONLY provide sprite + effect logic.
  */
 public abstract class ItemBullet extends AbstractBullet {
 
-  /** Default ticks per second used by this module. */
-  private static final int TPS = 60;
+  /** Keep TPS in ONE place for item module. */
+  public static final int TPS = 60;
 
-  /** Item lifetime in ticks: 3 seconds. */
-  private static final int DEFAULT_LIFE_TICKS = 3 * TPS;
+  /** Item lifetime in ticks (3 seconds). */
+  public static final int DEFAULT_LIFE_TICKS = 3 * TPS;
 
-  /** Item base speed per tick (DVD-style). */
+  /** Item speed per tick. */
   private static final double DEFAULT_PER_TICK_SPEED = 3.0;
+
+  /** Item size (bigger than normal bullets). */
+  protected static final Dimension2D ITEM_SIZE = new Dimension2D(32, 32);
 
   protected final ItemType type;
 
-  protected ItemBullet(
-      double startX, double startY, ItemType type, double canvasW, double canvasH) {
+  protected ItemBullet(double startX, double startY, ItemType type, double canvasW, double canvasH) {
     this.x = startX;
     this.y = startY;
     this.originX = startX;
@@ -38,9 +49,8 @@ public abstract class ItemBullet extends AbstractBullet {
     this.canvasH = canvasH;
 
     this.type = type;
-    this.size = new Dimension2D(18, 18);
+    this.size = ITEM_SIZE;
 
-    // Item lifetime (3 seconds by default)
     this.lifeTicks = DEFAULT_LIFE_TICKS;
 
     // Random initial direction
@@ -52,7 +62,7 @@ public abstract class ItemBullet extends AbstractBullet {
     // Items are not fired by the player
     this.fromPlayer = false;
 
-    // DVD-style bouncing
+    // DVD bounce
     this.trajectory = new BounceTrajectory();
   }
 
@@ -60,29 +70,54 @@ public abstract class ItemBullet extends AbstractBullet {
     return type;
   }
 
+  /** Radius used for circular semantic (optional for your collision system). */
+  public final double getRadius() {
+    return size.getWidth() / 2.0;
+  }
+
+  public final double getCenterX() {
+    return x + getRadius();
+  }
+
+  public final double getCenterY() {
+    return y + getRadius();
+  }
+
   @Override
-  public void update() {
-    trajectory.update(this);
+  public final void update() {
+    if (!aliveFlag) return;
+    moveOnce();
     tickLife();
   }
 
   @Override
-  public void onHit(Aircraft target) {
-    // Items can only be picked up by the player
+  public final void onHit(Aircraft target) {
     if (!target.isPlayer()) return;
-
     applyEffect(target);
-
-    // Mark as dead so the world removes it
     aliveFlag = false;
   }
 
-  /**
-   * Apply the item effect to the player. Implementation depends on item type
-   * (heal/shield/power/clear).
-   */
+  /** Apply item effect to the player. */
   protected abstract void applyEffect(Aircraft player);
 
+  /** Subclass provides sprite (return null to fallback to simple circle). */
+  protected abstract Image getSprite();
+
+  /**
+   * Unified render:
+   * - If sprite exists, draw it
+   * - Otherwise draw a simple circle (debug)
+   */
   @Override
-  public abstract void draw(GraphicsContext gc);
+  public final void draw(GraphicsContext gc) {
+    if (!aliveFlag) return;
+
+    Image sprite = getSprite();
+    if (sprite != null) {
+      gc.drawImage(sprite, x, y, size.getWidth(), size.getHeight());
+    } else {
+      gc.setFill(Color.WHITE);
+      gc.fillOval(x, y, size.getWidth(), size.getHeight());
+    }
+  }
 }
