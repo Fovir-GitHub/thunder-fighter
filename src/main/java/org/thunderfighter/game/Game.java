@@ -155,9 +155,14 @@ public class Game {
     CollisionDetector.detectCollision(entities);
 
     Iterator<AbstractEntity> it = entities.iterator();
+    List<AbstractEntity> tempList = new ArrayList<>();
     while (it.hasNext()) {
       AbstractEntity entity = it.next();
-      entity.update(entities);
+      if (entity instanceof AbstractEnemyAircraft) {
+        entity.update(tempList);
+      } else {
+        entity.update(entities);
+      }
       if (!entity.isAlive()) {
         it.remove();
         if (entity instanceof AbstractEnemyAircraft) {
