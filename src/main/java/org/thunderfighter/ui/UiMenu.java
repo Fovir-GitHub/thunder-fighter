@@ -1,11 +1,11 @@
 package org.thunderfighter.ui;
 
-import javafx.scene.StackPane;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import org.thunderfighter.core.abstractor.AbstractUiMenu;
 
 public class UiMenu extends AbstractUiMenu {
+    public Text title = new Text("Thunder Fighter");
     public Button startButton = new Button("Start Game");
     public Button historyButton = new Button("History Score");
     public Button aboutButton = new Button("About");
@@ -15,7 +15,6 @@ public class UiMenu extends AbstractUiMenu {
 
     public UiMenu(UiOverlay overlay) {
         this.overlay = overlay;
-        Text title = new Text("Thunder Fighter");
         this.title.setFont(javafx.scene.text.Font.font(30));
         this.title.setTranslateX(320);
         this.title.setTranslateY(100);
