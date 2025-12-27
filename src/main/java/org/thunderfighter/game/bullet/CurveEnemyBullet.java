@@ -13,8 +13,8 @@ import java.util.List;
 /**
  * CurveEnemyBullet
  *
- * <p>A curved bullet used for area control (restrict player movement). Curvature is controlled by
- * curveFactor.
+ * A curved bullet used for area control (restrict player movement).
+ * Curvature is controlled by curveFactor.
  */
 public class CurveEnemyBullet extends AbstractBullet {
 
@@ -48,6 +48,8 @@ public class CurveEnemyBullet extends AbstractBullet {
 
     this.fromPlayer = false;
     this.trajectory = new CurveTrajectory(curveFactor);
+
+
     this.lifeTicks = -1;
   }
 

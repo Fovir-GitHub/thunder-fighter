@@ -1,29 +1,30 @@
 package org.thunderfighter.game.bullet;
 
+import org.thunderfighter.core.abstractor.AbstractBullet;
+import org.thunderfighter.core.entity.Aircraft;
+
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
+import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import org.thunderfighter.core.abstractor.AbstractBullet;
-import org.thunderfighter.core.abstractor.AbstractEntity;
-import org.thunderfighter.core.entity.Aircraft;
 
 import java.util.List;
 
 /**
  * LaserBullet
  *
- * <p>Design: - Sprite default direction is DOWN (+Y). - Laser is a "beam": it does NOT travel as a
- * small projectile. - It grows to the canvas boundary within 0.5~0.7s (configurable). - It stays
- * for durationTicks, and can be cleared immediately by CLEAR item. - Execute mechanic:
- * takeDamage(Integer.MAX_VALUE).
- *
- * <p>Note: - UI warning lines / fan sweep markers belong to UI/World, not here.
+ * Design:
+ * - Sprite default direction is DOWN (+Y).
+ * - Laser is a beam (not a moving projectile).
+ * - It grows to the canvas boundary within growTicks.
+ * - Stays for durationTicks, can be cleared immediately by CLEAR item.
+ * - Execute mechanic: takeDamage(Integer.MAX_VALUE).
  */
 public class LaserBullet extends AbstractBullet implements Clearable {
 
   // ------------------------------------------------------------
-  // Sprite (change path if needed)
+  // Sprite (default direction: DOWN)
   // ------------------------------------------------------------
   private static final Image LASER_SPRITE =
       new Image(LaserBullet.class.getResourceAsStream("/images/Bullet/laser.png"));
@@ -42,17 +43,22 @@ public class LaserBullet extends AbstractBullet implements Clearable {
 
   /** Normalized direction (unit vector). */
   private final double dirX;
-
   private final double dirY;
-
-  /** Beam full length to the canvas boundary (computed once). */
-  private final double fullLength;
 
   /** Beam start anchor (muzzle point). */
   private final double startX;
-
   private final double startY;
 
+  /** Cached full beam length to boundary. */
+  private double fullLength = -1; // lazy compute after canvas available
+
+  /**
+   * Recommended ctor:
+   * - dx/dy defines direction (laser points to that direction)
+   * - durationTicks: how long laser exists
+   * - thickness: beam width (pixels)
+   * - growTicks: how long it takes to grow to boundary (e.g., 36)
+   */
   public LaserBullet(
       double startX,
       double startY,
@@ -60,52 +66,45 @@ public class LaserBullet extends AbstractBullet implements Clearable {
       double dy,
       int durationTicks,
       double thickness,
-      double canvasW,
-      double canvasH) {
+      int growTicks) {
 
-    // Anchor
     this.startX = startX;
     this.startY = startY;
 
-    // Store in AbstractBullet fields too (for compatibility)
+    // Keep AbstractBullet fields consistent
     this.x = startX;
     this.y = startY;
     this.originX = startX;
     this.originY = startY;
 
-    this.canvasW = canvasW;
-    this.canvasH = canvasH;
-
     this.thickness = thickness;
-    this.size = new javafx.geometry.Dimension2D(thickness, thickness);
+    this.size = new Dimension2D(thickness, thickness);
 
     this.fromPlayer = false;
 
-    // Lifetime
     this.remainTicks = Math.max(1, durationTicks);
-
-    // Growing time: 0.6s @60TPS ~ 36 ticks (in range 0.5~0.7)
-    this.growTicks = 36;
+    this.growTicks = Math.max(1, growTicks);
 
     // Normalize direction
     double len = Math.hypot(dx, dy);
     if (len < 1e-6) {
-      // fallback: default shoot down
       this.dirX = 0.0;
-      this.dirY = 1.0;
+      this.dirY = 1.0; // default DOWN
     } else {
       this.dirX = dx / len;
       this.dirY = dy / len;
     }
 
-    // Save direction into AbstractBullet velocity fields (semantic only here)
+    // semantic only
     this.dx = this.dirX;
     this.dy = this.dirY;
-    this.speed = 0; // beam does not "move"; it grows
+    this.speed = 0; // beam does not move
+    this.lifeTicks = -1; // we use remainTicks
+  }
 
-    // Compute full beam length until it hits canvas boundary
-    this.fullLength =
-        computeRayLengthToBounds(this.startX, this.startY, this.dirX, this.dirY, canvasW, canvasH);
+  /** Convenience ctor with default growTicks = 36 (~0.6s @60TPS). */
+  public LaserBullet(double startX, double startY, double dx, double dy, int durationTicks, double thickness) {
+    this(startX, startY, dx, dy, durationTicks, thickness, 36);
   }
 
   /** Beam thickness in pixels. */
@@ -113,14 +112,12 @@ public class LaserBullet extends AbstractBullet implements Clearable {
     return thickness;
   }
 
-  /** Remaining ticks. */
-  public int getRemainTicks() {
-    return remainTicks;
-  }
-
   /** Current beam length (growing). */
   public double getCurrentLength() {
-    double t = Math.min(1.0, (growTicks <= 0) ? 1.0 : (ageTicks / (double) growTicks));
+    ensureFullLengthComputed();
+    if (fullLength <= 0) return 0;
+
+    double t = Math.min(1.0, ageTicks / (double) growTicks);
     return fullLength * t;
   }
 
@@ -130,17 +127,13 @@ public class LaserBullet extends AbstractBullet implements Clearable {
 
     ageTicks++;
     remainTicks--;
-    if (remainTicks <= 0) {
-      aliveFlag = false;
-    }
+    if (remainTicks <= 0) aliveFlag = false;
   }
 
   @Override
   public void onHit(Aircraft target) {
-    // Execute mechanic
-    target.takeDamage(Integer.MAX_VALUE);
-
-    // Laser default behavior: piercing (does NOT disappear on hit)
+    target.takeDamage(Integer.MAX_VALUE); // execute
+    // piercing by default
   }
 
   @Override
@@ -149,8 +142,8 @@ public class LaserBullet extends AbstractBullet implements Clearable {
   }
 
   /**
-   * Important: Default AbstractBullet collision is a small rectangle at (x,y). For laser beam we
-   * override it using an axis-aligned bounding box. (Approximation good enough for most projects.)
+   * Laser collision:
+   * Use an axis-aligned bounding box covering the current beam segment (AABB approximation).
    */
   @Override
   public Bounds getCollisionBounds() {
@@ -173,43 +166,56 @@ public class LaserBullet extends AbstractBullet implements Clearable {
     double len = getCurrentLength();
     if (len <= 1) return;
 
-    // ------------------------------------------------------------
-    // Rotation:
-    // - atan2 gives angle from +X axis
-    // - our sprite default is DOWN (+Y), which corresponds to +90 degrees
-    // => rotationDegrees = angleToDir - 90deg
-    // ------------------------------------------------------------
+    // rotation: sprite default DOWN (+Y)
+    // angleToDir is angle from +X; DOWN is +90deg => subtract 90deg
     double angleToDir = Math.atan2(dirY, dirX);
     double rotationDegrees = Math.toDegrees(angleToDir - Math.PI / 2.0);
 
     gc.save();
-
-    // Move origin to laser start point, rotate, then draw a stretched sprite downward
     gc.translate(startX, startY);
     gc.rotate(rotationDegrees);
 
-    // Draw: centered thickness, stretched length
+    // draw stretched laser downward (y+)
     gc.drawImage(LASER_SPRITE, -thickness / 2.0, 0, thickness, len);
 
     gc.restore();
   }
 
   // ------------------------------------------------------------
-  // Helper: ray length to bounds
+  // Internal
   // ------------------------------------------------------------
+  private void ensureFullLengthComputed() {
+    if (fullLength > 0) return;
+
+    // canvas comes from AbstractEntity; must be injected like aircraft
+    if (this.canvas == null) {
+      // no canvas yet, keep safe
+      fullLength = 0;
+      return;
+    }
+
+    double w = canvas.getWidth();
+    double h = canvas.getHeight();
+    if (w <= 1 || h <= 1) {
+      fullLength = 0;
+      return;
+    }
+
+    fullLength = computeRayLengthToBounds(startX, startY, dirX, dirY, w, h);
+  }
+
   private static double computeRayLengthToBounds(
       double x, double y, double dx, double dy, double w, double h) {
 
-    // We compute t for intersections with x=0, x=w, y=0, y=h, choose the smallest positive t.
     double tMin = Double.POSITIVE_INFINITY;
 
-    // Avoid division by 0
     if (Math.abs(dx) > 1e-9) {
       double tx1 = (0 - x) / dx;
       double tx2 = (w - x) / dx;
       if (tx1 > 0) tMin = Math.min(tMin, tx1);
       if (tx2 > 0) tMin = Math.min(tMin, tx2);
     }
+
     if (Math.abs(dy) > 1e-9) {
       double ty1 = (0 - y) / dy;
       double ty2 = (h - y) / dy;
@@ -217,13 +223,10 @@ public class LaserBullet extends AbstractBullet implements Clearable {
       if (ty2 > 0) tMin = Math.min(tMin, ty2);
     }
 
-    // If for some reason we can't find a positive intersection, fallback
     if (!Double.isFinite(tMin) || tMin <= 0) {
       return Math.hypot(w, h);
     }
 
-    // Clamp to reasonable max (diagonal)
-    double diag = Math.hypot(w, h);
-    return Math.min(diag, tMin);
+    return Math.min(Math.hypot(w, h), tMin);
   }
 }

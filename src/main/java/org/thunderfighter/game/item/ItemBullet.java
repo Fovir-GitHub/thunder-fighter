@@ -14,12 +14,17 @@ import java.util.List;
 /**
  * ItemBullet (Items are bullets)
  *
- * <p>Design: - Items belong to Bullet system - Only interact with player aircraft (pickup) -
- * DVD-style bouncing inside the canvas - Lifetime: 3 seconds by default - Visual: larger than
- * normal bullets, circular semantic
+ * <p>Design:
+ * - Items belong to Bullet system
+ * - Only interact with player aircraft (pickup)
+ * - DVD-style bouncing inside the canvas
+ * - Lifetime: 3 seconds by default
+ * - Visual: sprite-based only
  *
- * <p>Notes: - Does NOT implement ItemLike anymore - Item lifecycle is fully handled by
- * BulletManager via aliveFlag - draw() is FINAL to guarantee visibility even if sprite missing
+ * <p>Notes:
+ * - Item lifecycle is fully handled by BulletManager via aliveFlag
+ * - draw() is FINAL
+ * - If sprite is missing, item will not be rendered (no fallback graphics)
  */
 public abstract class ItemBullet extends AbstractBullet {
 
@@ -37,8 +42,12 @@ public abstract class ItemBullet extends AbstractBullet {
 
   protected final ItemType type;
 
-  protected ItemBullet(
-      double startX, double startY, ItemType type, double canvasW, double canvasH) {
+  /**
+   * Constructor.
+   *
+   * <p>Canvas is injected later via AbstractEntity.setCanvas(...)
+   */
+  protected ItemBullet(double startX, double startY, ItemType type) {
 
     // position & origin
     this.x = startX;
@@ -57,7 +66,7 @@ public abstract class ItemBullet extends AbstractBullet {
     // lifetime
     this.lifeTicks = DEFAULT_LIFE_TICKS;
 
-    // random initial direction (DVD bounce)
+    // random initial direction (DVD-style bounce)
     double angle = Math.random() * Math.PI * 2.0;
     this.dx = Math.cos(angle) * DEFAULT_PER_TICK_SPEED;
     this.dy = Math.sin(angle) * DEFAULT_PER_TICK_SPEED;
@@ -71,7 +80,7 @@ public abstract class ItemBullet extends AbstractBullet {
     return type;
   }
 
-  /** Radius for circular semantic meaning (visual only). */
+  /** Radius for circular semantic meaning (still useful for logic if needed). */
   public final double getRadius() {
     return size.getWidth() / 2.0;
   }
@@ -98,16 +107,14 @@ public abstract class ItemBullet extends AbstractBullet {
     if (!target.isPlayer()) return;
 
     applyEffect(target);
-    aliveFlag = false; // picked up -> removed by BulletManager
+    aliveFlag = false;
   }
 
-  /** Apply item effect to the player (heal/shield/power/clear). */
+  /** Apply item effect to the player (heal / shield / power / clear). */
   protected abstract void applyEffect(Aircraft player);
 
-  /** Subclass provides sprite (can return null). */
-  protected Image getSprite() {
-    return null;
-  }
+  /** Subclass must provide sprite (should not return null in production). */
+  protected abstract Image getSprite();
 
   /** Fallback color so item is ALWAYS visible even if sprite missing. */
   private Color getFallbackColor() {

@@ -1,5 +1,6 @@
 package org.thunderfighter.game.bulletfactory;
 
+import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.game.bullet.CurveEnemyBullet;
 import org.thunderfighter.game.bullet.HomingEnemyBullet;
 import org.thunderfighter.game.bullet.LaserBullet;
@@ -14,30 +15,38 @@ import org.thunderfighter.game.trajectory.CurveTrajectory;
 import org.thunderfighter.game.trajectory.HomingTrajectory;
 import org.thunderfighter.game.trajectory.StraightTrajectory;
 
+import javafx.scene.canvas.Canvas;
+
 /**
  * BulletFactory
  *
  * <p>Centralized factory responsible for creating all bullets and item-bullets.
  *
- * <p>Responsibilities: - Hide construction details of bullets - Assign trajectories - Set canvas
- * size, speed, lifetime, and flags
- *
- * <p>This class belongs to the game layer (NOT core), because it contains gameplay-specific
- * creation logic.
+ * <p>Game-layer factory:
+ * - Hides construction details
+ * - Assigns trajectories
+ * - Injects Canvas into bullets (via AbstractEntity.setCanvas)
  */
 public final class BulletFactory {
 
-  // Prevent instantiation
   private BulletFactory() {}
+
+  // -------------------------------------------------
+  // Internal helper
+  // -------------------------------------------------
+  private static <T extends AbstractBullet> T injectCanvas(Canvas canvas, T bullet) {
+    if (canvas != null) {
+      bullet.setCanvas(canvas);
+    }
+    return bullet;
+  }
 
   // -------------------------------------------------
   // Player Bullets
   // -------------------------------------------------
-
-  /** Creates a standard player bullet (straight line, damage = 1). */
-  public static PlayerBullet createPlayerBullet(
-      double x, double y, double canvasW, double canvasH) {
-    PlayerBullet bullet = new PlayerBullet(x, y, canvasW, canvasH);
+  public static PlayerBullet createPlayerBullet(Canvas canvas, double x, double y) {
+    PlayerBullet bullet = new PlayerBullet(x, y);
+    injectCanvas(canvas, bullet);
     bullet.setTrajectory(new StraightTrajectory());
     return bullet;
   }
@@ -45,44 +54,42 @@ public final class BulletFactory {
   // -------------------------------------------------
   // Enemy Bullets
   // -------------------------------------------------
-
-  /** Creates a normal enemy bullet with straight trajectory. */
   public static NormalEnemyBullet createEnemyBullet(
-      double x, double y, double dx, double dy, boolean large, double canvasW, double canvasH) {
-    NormalEnemyBullet bullet = new NormalEnemyBullet(x, y, dx, dy, large, canvasW, canvasH);
+      Canvas canvas, double x, double y, double dx, double dy, boolean large) {
+
+    NormalEnemyBullet bullet = new NormalEnemyBullet(x, y, dx, dy, large);
+    injectCanvas(canvas, bullet);
     bullet.setTrajectory(new StraightTrajectory());
     return bullet;
   }
 
-  /**
-   * Creates a curved enemy bullet using Lorentz-style trajectory. Used for area control and
-   * movement restriction.
-   */
   public static CurveEnemyBullet createCurvedEnemyBullet(
-      double x,
-      double y,
-      double dx,
-      double dy,
-      double curveFactor,
-      double canvasW,
-      double canvasH) {
-    CurveEnemyBullet bullet = new CurveEnemyBullet(x, y, dx, dy, curveFactor, canvasW, canvasH);
+      Canvas canvas, double x, double y, double dx, double dy, double curveFactor) {
+
+    CurveEnemyBullet bullet = new CurveEnemyBullet(x, y, dx, dy, curveFactor);
+    injectCanvas(canvas, bullet);
     bullet.setTrajectory(new CurveTrajectory(curveFactor));
     return bullet;
   }
 
-  /** Creates a homing enemy bullet that tracks the player for a limited time. */
+  /**
+   * Homing enemy bullet.
+   *
+   * <p>Tracks target for limited ticks, then disappears.
+   */
   public static HomingEnemyBullet createHomingBullet(
+      Canvas canvas,
       double x,
       double y,
       double dx,
       double dy,
       int trackingTicks,
-      HomingTrajectory.TargetProvider provider,
-      double canvasW,
-      double canvasH) {
+      HomingTrajectory.TargetProvider provider) {
+
     HomingEnemyBullet bullet =
-        new HomingEnemyBullet(x, y, dx, dy, trackingTicks, provider, canvasW, canvasH);
+        new HomingEnemyBullet(x, y, dx, dy, trackingTicks, provider);
+
+    injectCanvas(canvas, bullet);
     bullet.setTrajectory(new HomingTrajectory(provider, 0.12));
     return bullet;
   }
@@ -90,58 +97,61 @@ public final class BulletFactory {
   // -------------------------------------------------
   // Laser Bullets (Boss)
   // -------------------------------------------------
-
-  /**
-   * Creates a laser bullet.
-   *
-   * <p>Laser bullets: - Move extremely fast - Have a limited duration - Can be cleared immediately
-   * by clear-screen items
-   */
   public static LaserBullet createLaserBullet(
+      Canvas canvas,
       double x,
       double y,
       double dx,
       double dy,
       int durationTicks,
-      double thickness,
-      double canvasW,
-      double canvasH) {
-    return new LaserBullet(x, y, dx, dy, durationTicks, thickness, canvasW, canvasH);
+      double thickness) {
+
+    LaserBullet bullet =
+        new LaserBullet(x, y, dx, dy, durationTicks, thickness);
+
+    injectCanvas(canvas, bullet);
+    // bullet.setTrajectory(new StraightTrajectory());
+    return bullet;
   }
 
   // -------------------------------------------------
   // Item Bullets
   // -------------------------------------------------
-
-  /** Creates a heal item bullet (+1 HP). */
-  public static HealItemBullet createHealItem(double x, double y, double canvasW, double canvasH) {
-    return new HealItemBullet(x, y, canvasW, canvasH);
+  public static HealItemBullet createHealItem(Canvas canvas, double x, double y) {
+    HealItemBullet bullet = new HealItemBullet(x, y);
+    injectCanvas(canvas, bullet);
+    return bullet;
   }
 
-  /** Creates a shield item bullet (invincibility). */
   public static ShieldItemBullet createShieldItem(
-      double x, double y, double canvasW, double canvasH, int invincibleTicks) {
-    return new ShieldItemBullet(x, y, canvasW, canvasH, invincibleTicks);
+      Canvas canvas, double x, double y, int invincibleTicks) {
+
+    ShieldItemBullet bullet = new ShieldItemBullet(x, y, invincibleTicks);
+    injectCanvas(canvas, bullet);
+    return bullet;
   }
 
-  /** Creates a power item bullet (damage boost). */
   public static PowerItemBullet createPowerItem(
-      double x, double y, double canvasW, double canvasH, int buffTicks, int bonusDamage) {
-    return new PowerItemBullet(x, y, canvasW, canvasH, buffTicks, bonusDamage);
+      Canvas canvas, double x, double y, int buffTicks, int bonusDamage) {
+
+    PowerItemBullet bullet =
+        new PowerItemBullet(x, y, buffTicks, bonusDamage);
+
+    injectCanvas(canvas, bullet);
+    return bullet;
   }
 
-  /**
-   * Creates a clear-screen item bullet.
-   *
-   * <p>This item requires cooperation with the game world to clear bullets/enemies.
-   */
   public static ClearItemBullet createClearItem(
+      Canvas canvas,
       double x,
       double y,
-      double canvasW,
-      double canvasH,
       ClearScreenHandler handler,
       int clearWindowTicks) {
-    return new ClearItemBullet(x, y, canvasW, canvasH, handler, clearWindowTicks);
+
+    ClearItemBullet bullet =
+        new ClearItemBullet(x, y, handler, clearWindowTicks);
+
+    injectCanvas(canvas, bullet);
+    return bullet;
   }
 }
