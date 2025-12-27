@@ -3,6 +3,8 @@ package org.thunderfighter.game.trajectory;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Trajectory;
 
+import javafx.scene.canvas.Canvas;
+
 /**
  * DVD-style bouncing trajectory. Bullet reflects when reaching canvas boundaries.
  *
@@ -13,14 +15,17 @@ public class BounceTrajectory implements Trajectory {
   @Override
   public void update(AbstractBullet b) {
 
+    Canvas canvas = b.getCanvas();
+    if (canvas == null) return; // 防止尚未注入 canvas 时 NPE
+
     double nextX = b.getX() + b.getDx();
     double nextY = b.getY() + b.getDy();
 
     double width = b.getSize().getWidth();
     double height = b.getSize().getHeight();
 
-    double canvasW = b.getCanvasW();
-    double canvasH = b.getCanvasH();
+    double canvasW = canvas.getWidth();
+    double canvasH = canvas.getHeight();
 
     // Horizontal reflection
     if (nextX <= 0) {

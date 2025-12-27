@@ -1,17 +1,17 @@
 package org.thunderfighter.core.abstractor;
 
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.core.entity.Bullet;
 import org.thunderfighter.core.entity.Trajectory;
 
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Bounds;
+
 /**
  * AbstractBullet
  *
- * <p>Base class for all bullets (including items if you treat them as bullets). Provides: -
- * Position / velocity (x, y, dx, dy) - Trajectory hook (moveOnce) - Lifetime countdown (lifeTicks)
- * - Out-of-bounds kill logic (requires canvasW/canvasH to be set!) - Collision bounds
+ * Base class for all bullets (including items).
+ * Canvas is inherited from AbstractEntity.
  */
 public abstract class AbstractBullet extends AbstractEntity implements Bullet {
 
@@ -26,17 +26,66 @@ public abstract class AbstractBullet extends AbstractEntity implements Bullet {
 
   /** Spawn origin (semantic info for trajectories). */
   protected double originX;
-
   protected double originY;
 
-  /** Canvas bounds (must be set by bullet constructor). */
-  protected double canvasW;
+  // ----------------------------
+  // Trajectory-required accessors
+  // ----------------------------
 
-  protected double canvasH;
+  /** Position X (delegated to AbstractEntity state). */
+  public double getX() {
+    return x;
+  }
 
+  /** Position Y (delegated to AbstractEntity state). */
+  public double getY() {
+    return y;
+  }
+
+  /** Set position X. */
+  public void setX(double x) {
+    this.x = x;
+  }
+
+  /** Set position Y. */
+  public void setY(double y) {
+    this.y = y;
+  }
+
+  /** Velocity X per tick. */
+  public double getDx() {
+    return dx;
+  }
+
+  /** Velocity Y per tick. */
+  public double getDy() {
+    return dy;
+  }
+
+  /** Set velocity X per tick. */
+  public void setDx(double dx) {
+    this.dx = dx;
+  }
+
+  /** Set velocity Y per tick. */
+  public void setDy(double dy) {
+    this.dy = dy;
+  }
+
+  /** Allow runtime trajectory swapping (optional but useful). */
+  public void setTrajectory(Trajectory trajectory) {
+    this.trajectory = trajectory;
+  }
+
+  public Trajectory getTrajectory() {
+    return trajectory;
+  }
+
+  // ----------------------------
+  // Collision
+  // ----------------------------
   @Override
   public Bounds getCollisionBounds() {
-    // size must be initialized in each concrete bullet constructor
     return new BoundingBox(x, y, size.getWidth(), size.getHeight());
   }
 
@@ -46,78 +95,14 @@ public abstract class AbstractBullet extends AbstractEntity implements Bullet {
   }
 
   // ----------------------------
-  // Getters
+  // Movement helpers
   // ----------------------------
-  public final double getX() {
-    return x;
+  protected final void moveOnce() {
+    if (trajectory != null) {
+      trajectory.update(this);
+    }
   }
 
-  public final double getY() {
-    return y;
-  }
-
-  public final double getDx() {
-    return dx;
-  }
-
-  public final double getDy() {
-    return dy;
-  }
-
-  public final double getOriginX() {
-    return originX;
-  }
-
-  public final double getOriginY() {
-    return originY;
-  }
-
-  public final double getCanvasW() {
-    return canvasW;
-  }
-
-  public final double getCanvasH() {
-    return canvasH;
-  }
-
-  // ----------------------------
-  // Setters (for trajectories/factory)
-  // ----------------------------
-  public final void setX(double x) {
-    this.x = x;
-  }
-
-  public final void setY(double y) {
-    this.y = y;
-  }
-
-  public final void setDx(double dx) {
-    this.dx = dx;
-  }
-
-  public final void setDy(double dy) {
-    this.dy = dy;
-  }
-
-  public final void setCanvasSize(double canvasW, double canvasH) {
-    this.canvasW = canvasW;
-    this.canvasH = canvasH;
-  }
-
-  public final void setTrajectory(Trajectory trajectory) {
-    this.trajectory = trajectory;
-  }
-
-  public final void setOrigin(double ox, double oy) {
-    this.originX = ox;
-    this.originY = oy;
-  }
-
-  public final void setLifeTicks(int ticks) {
-    this.lifeTicks = ticks;
-  }
-
-  /** Decrements lifetime if enabled. When lifeTicks reaches 0, bullet dies. */
   protected final void tickLife() {
     if (lifeTicks > 0) {
       lifeTicks--;
@@ -125,20 +110,51 @@ public abstract class AbstractBullet extends AbstractEntity implements Bullet {
     }
   }
 
-  /** Kills bullet when leaving the canvas. Requires canvasW/canvasH > 0. */
+  /**
+   * Kill bullet when leaving canvas.
+   * Canvas comes from AbstractEntity.
+   */
   protected final void killIfOutOfBounds() {
-    if (x < 0 || x > canvasW || y < 0 || y > canvasH) {
+    if (canvas == null) return;
+
+    double w = canvas.getWidth();
+    double h = canvas.getHeight();
+
+    if (x + size.getWidth() < 0
+        || x > w
+        || y + size.getHeight() < 0
+        || y > h) {
       aliveFlag = false;
     }
   }
 
-  /** One movement step by the current trajectory (if any). */
-  protected final void moveOnce() {
-    if (trajectory != null) {
-      trajectory.update(this);
-    }
+  // ----------------------------
+  // Optional convenience setters (spawn info)
+  // ----------------------------
+  public void setOrigin(double ox, double oy) {
+    this.originX = ox;
+    this.originY = oy;
   }
 
+  public double getOriginX() {
+    return originX;
+  }
+
+  public double getOriginY() {
+    return originY;
+  }
+
+  public void setLifeTicks(int ticks) {
+    this.lifeTicks = ticks;
+  }
+
+  public int getLifeTicks() {
+    return lifeTicks;
+  }
+
+  // ----------------------------
+  // Abstract hooks
+  // ----------------------------
   @Override
   public abstract void update();
 

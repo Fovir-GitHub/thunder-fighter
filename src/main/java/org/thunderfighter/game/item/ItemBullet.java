@@ -1,22 +1,27 @@
 package org.thunderfighter.game.item;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.BounceTrajectory;
 
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
 /**
  * ItemBullet (Items are bullets)
  *
- * <p>Design: - Items belong to Bullet system - Only interact with player aircraft (pickup) -
- * DVD-style bouncing inside the canvas - Lifetime: 3 seconds by default - Visual: larger than
- * normal bullets, circular semantic
+ * <p>Design:
+ * - Items belong to Bullet system
+ * - Only interact with player aircraft (pickup)
+ * - DVD-style bouncing inside the canvas
+ * - Lifetime: 3 seconds by default
+ * - Visual: sprite-based only
  *
- * <p>Notes: - Does NOT implement ItemLike anymore - Item lifecycle is fully handled by
- * BulletManager via aliveFlag - draw() is FINAL to guarantee visibility even if sprite missing
+ * <p>Notes:
+ * - Item lifecycle is fully handled by BulletManager via aliveFlag
+ * - draw() is FINAL
+ * - If sprite is missing, item will not be rendered (no fallback graphics)
  */
 public abstract class ItemBullet extends AbstractBullet {
 
@@ -34,8 +39,12 @@ public abstract class ItemBullet extends AbstractBullet {
 
   protected final ItemType type;
 
-  protected ItemBullet(
-      double startX, double startY, ItemType type, double canvasW, double canvasH) {
+  /**
+   * Constructor.
+   *
+   * <p>Canvas is injected later via AbstractEntity.setCanvas(...)
+   */
+  protected ItemBullet(double startX, double startY, ItemType type) {
 
     // position & origin
     this.x = startX;
@@ -43,18 +52,14 @@ public abstract class ItemBullet extends AbstractBullet {
     this.originX = startX;
     this.originY = startY;
 
-    // canvas bounds
-    this.canvasW = canvasW;
-    this.canvasH = canvasH;
-
-    // item metadata
+    // metadata
     this.type = type;
     this.size = ITEM_SIZE;
 
     // lifetime
     this.lifeTicks = DEFAULT_LIFE_TICKS;
 
-    // random initial direction (DVD bounce)
+    // random initial direction (DVD-style bounce)
     double angle = Math.random() * Math.PI * 2.0;
     this.dx = Math.cos(angle) * DEFAULT_PER_TICK_SPEED;
     this.dy = Math.sin(angle) * DEFAULT_PER_TICK_SPEED;
@@ -68,7 +73,7 @@ public abstract class ItemBullet extends AbstractBullet {
     return type;
   }
 
-  /** Radius for circular semantic meaning (visual only). */
+  /** Radius for circular semantic meaning (still useful for logic if needed). */
   public final double getRadius() {
     return size.getWidth() / 2.0;
   }
@@ -95,43 +100,29 @@ public abstract class ItemBullet extends AbstractBullet {
     if (!target.isPlayer()) return;
 
     applyEffect(target);
-    aliveFlag = false; // picked up -> removed by BulletManager
+    aliveFlag = false;
   }
 
-  /** Apply item effect to the player (heal/shield/power/clear). */
+  /** Apply item effect to the player (heal / shield / power / clear). */
   protected abstract void applyEffect(Aircraft player);
 
-  /** Subclass provides sprite (can return null). */
-  protected Image getSprite() {
-    return null;
-  }
+  /** Subclass must provide sprite (should not return null in production). */
+  protected abstract Image getSprite();
 
-  /** Fallback color so item is ALWAYS visible even if sprite missing. */
-  private Color getFallbackColor() {
-    return switch (type) {
-      case HEAL -> Color.RED;
-      case POWER -> Color.GOLD;
-      case SHIELD -> Color.CYAN;
-      case CLEAR -> Color.WHITE;
-    };
-  }
-
-  /** FINAL draw: guarantees visibility. */
+  /** FINAL draw: sprite-only rendering. */
   @Override
   public final void draw(GraphicsContext gc) {
     if (!aliveFlag) return;
 
-    Image sprite = null;
+    Image sprite;
     try {
       sprite = getSprite();
     } catch (Throwable ignored) {
+      return;
     }
 
-    if (sprite != null) {
-      gc.drawImage(sprite, x, y, size.getWidth(), size.getHeight());
-    } else {
-      gc.setFill(getFallbackColor());
-      gc.fillOval(x, y, size.getWidth(), size.getHeight());
-    }
+    if (sprite == null) return;
+
+    gc.drawImage(sprite, x, y, size.getWidth(), size.getHeight());
   }
 }
