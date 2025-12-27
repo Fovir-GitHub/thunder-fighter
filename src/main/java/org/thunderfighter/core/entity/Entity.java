@@ -3,9 +3,12 @@ package org.thunderfighter.core.entity;
 import javafx.geometry.Bounds;
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
+import org.thunderfighter.core.abstractor.AbstractEntity;
+
+import java.util.List;
 
 public interface Entity {
-  void update(); // update object status
+  void update(List<AbstractEntity> worldEntities); // update object status
 
   void draw(GraphicsContext gc); // used to draw objects
 

@@ -9,6 +9,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.collision.CollisionDetector;
 import org.thunderfighter.core.manager.ScoreManager;
@@ -70,7 +71,7 @@ public class Game {
   private void initGame() {
     initEntities();
     inventory = new PlayerItemInventory();
-    enemySpawner = new EnemySpawner(canvas.getWidth(), entities);
+    enemySpawner = new EnemySpawner(canvas, entities);
     scoreBoard = new ScoreBoard(root, playerAircraft);
 
     // TODO: Add `ClearScreenHandler`.
@@ -117,7 +118,9 @@ public class Game {
                 menu.setVisible(false);
                 overlay.setVisible(true);
                 break;
-              case OVER:
+              case SUCCESS:
+                break;
+              case FAIL:
                 break;
             }
           }
@@ -147,6 +150,9 @@ public class Game {
       entity.update();
       if (!entity.isAlive()) {
         it.remove();
+        if (entity instanceof AbstractEnemyAircraft) {
+          numberOfEnemy--;
+        }
       }
     }
 
@@ -165,14 +171,22 @@ public class Game {
       return;
     }
 
-    int currentScore = ScoreManager.getInstance().getScore() % Constant.SCORE_PER_ROUND;
+    int currentScore = ScoreManager.getInstance().getScore();
     if (currentScore >= Constant.GENERATE_BOSS_SCORE) {
-      enemySpawner.spawnBoss();
+      if (enemySpawner.spawnBoss()) {
+        numberOfEnemy++;
+      }
     } else if (currentScore >= Constant.GENERATE_ELITE_SCORE) {
-      enemySpawner.spawnElite();
-      enemySpawner.spawnNormal();
+      if (enemySpawner.spawnElite()) {
+        numberOfEnemy++;
+      }
+      if (enemySpawner.spawnNormal()) {
+        numberOfEnemy++;
+      }
     } else {
-      enemySpawner.spawnNormal();
+      if (enemySpawner.spawnNormal()) {
+        numberOfEnemy++;
+      }
     }
   }
 }

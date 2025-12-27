@@ -28,10 +28,12 @@ public class EliteEnemy extends AbstractEnemyAircraft {
   }
 
   @Override
-  protected void onUpdate() {
-    super.onUpdate();
-    if (hp == 0) ScoreManager.getInstance().addScore(50);
-    aliveFlag = false;
+  protected void onUpdate(List<AbstractEntity> worldEntities) {
+    super.onUpdate(worldEntities);
+    if (hp <= 0) {
+      ScoreManager.getInstance().addScore(50);
+      aliveFlag = false;
+    }
   }
 
   @Override

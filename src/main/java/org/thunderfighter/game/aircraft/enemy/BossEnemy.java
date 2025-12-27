@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
+import org.thunderfighter.game.Game;
 import org.thunderfighter.game.bulletfactory.BulletFactory;
+import org.thunderfighter.utils.Constant;
 
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.Canvas;
@@ -15,7 +17,8 @@ public class BossEnemy extends AbstractEnemyAircraft {
   public static final Dimension2D SIZE = new Dimension2D(200, 150); // @params
 
   private boolean movingRight = true;
-  private static final double SCREEN_WIDTH = 800; // @params
+  private static final double SCREEN_WIDTH = 800;// @params
+  private Game game;
 
   private enum Stage {
     stage1,
@@ -29,7 +32,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     this.x = x;
     this.y = y; // birth coordinates
 
-    this.hp = 300;
+    this.hp = 50;
     this.speed = 1;
     this.score = 3000; // kill reward
 
@@ -39,9 +42,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
     this.size = SIZE;
 
-    this.sprite =
-        new Image(
-            getClass().getResourceAsStream("/images/Aircraft/BossEnemy.png"));
+    this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/BossEnemy.png"));
   }
 
   @Override
@@ -59,19 +60,21 @@ public class BossEnemy extends AbstractEnemyAircraft {
   }
 
   @Override
-  protected void onUpdate() {
-    super.onUpdate();
+  protected void onUpdate(List<AbstractEntity> worldEntities) {
+    super.onUpdate(worldEntities);
 
-    if (hp > 200) {
+    if (hp >= 40) {
       stage = Stage.stage1;
       shootInterval = 60;
-    } else if (hp > 100) {
+    } else if (hp >= 20) {
       stage = Stage.stage2;
       shootInterval = 40;
     } else if (hp > 0) {
       stage = Stage.stage3;
       shootInterval = 25;
       speed = 1.8;
+    } else {
+      game.setGameState(Constant.GAME_STATE.SUCCESS);
     }
   }
 

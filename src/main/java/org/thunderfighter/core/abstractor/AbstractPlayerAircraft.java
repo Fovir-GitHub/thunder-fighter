@@ -58,7 +58,7 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
   }
 
   @Override
-  protected void onUpdate() {
+  protected void onUpdate(List<AbstractEntity> worldEntities) {
     if (shootCooldown > 0) {
       shootCooldown--;
     }
