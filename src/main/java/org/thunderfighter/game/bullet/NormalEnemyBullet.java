@@ -1,27 +1,22 @@
 package org.thunderfighter.game.bullet;
 
+import java.util.List;
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.StraightTrajectory;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
-import java.util.List;
-
 /**
  * NormalEnemyBullet
  *
- * Straight enemy bullet.
- * - Damage: 1
- * - Dies when out of canvas bounds (uses injected canvas)
- * - Supports small / large size
+ * <p>Straight enemy bullet. - Damage: 1 - Dies when out of canvas bounds (uses injected canvas) -
+ * Supports small / large size
  *
- * Compatibility:
- * - Provides a 2-parameter constructor to match existing Aircraft.doShoot(x, y)
- * - Also provides full constructor for advanced usage (boss / elite patterns)
+ * <p>Compatibility: - Provides a 2-parameter constructor to match existing Aircraft.doShoot(x, y) -
+ * Also provides full constructor for advanced usage (boss / elite patterns)
  */
 public class NormalEnemyBullet extends AbstractBullet {
 
@@ -42,9 +37,7 @@ public class NormalEnemyBullet extends AbstractBullet {
   /**
    * Full constructor (recommended when spawning patterns).
    *
-   * NOTE:
-   * - canvasW/canvasH removed
-   * - Out-of-bounds uses injected canvas from AbstractEntity
+   * <p>NOTE: - canvasW/canvasH removed - Out-of-bounds uses injected canvas from AbstractEntity
    */
   public NormalEnemyBullet(double startX, double startY, double dx, double dy, boolean large) {
 
@@ -75,7 +68,6 @@ public class NormalEnemyBullet extends AbstractBullet {
     tickLife();
     killIfOutOfBounds(); // now depends on injected canvas size
   }
-
 
   @Override
   public void onHit(Aircraft target) {
