@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.thunderfighter.core.abstractor.AbstractUiMenu;
+import org.thunderfighter.game.Game;
+import org.thunderfighter.utils.Constant;
 
 public class UiMenu extends AbstractUiMenu {
 
@@ -13,9 +15,14 @@ public class UiMenu extends AbstractUiMenu {
     public final Button historyButton = new Button("History Score");
     public final Button aboutButton = new Button("About");
     public final Button ruleButton = new Button("Game Rule");
+    private final Game game;
+    private final UiOverlay overlay;
 
-    public UiMenu(UiOverlay overlay) {
-        this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
+    public UiMenu(Game game, UiOverlay overlay) {
+      this.game = game;
+      this.overlay = overlay;
+      this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         this.setPickOnBounds(true);
 
         this.setAlignment(Pos.CENTER);
@@ -33,8 +40,8 @@ public class UiMenu extends AbstractUiMenu {
         showMenu();
 
         startButton.setOnAction(e -> {
-            hideMenu();
-            overlay.showMenu();
+            game.setGameState(Constant.GAME_STATE.RUNNING);
+            game.start();
         });
 
         historyButton.setOnAction(e -> UiScoreStorage.showScoreDialog());

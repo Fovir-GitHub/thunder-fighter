@@ -54,7 +54,7 @@ public class Game {
     // TODO:
     //  - Enable `canvas` to resize by following the window size change.
     overlay = new UiOverlay();
-    menu = new UiMenu(this.overlay);
+    menu = new UiMenu(this ,overlay);
     canvas = new Canvas(800, 600);
     graphicsContext = canvas.getGraphicsContext2D();
     root = new StackPane(canvas, overlay, menu);
@@ -107,10 +107,13 @@ public class Game {
           public void handle(long now) {
             switch (gameState) {
               case MENU:
+                graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 menu.setVisible(true);
                 overlay.setVisible(false);
                 break;
               case RUNNING:
+                menu.setVisible(false);
+                overlay.setVisible(false);
                 update();
                 draw();
                 break;
@@ -128,7 +131,9 @@ public class Game {
   }
 
   public void start() {
-    animationTimer.start();
+    if (animationTimer != null) {
+      animationTimer.start();
+    };
   }
 
   public void stop() {
