@@ -1,8 +1,7 @@
 package org.thunderfighter.core.abstractor;
 
-import org.thunderfighter.core.manager.ScoreManager;
-
 import java.util.List;
+import org.thunderfighter.core.manager.ScoreManager;
 
 public abstract class AbstractEnemyAircraft extends AbstractAircraft {
 
