@@ -39,6 +39,8 @@ public class Game {
   private UiOverlay overlay;
   private UiMenu menu;
   private ScoreBoard scoreBoard;
+  private Image backgroundImage =
+      new Image(getClass().getResourceAsStream("/images/Background/bg.png"));
 
   // Player.
   private PlayerAircraft playerAircraft;
@@ -46,17 +48,14 @@ public class Game {
   // Manage all enetities.
   private List<AbstractEntity> entities = new ArrayList<>();
 
-  // Spawn enemies.
+  // Enemy related.
   private EnemySpawner enemySpawner;
   private int numberOfEnemy = 0;
+  private PHASE enemyStage = PHASE.NORMAL;
 
-  private Image backgroundImage =
-      new Image(getClass().getResourceAsStream("/images/Background/bg.png"));
-
+  // Game related.
   GAME_STATE gameState;
   private boolean fromMenuStart = false;
-
-  private PHASE enemyStage = PHASE.NORMAL;
 
   public Game(Stage stage) {
     // TODO:
@@ -122,7 +121,6 @@ public class Game {
   }
 
   private void initAnimationTimer() {
-    // TODO: Implement `OVER` operation.
     animationTimer =
         new AnimationTimer() {
           @Override
