@@ -37,6 +37,7 @@ public class ScoreBoard {
     scoreBoardContainer.setVisible(visible);
   }
 
+  /** Initialize the score board and set its style. */
   private void initScoreBoardContainer() {
     scoreBoardContainer = new VBox(12);
     scoreBoardContainer.setAlignment(Pos.TOP_RIGHT);
