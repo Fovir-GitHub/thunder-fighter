@@ -24,6 +24,15 @@ public class UiMenu extends AbstractUiMenu {
     this.setAlignment(Pos.CENTER);
     this.setSpacing(20);
 
+    String imagePath = getClass().getResource("/images/Background/log_in_bg.png").toExternalForm();
+    this.setStyle(
+        "-fx-background-image: url('"
+            + imagePath
+            + "');"
+            + "-fx-background-size: cover;"
+            + "-fx-background-position: center;"
+            + "-fx-background-repeat: no-repeat;");
+
     this.title.setFont(Font.font(30));
 
     createButton(startButton);
