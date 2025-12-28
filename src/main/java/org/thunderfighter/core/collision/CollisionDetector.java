@@ -10,7 +10,7 @@ import org.thunderfighter.core.entity.Bullet;
 import org.thunderfighter.game.aircraft.enemy.BossEnemy;
 import org.thunderfighter.game.aircraft.player.PlayerAircraft;
 
-/** Collisoin Detector */
+/** Collision Detector */
 public class CollisionDetector {
 
   public static void detectCollision(List<AbstractEntity> entities) {
@@ -34,7 +34,7 @@ public class CollisionDetector {
   }
 
   /**
-   * Determine whether collision happends between two entites.
+   * Determine whether collision happens between two entities.
    *
    * <p>Specially, collisions won't happen between bullets or between enemies.
    *
@@ -103,7 +103,7 @@ public class CollisionDetector {
     }
 
     // Prevent player and enemy from suicide.
-    if (!(aircraft.isPlayer() ^ bullet.isFromPlayer())) {
+    if (aircraft.isPlayer() == bullet.isFromPlayer()) {
       return;
     }
     bullet.onHit(aircraft);
