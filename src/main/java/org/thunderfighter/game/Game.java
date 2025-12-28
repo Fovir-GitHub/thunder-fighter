@@ -51,7 +51,7 @@ public class Game {
   // Enemy related.
   private EnemySpawner enemySpawner;
   private int numberOfEnemy = 0;
-  private PHASE enemyStage = PHASE.NORMAL;
+  private Constant.PHASE enemyStage = Constant.PHASE.NORMAL;
 
   // Game related.
   GAME_STATE gameState;
@@ -92,6 +92,7 @@ public class Game {
   /** Initialize entities and register them into the {@code entites} list. */
   private void initEntities() {
     entities.clear();
+    numberOfEnemy = 0;
     playerAircraft =
         new PlayerAircraft(
             canvas.getWidth() / 2,
@@ -139,6 +140,7 @@ public class Game {
   /** Restart the game when clicking the start button in the main menu. */
   private void restartGame() {
     ScoreManager.getInstance().reset();
+    enemyStage = PHASE.NORMAL;
     initEntities();
     keyboardController.setPlayer(this.playerAircraft);
     scoreBoard.setPlayerAircraft(this.playerAircraft);
