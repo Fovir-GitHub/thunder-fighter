@@ -48,7 +48,7 @@ public class UiMenu extends AbstractUiMenu {
   private void createButton(Button button) {
     button.setPrefWidth(150);
     button.setPrefHeight(40);
-    button.setFont(Font.font(25));
+    button.setFont(Font.font(15));
   }
 
   @Override
