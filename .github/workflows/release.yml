@@ -1,4 +1,4 @@
-name: Release JAR
+name: Release
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
       - "v*"
 
 jobs:
-  release:
+  release-jar:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,8 +29,75 @@ jobs:
         run: mvn -B clean package
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.VERSION }}
           name: Thunder Fighter v${{ steps.version.outputs.VERSION }}
           files: target/*.jar
+          body: |
+            ## Download
+
+            ### Windows User
+
+            Download the `thunder-fighter-${{ steps.version.outputs.VERSION }}.msi` file below, and execute it to install the game, which will create a shortcut on the desktop, and you can double click it to play the game.
+
+            ### Run From JAR
+
+            Ensure Java 21 is downloaded.
+
+            Download the `.jar` file below, then run the following command:
+
+            ```bash
+            java -jar ./thunder-fighter-${{ steps.version.outputs.VERSION }}.jar
+            ```
+  release-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup JDK 21 (Liberica Full with JavaFX)
+        uses: actions/setup-java@v4
+        with:
+          distribution: liberica
+          java-version: 21
+          jdkFile: ""
+          java-package: jdk+fx
+          cache: maven
+
+      - name: Get project version
+        id: version
+        shell: bash
+        run: |
+          echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_OUTPUT
+
+      - name: Build with Maven
+        run: mvn -B clean package
+
+      - name: Create custom runtime image with jlink
+        shell: bash
+        run: |
+          jlink --add-modules java.base,javafx.controls,javafx.fxml,java.desktop,java.logging \
+                --output target/custom-runtime \
+                --no-header-files --no-man-pages --compress=2
+
+      - name: Package Windows installer with jpackage
+        shell: bash
+        run: |
+          jpackage --type msi \
+                   --name "thunder-fighter" \
+                   --input target \
+                   --main-jar thunder-fighter-${{ steps.version.outputs.VERSION }}.jar \
+                   --main-class org.thunderfighter.Main \
+                   --runtime-image target/custom-runtime \
+                   --dest target/installer \
+                   --app-version ${{ steps.version.outputs.VERSION }} \
+                   --vendor "Thunder Fighter" \
+                   --win-menu \
+                   --win-shortcut
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.version.outputs.VERSION }}
+          name: Thunder Fighter v${{ steps.version.outputs.VERSION }}
+          files: target/installer/*.msi
