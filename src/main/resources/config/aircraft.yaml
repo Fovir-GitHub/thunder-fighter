@@ -1,9 +1,17 @@
+player:
+  hp: 3
+  speed: 5
+  shootInterval: 20
+  bulletType: straight
+  size: [60, 80]
+
 enemy:
   normal:
     hp: 1
     speed: 2
     score: 10
     canShoot: false
+    size: [50, 60]
 
   elite:
     hp: 3
@@ -12,12 +20,14 @@ enemy:
     canShoot: true
     shootInterval: 60
     bulletType: straight
+    size: [60, 80]
 
 boss:
   hp: 300
   speed: 1
   score: 500
-
+  shootInterval: 40
+  size: [200, 150]
   phases:
     - hpThreshold: 200
       pattern: fan
