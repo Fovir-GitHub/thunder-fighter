@@ -1,15 +1,14 @@
 package org.thunderfighter.game.spawn;
 
 import java.util.Random;
-
+import javafx.geometry.Bounds;
+import javafx.scene.canvas.Canvas;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.core.entity.Bullet;
 import org.thunderfighter.core.manager.ItemManager;
 import org.thunderfighter.game.bulletfactory.BulletFactory;
 import org.thunderfighter.game.item.ClearScreenHandler;
 import org.thunderfighter.game.item.ItemType;
-
-import javafx.scene.canvas.Canvas;
 
 public class ItemSpawner {
 
@@ -40,8 +39,13 @@ public class ItemSpawner {
 
     ItemType type = rollTypeEqual();
 
-    double px = player.getCollisionBounds().getMinX();
-    double py = player.getCollisionBounds().getMinY();
+    Bounds playerBounds = player.getCollisionBounds();
+    if (playerBounds == null) {
+      return;
+    }
+
+    double px = playerBounds.getMinX();
+    double py = playerBounds.getMinY();
 
     double[] pos = computeSpawnPosition(px, py);
     if (pos == null) return;
