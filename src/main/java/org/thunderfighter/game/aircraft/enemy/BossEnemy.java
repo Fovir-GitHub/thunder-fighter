@@ -62,6 +62,12 @@ public class BossEnemy extends AbstractEnemyAircraft {
   }
 
   @Override
+  protected void onDie() {
+    super.onDie();
+    game.setGameState(Constant.GAME_STATE.SUCCESS);
+  }
+
+  @Override
   protected void onUpdate(List<AbstractEntity> worldEntities) {
     super.onUpdate(worldEntities);
 
@@ -72,8 +78,6 @@ public class BossEnemy extends AbstractEnemyAircraft {
     } else if (hp > 0) {
       stage = Stage.stage3;
       speed = 1.8;
-    } else {
-      game.setGameState(Constant.GAME_STATE.SUCCESS);
     }
 
     if (stage != lastStage) {
