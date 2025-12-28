@@ -21,6 +21,7 @@ import org.thunderfighter.ui.KeyboardController;
 import org.thunderfighter.ui.ScoreBoard;
 import org.thunderfighter.ui.UiMenu;
 import org.thunderfighter.ui.UiOverlay;
+import org.thunderfighter.ui.UiScoreStorage;
 import org.thunderfighter.utils.Constant;
 import org.thunderfighter.utils.Constant.GAME_STATE;
 import org.thunderfighter.utils.Constant.PHASE;
@@ -56,6 +57,7 @@ public class Game {
   // Game related.
   GAME_STATE gameState;
   private boolean fromMenuStart = false;
+  private boolean scoreStored = false;
 
   public Game(Stage stage) {
     // TODO:
@@ -153,6 +155,7 @@ public class Game {
     overlay.setVisible(false);
     scoreBoard.setVisible(false);
     fromMenuStart = true;
+    scoreStored = false;
   }
 
   private void handleRunningState() {
@@ -172,12 +175,21 @@ public class Game {
     overlay.showPause();
   }
 
+  private void storeScore() {
+    if (!scoreStored) {
+      UiScoreStorage.addScore(ScoreManager.getInstance().getScore());
+      scoreStored = true;
+    }
+  }
+
   private void handleSuccessState() {
     overlay.showSuccess();
+    storeScore();
   }
 
   private void handleFailState() {
     overlay.showFail();
+    storeScore();
   }
 
   public void start() {

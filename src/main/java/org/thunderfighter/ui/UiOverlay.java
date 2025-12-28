@@ -5,16 +5,15 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.thunderfighter.core.abstractor.AbstractUiMenu;
-import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.Game;
 import org.thunderfighter.utils.Constant;
 
 /*
-  Create 3 modes:
- 1. PAUSE: resume game
- 2. SUCCESS: show victory and offer back to menu button
- 3. FAIL: show game over and offer back to menu button
- */
+ Create 3 modes:
+1. PAUSE: resume game
+2. SUCCESS: show victory and offer back to menu button
+3. FAIL: show game over and offer back to menu button
+*/
 public class UiOverlay extends AbstractUiMenu {
 
   /** Overlay modes, deciding title text and visible buttons. */
@@ -65,11 +64,11 @@ public class UiOverlay extends AbstractUiMenu {
         });
 
     // Back to menu
-      restartButton.setOnAction(
+    restartButton.setOnAction(
         e -> {
           game.setGameState(Constant.GAME_STATE.MENU);
           hideMenu();
-        });//come back to menu
+        }); // come back to menu
 
     historyButton.setOnAction(e -> UiScoreStorage.showScoreDialog());
     ruleButton.setOnAction(e -> UiDialog.showRuleDialog());
@@ -95,10 +94,6 @@ public class UiOverlay extends AbstractUiMenu {
   public void showSuccess() {
     applyMode(OverlayMode.SUCCESS);
     showMenu();
-    UiScoreStorage.addScore(ScoreManager.getInstance().getScore());
-    ScoreManager.getInstance().reset();
-    game.setGameState(Constant.GAME_STATE.MENU);
-
   }
 
   // Show fail overlay.
@@ -106,13 +101,9 @@ public class UiOverlay extends AbstractUiMenu {
   public void showFail() {
     applyMode(OverlayMode.FAIL);
     showMenu();
-    UiScoreStorage.addScore(ScoreManager.getInstance().getScore());
-    ScoreManager.getInstance().reset();
-    game.setGameState(Constant.GAME_STATE.MENU);
   }
 
-
-  //Logic to apply the mode changes to the overlay UI.
+  // Logic to apply the mode changes to the overlay UI.
   private void applyMode(OverlayMode newMode) {
     this.mode = newMode;
 
@@ -147,7 +138,8 @@ public class UiOverlay extends AbstractUiMenu {
     }
 
     // Keep the same ordering; only toggle visibility
-    this.getChildren().setAll(title, continueButton, restartButton, historyButton, ruleButton, aboutButton);
+    this.getChildren()
+        .setAll(title, continueButton, restartButton, historyButton, ruleButton, aboutButton);
   }
 
   @Override
