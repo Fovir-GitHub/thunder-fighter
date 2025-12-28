@@ -122,31 +122,39 @@ public class Game {
           @Override
           public void handle(long now) {
             switch (gameState) {
-              case MENU:
-                graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                menu.setVisible(true);
-                overlay.setVisible(false);
-                scoreBoard.setVisible(false);
-                break;
-              case RUNNING:
-                menu.setVisible(false);
-                overlay.setVisible(false);
-                scoreBoard.setVisible(true);
-                update();
-                draw();
-                break;
-              case PAUSE:
-                menu.setVisible(false);
-                overlay.setVisible(true);
-                break;
-              case SUCCESS:
-                break;
-              case FAIL:
-                break;
+              case MENU -> handleMenuState();
+              case RUNNING -> handleRunningState();
+              case PAUSE -> handlePauseState();
+              case SUCCESS -> handleSuccessState();
+              case FAIL -> handleFailState();
             }
           }
         };
   }
+
+  private void handleMenuState() {
+    graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    menu.setVisible(true);
+    overlay.setVisible(false);
+    scoreBoard.setVisible(false);
+  }
+
+  private void handleRunningState() {
+    menu.setVisible(false);
+    overlay.setVisible(false);
+    scoreBoard.setVisible(true);
+    update();
+    draw();
+  }
+
+  private void handlePauseState() {
+    menu.setVisible(false);
+    overlay.setVisible(true);
+  }
+
+  private void handleSuccessState() {}
+
+  private void handleFailState() {}
 
   public void start() {
     if (animationTimer != null) {
