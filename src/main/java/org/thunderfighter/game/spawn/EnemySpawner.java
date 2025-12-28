@@ -13,7 +13,6 @@ public class EnemySpawner {
   private final Random rng = new Random();
   private final Canvas canvas;
   private List<AbstractEntity> entities;
-  private Game game;
 
   private int normalCd = 0;
   private int eliteCd = 0;
@@ -22,7 +21,6 @@ public class EnemySpawner {
   public EnemySpawner(Canvas canvas, List<AbstractEntity> entities, Game game) {
     this.canvas = canvas;
     this.entities = entities;
-    this.game = game;
   }
 
   public boolean spawnNormal() {
