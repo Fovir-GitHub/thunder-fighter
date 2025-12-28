@@ -32,7 +32,7 @@ public class EnemySpawner {
     if (normalCd-- > 0) {
       return false;
     }
-    normalCd = 2 * Constant.TPS;
+    normalCd = Constant.TPS;
 
     NormalEnemy enemy = new NormalEnemy(randomX());
     enemy.setCanvas(canvas);
@@ -45,7 +45,7 @@ public class EnemySpawner {
     if (eliteCd-- > 0) {
       return false;
     }
-    eliteCd = 5 * Constant.TPS;
+    eliteCd = 3 * Constant.TPS;
 
     EliteEnemy enemy = new EliteEnemy(randomX());
     enemy.setCanvas(canvas);

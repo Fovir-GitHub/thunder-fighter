@@ -41,6 +41,8 @@ public class Game {
   private Image backgroundImage =
       new Image(getClass().getResourceAsStream("/images/Background/bg.png"));
 
+  private long lastTime = 0;
+
   // Player.
   private PlayerAircraft playerAircraft;
 
@@ -120,9 +122,22 @@ public class Game {
 
   private void initAnimationTimer() {
     animationTimer =
-        new AnimationTimer() {
-          @Override
-          public void handle(long now) {
+      new AnimationTimer() {
+        @Override
+        public void handle(long now) {
+          //If this is the first run, initialize the timestamp.
+          if (lastTime == 0) {
+            lastTime = now;
+            return;
+          }
+
+          // Calculate the time interval (nanoseconds) required for each frame.
+          // 1seconds = 1,000,000,000 ns
+          long interval = 1_000_000_000 / Constant.TPS;
+
+          // The logic is executed only when the difference
+          // between the current time and the previous time is greater than or equal to the interval.
+          if (now - lastTime >= interval) {
             switch (gameState) {
               case MENU -> handleMenuState();
               case RUNNING -> handleRunningState();
@@ -130,8 +145,11 @@ public class Game {
               case SUCCESS -> handleSuccessState();
               case FAIL -> handleFailState();
             }
+            // Update last execution time
+            lastTime = now;
           }
-        };
+        }
+      };
   }
 
   /** Restart the game when clicking the start button in the main menu. */
