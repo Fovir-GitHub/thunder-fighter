@@ -6,13 +6,7 @@ This project aims to develop a classical game Thunder Fighter with `JavaFX`.
 
 ## Installation
 
-Navigate to [Latest Release Page](https://github.com/Fovir-GitHub/thunder-fighter/releases/latest) and download `thunder-fighter-${version}.jar`.
-
-Then, open the terminal at the same directory, and run the following command to execute it:
-
-```bash
-java -jar ./thunder-fighter-${version}.jar
-```
+To install the game, please follow the guide on [Latest Release Page](https://github.com/Fovir-GitHub/thunder-fighter/releases/latest).
 
 ## Project Structure
 
