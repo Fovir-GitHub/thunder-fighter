@@ -5,6 +5,7 @@ import javafx.scene.input.KeyCode;
 import org.thunderfighter.core.abstractor.AbstractPlayerAircraft;
 import org.thunderfighter.game.item.ClearScreenHandler;
 import org.thunderfighter.game.item.PlayerItemInventory;
+import org.thunderfighter.game.Game;
 
 
 // Keyboard input controller for player aircraft, enable operations based on key presses
@@ -13,17 +14,17 @@ public class KeyboardController {
   private final AbstractPlayerAircraft player;
   private final PlayerItemInventory inventory;
   private final ClearScreenHandler clearScreenHandler;
-  private final UiSceneManager uiSceneManager;
+  private final Game game;
 
   public KeyboardController(
     AbstractPlayerAircraft player,
     PlayerItemInventory inventory,
     ClearScreenHandler clearScreenHandler,
-    UiSceneManager uiSceneManager) {
+    Game game) {
     this.player = player;
     this.inventory = inventory;
     this.clearScreenHandler = clearScreenHandler;
-    this.uiSceneManager = uiSceneManager;
+    this.game = game;
   } // create a keyboard controller for the player aircraft
 
   public void operation(Scene scene) {
@@ -42,7 +43,8 @@ public class KeyboardController {
               event.consume();
             }
             case P ->{
-              uiSceneManager.togglePause();
+              // Pause/resume is driven by the global game state.
+              game.togglePause();
               event.consume(); 
             }
             case E -> {
