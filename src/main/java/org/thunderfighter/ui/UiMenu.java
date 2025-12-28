@@ -10,60 +10,56 @@ import org.thunderfighter.utils.Constant;
 
 public class UiMenu extends AbstractUiMenu {
 
-    public final Text title = new Text("Thunder Fighter");
-    public final Button startButton = new Button("Start Game");
-    public final Button historyButton = new Button("History Score");
-    public final Button aboutButton = new Button("About");
-    public final Button ruleButton = new Button("Game Rule");
-    private final Game game;
-    private final UiOverlay overlay;
+  public final Text title = new Text("Thunder Fighter");
+  public final Button startButton = new Button("Start Game");
+  public final Button historyButton = new Button("History Score");
+  public final Button aboutButton = new Button("About");
+  public final Button ruleButton = new Button("Game Rule");
 
+  public UiMenu(Game game, UiOverlay overlay) {
+    this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    this.setPickOnBounds(true);
 
-    public UiMenu(Game game, UiOverlay overlay) {
-      this.game = game;
-      this.overlay = overlay;
-      this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        this.setPickOnBounds(true);
+    this.setAlignment(Pos.CENTER);
+    this.setSpacing(20);
 
-        this.setAlignment(Pos.CENTER);
-        this.setSpacing(20);
+    this.title.setFont(Font.font(30));
 
-        this.title.setFont(Font.font(30));
+    createButton(startButton);
+    createButton(historyButton);
+    createButton(ruleButton);
+    createButton(aboutButton);
 
-        createButton(startButton);
-        createButton(historyButton);
-        createButton(ruleButton);
-        createButton(aboutButton);
+    this.getChildren().setAll(title, startButton, historyButton, ruleButton, aboutButton);
 
-        this.getChildren().setAll(title, startButton, historyButton, ruleButton, aboutButton);
+    showMenu();
 
-        showMenu();
-
-        startButton.setOnAction(e -> {
-            game.setGameState(Constant.GAME_STATE.RUNNING);
-            game.start();
+    startButton.setOnAction(
+        e -> {
+          game.setGameState(Constant.GAME_STATE.RUNNING);
+          game.start();
         });
 
-        historyButton.setOnAction(e -> UiScoreStorage.showScoreDialog());
-        ruleButton.setOnAction(e -> UiDialog.showRuleDialog());
-        aboutButton.setOnAction(e -> UiDialog.showAboutDialog());
-    }
+    historyButton.setOnAction(e -> UiScoreStorage.showScoreDialog());
+    ruleButton.setOnAction(e -> UiDialog.showRuleDialog());
+    aboutButton.setOnAction(e -> UiDialog.showAboutDialog());
+  }
 
-    private void createButton(Button button) {
-        button.setPrefWidth(150);
-        button.setPrefHeight(40);
-        button.setFont(Font.font(25));
-    }
+  private void createButton(Button button) {
+    button.setPrefWidth(150);
+    button.setPrefHeight(40);
+    button.setFont(Font.font(25));
+  }
 
-    @Override
-    public void showMenu() {
-        this.setVisible(true);
-        this.setManaged(true);
-    }
+  @Override
+  public void showMenu() {
+    this.setVisible(true);
+    this.setManaged(true);
+  }
 
-    @Override
-    public void hideMenu() {
-        this.setVisible(false);
-        this.setManaged(false);
-    }
+  @Override
+  public void hideMenu() {
+    this.setVisible(false);
+    this.setManaged(false);
+  }
 }
