@@ -31,6 +31,7 @@ public class UiDialog extends AbstractUiDialog {
     }
 
     public static void showRuleDialog() {
-        showInfoDialog("Game Rule", "1. Use arrow keys or WASD to move the fighter.\n2. Press space to shoot.\n3. Avoid enemy fire and obstacles.\n4. Score points by destroying enemies.\n5. You can pick up items to gain power-ups.");
+        showInfoDialog("Game Rule", "1. Use arrow keys or WASD to move the fighter.\n2. Press space to shoot.\n3. Avoid enemy fire and obstacles.\n4. Score points by destroying enemies.");
     }
 }
+
