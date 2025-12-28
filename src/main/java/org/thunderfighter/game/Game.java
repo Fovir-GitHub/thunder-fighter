@@ -149,8 +149,7 @@ public class Game {
   }
 
   private void handlePauseState() {
-    menu.setVisible(false);
-    overlay.setVisible(true);
+    overlay.showMenu();
   }
 
   private void handleSuccessState() {
