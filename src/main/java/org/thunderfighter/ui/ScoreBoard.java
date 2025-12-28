@@ -18,7 +18,7 @@ public class ScoreBoard {
   private VBox scoreBoardContainer;
   private Label scoreLabel;
   private Label livesLabel;
-  private final PlayerAircraft playerAircraft;
+  private PlayerAircraft playerAircraft;
 
   /**
    * Constructor of {@code ScoreBoard}.
@@ -31,6 +31,10 @@ public class ScoreBoard {
     initScoreBoardContainer();
 
     root.getChildren().add(scoreBoardContainer);
+  }
+
+  public void setPlayerAircraft(PlayerAircraft playerAircraft) {
+    this.playerAircraft = playerAircraft;
   }
 
   public void setVisible(boolean visible) {

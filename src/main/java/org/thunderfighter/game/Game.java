@@ -53,6 +53,7 @@ public class Game {
       new Image(getClass().getResourceAsStream("/images/Background/bg.png"));
 
   GAME_STATE gameState;
+  private boolean fromMenuStart = false;
 
   public Game(Stage stage) {
     // TODO:
@@ -88,6 +89,7 @@ public class Game {
 
   /** Initialize entities and register them into the {@code entites} list. */
   private void initEntities() {
+    entities.clear();
     playerAircraft =
         new PlayerAircraft(
             canvas.getWidth() / 2,
@@ -133,14 +135,26 @@ public class Game {
         };
   }
 
+  private void restartGame() {
+    ScoreManager.getInstance().reset();
+    initEntities();
+    keyboardController.setPlayer(this.playerAircraft);
+    scoreBoard.setPlayerAircraft(this.playerAircraft);
+  }
+
   private void handleMenuState() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     menu.setVisible(true);
     overlay.setVisible(false);
     scoreBoard.setVisible(false);
+    fromMenuStart = true;
   }
 
   private void handleRunningState() {
+    if (fromMenuStart) {
+      restartGame();
+      fromMenuStart = false;
+    }
     menu.setVisible(false);
     overlay.setVisible(false);
     scoreBoard.setVisible(true);
@@ -149,15 +163,15 @@ public class Game {
   }
 
   private void handlePauseState() {
-    overlay.showMenu();
+    overlay.showPause();
   }
 
   private void handleSuccessState() {
-    handlePauseState();
+    overlay.showSuccess();
   }
 
   private void handleFailState() {
-    handlePauseState();
+    overlay.showFail();
   }
 
   public void start() {

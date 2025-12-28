@@ -3,29 +3,32 @@ package org.thunderfighter.ui;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import org.thunderfighter.core.abstractor.AbstractPlayerAircraft;
+import org.thunderfighter.game.Game;
 import org.thunderfighter.game.item.ClearScreenHandler;
 import org.thunderfighter.game.item.PlayerItemInventory;
-import org.thunderfighter.game.Game;
-
 
 // Keyboard input controller for player aircraft, enable operations based on key presses
 public class KeyboardController {
 
-  private final AbstractPlayerAircraft player;
+  private AbstractPlayerAircraft player;
   private final PlayerItemInventory inventory;
   private final ClearScreenHandler clearScreenHandler;
   private final Game game;
 
   public KeyboardController(
-    AbstractPlayerAircraft player,
-    PlayerItemInventory inventory,
-    ClearScreenHandler clearScreenHandler,
-    Game game) {
+      AbstractPlayerAircraft player,
+      PlayerItemInventory inventory,
+      ClearScreenHandler clearScreenHandler,
+      Game game) {
     this.player = player;
     this.inventory = inventory;
     this.clearScreenHandler = clearScreenHandler;
     this.game = game;
   } // create a keyboard controller for the player aircraft
+
+  public void setPlayer(AbstractPlayerAircraft player) {
+    this.player = player;
+  }
 
   public void operation(Scene scene) {
 
@@ -42,10 +45,10 @@ public class KeyboardController {
               player.setShooting(true);
               event.consume();
             }
-            case P ->{
+            case P -> {
               // Pause/resume is driven by the global game state.
               game.togglePause();
-              event.consume(); 
+              event.consume();
             }
             case E -> {
               if (inventory.hasItem()) {
