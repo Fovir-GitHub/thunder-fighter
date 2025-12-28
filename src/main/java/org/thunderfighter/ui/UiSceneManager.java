@@ -3,6 +3,7 @@ package org.thunderfighter.ui;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
+// Manages the main scene, including menu and overlay
 public class UiSceneManager {
   private final StackPane root = new StackPane();
   private final Scene scene;
@@ -16,7 +17,7 @@ public class UiSceneManager {
     root.getChildren().addAll(menu, overlay);
     scene = new Scene(root, 800, 600);
     overlay.hideMenu();
-  }
+  }// Initialize the scene manager with menu and overlay
 
   public void togglePause() {
     if (overlay.isVisible()) {
@@ -25,11 +26,11 @@ public class UiSceneManager {
     else {
       showOverlay();
     }
-  }
+  }// Toggle the overlay visibility
 
   public Scene getScene() {
     return scene;
-  }
+  }// Get the main scene
 
   public void showOverlay() {
     overlay.showMenu();
