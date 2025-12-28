@@ -59,7 +59,7 @@ public class Game {
   public Game(Stage stage) {
     // TODO:
     //  - Enable `canvas` to resize by following the window size change.
-    overlay = new UiOverlay();
+    overlay = new UiOverlay(this);
     menu = new UiMenu(this, overlay);
     uiSceneManager = new UiSceneManager(menu, overlay);
     canvas = new Canvas(800, 600);
@@ -82,8 +82,7 @@ public class Game {
     scoreBoard = new ScoreBoard(root, playerAircraft);
 
     // TODO: Add `ClearScreenHandler`.
-    this.keyboardController =
-        new KeyboardController(playerAircraft, inventory, null, uiSceneManager);
+    this.keyboardController = new KeyboardController(playerAircraft, inventory, null, this);
     keyboardController.operation(this.scene);
 
     ScoreManager.getInstance().reset();
@@ -105,6 +104,18 @@ public class Game {
 
   public void setGameState(GAME_STATE gameState) {
     this.gameState = gameState;
+  }
+
+  public GAME_STATE getGameState() {
+    return gameState;
+  }
+
+  public void togglePause() {
+    if (gameState == GAME_STATE.RUNNING) {
+      gameState = GAME_STATE.PAUSE;
+    } else {
+      gameState = GAME_STATE.RUNNING;
+    }
   }
 
   private void initAnimationTimer() {
