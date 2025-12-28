@@ -1,5 +1,6 @@
 package org.thunderfighter.game.bullet;
 
+import java.util.List;
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -7,12 +8,6 @@ import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.HomingTrajectory;
-
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
-import java.util.List;
 
 /**
  * HomingEnemyBullet
@@ -50,7 +45,6 @@ public class HomingEnemyBullet extends AbstractBullet {
     this.speed = Math.hypot(initDx, initDy);
 
     this.fromPlayer = false;
-
 
     this.trajectory = new HomingTrajectory(provider, 0.10);
 

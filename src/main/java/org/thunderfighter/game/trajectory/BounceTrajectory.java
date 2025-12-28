@@ -1,9 +1,8 @@
 package org.thunderfighter.game.trajectory;
 
+import javafx.scene.canvas.Canvas;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.entity.Trajectory;
-
-import javafx.scene.canvas.Canvas;
 
 /**
  * DVD-style bouncing trajectory. Bullet reflects when reaching canvas boundaries.

@@ -1,14 +1,13 @@
 package org.thunderfighter.game.item;
 
-import org.thunderfighter.core.entity.Aircraft;
-
 import javafx.scene.image.Image;
+import org.thunderfighter.core.entity.Aircraft;
 
 /**
  * ClearItemBullet
  *
- * Item bullet that clears enemy bullets and enemies on pickup.
- * Canvas bounds are handled via AbstractEntity.setCanvas(...).
+ * <p>Item bullet that clears enemy bullets and enemies on pickup. Canvas bounds are handled via
+ * AbstractEntity.setCanvas(...).
  */
 public class ClearItemBullet extends ItemBullet {
 
@@ -25,11 +24,7 @@ public class ClearItemBullet extends ItemBullet {
    * @param handler clear-screen handler (game-world level)
    * @param clearWindowTicks duration of the clear window
    */
-  public ClearItemBullet(
-      double x,
-      double y,
-      ClearScreenHandler handler,
-      int clearWindowTicks) {
+  public ClearItemBullet(double x, double y, ClearScreenHandler handler, int clearWindowTicks) {
 
     super(x, y, ItemType.CLEAR);
     this.handler = handler;

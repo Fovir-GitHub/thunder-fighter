@@ -1,5 +1,6 @@
 package org.thunderfighter.game.bullet;
 
+import java.util.List;
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -8,13 +9,11 @@ import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.CurveTrajectory;
 
-import java.util.List;
-
 /**
  * CurveEnemyBullet
  *
- * A curved bullet used for area control (restrict player movement).
- * Curvature is controlled by curveFactor.
+ * <p>A curved bullet used for area control (restrict player movement). Curvature is controlled by
+ * curveFactor.
  */
 public class CurveEnemyBullet extends AbstractBullet {
 
@@ -24,12 +23,7 @@ public class CurveEnemyBullet extends AbstractBullet {
   private static final Image SPRITE =
       new Image(CurveEnemyBullet.class.getResourceAsStream("/images/Bullet/enemy_bullet.png"));
 
-  public CurveEnemyBullet(
-      double startX,
-      double startY,
-      double dx,
-      double dy,
-      double curveFactor) {
+  public CurveEnemyBullet(double startX, double startY, double dx, double dy, double curveFactor) {
 
     this.x = startX;
     this.y = startY;
@@ -43,7 +37,6 @@ public class CurveEnemyBullet extends AbstractBullet {
 
     this.fromPlayer = false;
     this.trajectory = new CurveTrajectory(curveFactor);
-
 
     this.lifeTicks = -1;
   }

@@ -1,11 +1,10 @@
 package org.thunderfighter.core.entity;
 
+import java.util.List;
 import javafx.geometry.Bounds;
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.GraphicsContext;
 import org.thunderfighter.core.abstractor.AbstractEntity;
-
-import java.util.List;
 
 public interface Entity {
   void update(List<AbstractEntity> worldEntities); // update object status

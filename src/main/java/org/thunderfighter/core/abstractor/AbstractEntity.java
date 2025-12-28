@@ -1,13 +1,11 @@
 package org.thunderfighter.core.abstractor;
 
-import org.thunderfighter.core.entity.Entity;
-
+import java.util.List;
 import javafx.geometry.Bounds;
 import javafx.geometry.Dimension2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-
-import java.util.List;
+import org.thunderfighter.core.entity.Entity;
 
 public abstract class AbstractEntity implements Entity {
 
@@ -57,7 +55,8 @@ public abstract class AbstractEntity implements Entity {
   }
 
   @Override
-  public abstract void update(List<AbstractEntity> worldEntities); // the update logic is implemented by the subclass
+  public abstract void update(
+      List<AbstractEntity> worldEntities); // the update logic is implemented by the subclass
 
   @Override
   public abstract void draw(GraphicsContext gc); // the drawing logic

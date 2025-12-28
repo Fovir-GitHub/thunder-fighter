@@ -1,5 +1,6 @@
 package org.thunderfighter.game.bulletfactory;
 
+import javafx.scene.canvas.Canvas;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.game.bullet.CurveEnemyBullet;
 import org.thunderfighter.game.bullet.HomingEnemyBullet;
@@ -15,17 +16,13 @@ import org.thunderfighter.game.trajectory.CurveTrajectory;
 import org.thunderfighter.game.trajectory.HomingTrajectory;
 import org.thunderfighter.game.trajectory.StraightTrajectory;
 
-import javafx.scene.canvas.Canvas;
-
 /**
  * BulletFactory
  *
  * <p>Centralized factory responsible for creating all bullets and item-bullets.
  *
- * <p>Game-layer factory:
- * - Hides construction details
- * - Assigns trajectories
- * - Injects Canvas into bullets (via AbstractEntity.setCanvas)
+ * <p>Game-layer factory: - Hides construction details - Assigns trajectories - Injects Canvas into
+ * bullets (via AbstractEntity.setCanvas)
  */
 public final class BulletFactory {
 
@@ -86,8 +83,7 @@ public final class BulletFactory {
       int trackingTicks,
       HomingTrajectory.TargetProvider provider) {
 
-    HomingEnemyBullet bullet =
-        new HomingEnemyBullet(x, y, dx, dy, trackingTicks, provider);
+    HomingEnemyBullet bullet = new HomingEnemyBullet(x, y, dx, dy, trackingTicks, provider);
 
     injectCanvas(canvas, bullet);
     bullet.setTrajectory(new HomingTrajectory(provider, 0.12));
@@ -106,8 +102,7 @@ public final class BulletFactory {
       int durationTicks,
       double thickness) {
 
-    LaserBullet bullet =
-        new LaserBullet(x, y, dx, dy, durationTicks, thickness);
+    LaserBullet bullet = new LaserBullet(x, y, dx, dy, durationTicks, thickness);
 
     injectCanvas(canvas, bullet);
     // bullet.setTrajectory(new StraightTrajectory());
@@ -134,22 +129,16 @@ public final class BulletFactory {
   public static PowerItemBullet createPowerItem(
       Canvas canvas, double x, double y, int buffTicks, int bonusDamage) {
 
-    PowerItemBullet bullet =
-        new PowerItemBullet(x, y, buffTicks, bonusDamage);
+    PowerItemBullet bullet = new PowerItemBullet(x, y, buffTicks, bonusDamage);
 
     injectCanvas(canvas, bullet);
     return bullet;
   }
 
   public static ClearItemBullet createClearItem(
-      Canvas canvas,
-      double x,
-      double y,
-      ClearScreenHandler handler,
-      int clearWindowTicks) {
+      Canvas canvas, double x, double y, ClearScreenHandler handler, int clearWindowTicks) {
 
-    ClearItemBullet bullet =
-        new ClearItemBullet(x, y, handler, clearWindowTicks);
+    ClearItemBullet bullet = new ClearItemBullet(x, y, handler, clearWindowTicks);
 
     injectCanvas(canvas, bullet);
     return bullet;

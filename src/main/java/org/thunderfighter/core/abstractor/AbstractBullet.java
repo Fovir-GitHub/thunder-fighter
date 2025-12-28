@@ -1,21 +1,16 @@
 package org.thunderfighter.core.abstractor;
 
+import java.util.List;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Bounds;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.core.entity.Bullet;
 import org.thunderfighter.core.entity.Trajectory;
 
-import javafx.geometry.BoundingBox;
-import javafx.geometry.Bounds;
-
-import java.util.List;
-
 /**
  * AbstractBullet
  *
- * Base class for all bullets (including items).
- * Canvas is inherited from AbstractEntity.
+ * <p>Base class for all bullets (including items). Canvas is inherited from AbstractEntity.
  */
 public abstract class AbstractBullet extends AbstractEntity implements Bullet {
 
@@ -115,20 +110,14 @@ public abstract class AbstractBullet extends AbstractEntity implements Bullet {
     }
   }
 
-  /**
-   * Kill bullet when leaving canvas.
-   * Canvas comes from AbstractEntity.
-   */
+  /** Kill bullet when leaving canvas. Canvas comes from AbstractEntity. */
   protected final void killIfOutOfBounds() {
     if (canvas == null) return;
 
     double w = canvas.getWidth();
     double h = canvas.getHeight();
 
-    if (x + size.getWidth() < 0
-        || x > w
-        || y + size.getHeight() < 0
-        || y > h) {
+    if (x + size.getWidth() < 0 || x > w || y + size.getHeight() < 0 || y > h) {
       aliveFlag = false;
     }
   }

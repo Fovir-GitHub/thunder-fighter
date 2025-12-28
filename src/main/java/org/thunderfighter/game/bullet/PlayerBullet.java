@@ -1,22 +1,18 @@
 package org.thunderfighter.game.bullet;
 
+import java.util.List;
+import javafx.geometry.Dimension2D;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.entity.Aircraft;
 import org.thunderfighter.game.trajectory.StraightTrajectory;
 
-import javafx.geometry.Dimension2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
-import java.util.List;
-
 /**
  * PlayerBullet
  *
- * <p>Straight bullet fired by the player.
- * - Damage: 1
- * - Dies when out of canvas bounds
+ * <p>Straight bullet fired by the player. - Damage: 1 - Dies when out of canvas bounds
  *
  * <p>Canvas bounds are handled via AbstractEntity.setCanvas(...)
  */
@@ -29,13 +25,9 @@ public class PlayerBullet extends AbstractBullet {
 
   /** Player bullet sprite. */
   private static final Image SPRITE =
-      new Image(PlayerBullet.class.getResourceAsStream(
-          "/images/Bullet/player_bullet.png"));
+      new Image(PlayerBullet.class.getResourceAsStream("/images/Bullet/player_bullet.png"));
 
-  /**
-   * Constructor.
-   * Compatible with existing Aircraft.doShoot(x, y)
-   */
+  /** Constructor. Compatible with existing Aircraft.doShoot(x, y) */
   public PlayerBullet(double startX, double startY) {
     this.x = startX;
     this.y = startY;
@@ -79,12 +71,6 @@ public class PlayerBullet extends AbstractBullet {
   public void draw(GraphicsContext gc) {
     if (!aliveFlag) return;
 
-    gc.drawImage(
-        SPRITE,
-        x,
-        y,
-        size.getWidth(),
-        size.getHeight()
-    );
+    gc.drawImage(SPRITE, x, y, size.getWidth(), size.getHeight());
   }
 }

@@ -12,7 +12,7 @@ public class CurveTrajectory implements Trajectory {
   private final double maxSpeed;
 
   public CurveTrajectory(double factor) {
-  
+
     this(factor, 0.65, true, 4.0, 18.0);
   }
 
@@ -20,7 +20,8 @@ public class CurveTrajectory implements Trajectory {
     this(factor, gravity, true, 4.0, 18.0);
   }
 
-  public CurveTrajectory(double factor, double gravity, boolean keepSpeed, double minDownVy, double maxSpeed) {
+  public CurveTrajectory(
+      double factor, double gravity, boolean keepSpeed, double minDownVy, double maxSpeed) {
     this.factor = factor;
     this.gravity = gravity;
     this.keepSpeed = keepSpeed;
@@ -35,7 +36,7 @@ public class CurveTrajectory implements Trajectory {
 
     // Perpendicular accel -> curve
     double axCurve = -vy * factor;
-    double ayCurve =  vx * factor;
+    double ayCurve = vx * factor;
 
     // Add strong downward pull (JavaFX: +y is down)
     double newVx = vx + axCurve;

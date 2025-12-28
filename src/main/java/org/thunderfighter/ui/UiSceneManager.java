@@ -17,20 +17,19 @@ public class UiSceneManager {
     root.getChildren().addAll(menu, overlay);
     scene = new Scene(root, 800, 600);
     overlay.hideMenu();
-  }// Initialize the scene manager with menu and overlay
+  } // Initialize the scene manager with menu and overlay
 
   public void togglePause() {
     if (overlay.isVisible()) {
       hideOverlay();
-    } 
-    else {
+    } else {
       showOverlay();
     }
-  }// Toggle the overlay visibility
+  } // Toggle the overlay visibility
 
   public Scene getScene() {
     return scene;
-  }// Get the main scene
+  } // Get the main scene
 
   public void showOverlay() {
     overlay.showMenu();
