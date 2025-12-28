@@ -8,6 +8,7 @@ import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.game.Game;
 import org.thunderfighter.game.bulletfactory.BulletFactory;
+import org.thunderfighter.game.trajectory.HomingTrajectory;
 import org.thunderfighter.utils.Constant;
 
 public class BossEnemy extends AbstractEnemyAircraft {
@@ -15,7 +16,8 @@ public class BossEnemy extends AbstractEnemyAircraft {
   public static final Dimension2D SIZE = new Dimension2D(200, 150); // @params
 
   private boolean movingRight = true;
-  private static final double SCREEN_WIDTH = 800; // @params
+  private static final double SCREEN_WIDTH = 800;
+  private Stage lastStage = null; // @params
   private Game game;
 
   private enum Stage {
@@ -35,8 +37,8 @@ public class BossEnemy extends AbstractEnemyAircraft {
     this.score = 3000; // kill reward
 
     this.canShoot = true;
-    this.shootInterval = 60; // the number of frames are needed between two shots
-    this.shootCooldown = 0; // the number of frames are left before the next shot can be fired
+    this.shootInterval = 180; // the number of frames are needed between two shots
+    this.shootCooldown = shootInterval; // the number of frames are left before the next shot can be fired
 
     this.size = SIZE;
 
@@ -64,16 +66,24 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
     if (hp >= 40) {
       stage = Stage.stage1;
-      shootInterval = 60;
     } else if (hp >= 20) {
       stage = Stage.stage2;
-      shootInterval = 40;
     } else if (hp > 0) {
       stage = Stage.stage3;
-      shootInterval = 25;
       speed = 1.8;
     } else {
       game.setGameState(Constant.GAME_STATE.SUCCESS);
+    }
+
+    if (stage != lastStage) {
+      switch (stage) {
+        case stage1 -> shootInterval = 120;
+        case stage2 -> shootInterval = 80;
+        case stage3 -> shootInterval = 50;
+      }
+
+      shootCooldown = shootInterval;
+      lastStage = stage;
     }
   }
 
@@ -93,38 +103,92 @@ public class BossEnemy extends AbstractEnemyAircraft {
   }
 
   private void shootStage1(List<AbstractEntity> worldEntities) {
+    Canvas c = getCanvas();
+    if (c == null) return;
+
     double cx = x + size.getWidth() / 2; // @params
     double by = y + size.getHeight();
 
-    Canvas c = getCanvas();
-    if (c == null) return;
-
     for (int i = -1; i <= 1; i++) {
-      worldEntities.add(BulletFactory.createEnemyBullet(c, cx + i * 25, by, i * 0.6, 3.5, false));
+      worldEntities.add(
+        BulletFactory.createEnemyBullet(
+          c, cx + i * 20, by + 4, i * 0.6, 3.5, false));
     }
+
+    worldEntities.add(
+      BulletFactory.createCurvedEnemyBullet(
+        c, cx - 40, by, -1.2, 3.0, 0.05));
+    worldEntities.add(
+      BulletFactory.createCurvedEnemyBullet(
+        c, cx - 40, by, -1.2, 3.0, -0.05));
   }
 
   private void shootStage2(List<AbstractEntity> worldEntities) {
-    double cx = x + size.getWidth() / 2;
-    double by = y + size.getHeight();
-
     Canvas c = getCanvas();
     if (c == null) return;
 
+    double cx = x + size.getWidth() / 2;
+    double by = y + size.getHeight();
+
+    worldEntities.add(
+      BulletFactory.createHomingBullet(
+        c, cx, by, 0, 2.5, 120,
+        new HomingTrajectory.TargetProvider() {
+          @Override
+          public double getTargetX() {
+            return game.getPlayerAircraft() != null
+              ? game.getPlayerAircraft().getX()
+              : cx;
+          }
+
+          @Override
+          public double getTargetY() {
+            return game.getPlayerAircraft() != null
+              ? game.getPlayerAircraft().getY()
+              : by + 200;
+          }
+        }
+        ));
+
     for (int i = -3; i <= 3; i++) {
-      worldEntities.add(BulletFactory.createEnemyBullet(c, cx, by + 4, i * 0.8, 4, i == 0));
+      worldEntities.add(
+        BulletFactory.createEnemyBullet(
+          c, cx, by + 4, i * 0.7, 3.8, i == 0));
     }
   }
 
   private void shootStage3(List<AbstractEntity> worldEntities) {
-    double cx = x + size.getWidth() / 2;
-    double by = y + size.getHeight();
-
     Canvas c = getCanvas();
     if (c == null) return;
 
-    worldEntities.add(BulletFactory.createCurvedEnemyBullet(c, cx - 60, by + 4, -1.5, 3.5, 0.06));
-    worldEntities.add(BulletFactory.createCurvedEnemyBullet(c, cx - 60, by + 4, -1.5, 3.5, -0.06));
-    worldEntities.add(BulletFactory.createEnemyBullet(c, cx, by + 4, 0, 5, true));
+    double cx = x + size.getWidth() / 2;
+    double by = y + size.getHeight();
+
+    worldEntities.add(
+      BulletFactory.createLaserBullet(
+        c, cx - 30, by + 4, 0, 1, 90, 12)); // create Laser bullet
+
+    worldEntities.add(
+      BulletFactory.createHomingBullet(
+        c, cx + 40, by + 4, 0, 2.5, 100,
+        new HomingTrajectory.TargetProvider() {
+          @Override
+          public double getTargetX() {
+            return game.getPlayerAircraft() != null
+              ? game.getPlayerAircraft().getX()
+              : cx;
+          }
+
+          @Override
+          public double getTargetY() {
+            return game.getPlayerAircraft() != null
+              ? game.getPlayerAircraft().getY()
+              : by + 200;
+          }
+        }));
+
+    worldEntities.add(
+      BulletFactory.createEnemyBullet(
+        c, cx, by + 4, 0, 4.5, true)); // create straight bullet
   }
 }

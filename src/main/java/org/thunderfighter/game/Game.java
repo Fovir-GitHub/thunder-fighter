@@ -186,6 +186,11 @@ public class Game {
     }
   }
 
+  public PlayerAircraft getPlayerAircraft() {
+    return playerAircraft;
+  }
+
+
   private Constant.PHASE enemyStage = Constant.PHASE.NORMAL;
 
   private void generateEnemy() {
