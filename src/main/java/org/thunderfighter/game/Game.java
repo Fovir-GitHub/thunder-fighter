@@ -41,6 +41,8 @@ public class Game {
   private Image backgroundImage =
       new Image(getClass().getResourceAsStream("/images/Background/bg.png"));
 
+  private long lastTime = 0;
+
   // Player.
   private PlayerAircraft playerAircraft;
 
@@ -96,6 +98,44 @@ public class Game {
     } else {
       gameState = GAME_STATE.RUNNING;
     }
+  }
+
+  /**
+   * Core logic of running the game.
+   *
+   * <p>It offers different methods to run under different game state.
+   */
+  private void initAnimationTimer() {
+    animationTimer =
+        new AnimationTimer() {
+          @Override
+          public void handle(long now) {
+            // If this is the first run, initialize the timestamp.
+            if (lastTime == 0) {
+              lastTime = now;
+              return;
+            }
+
+            // Calculate the time interval (nanoseconds) required for each frame.
+            // 1seconds = 1,000,000,000 ns
+            long interval = 1_000_000_000 / Constant.TPS;
+
+            // The logic is executed only when the difference
+            // between the current time and the previous time is greater than or equal to the
+            // interval.
+            if (now - lastTime >= interval) {
+              switch (gameState) {
+                case MENU -> handleMenuState();
+                case RUNNING -> handleRunningState();
+                case PAUSE -> handlePauseState();
+                case SUCCESS -> handleSuccessState();
+                case FAIL -> handleFailState();
+              }
+              // Update last execution time
+              lastTime = now;
+            }
+          }
+        };
   }
 
   public void start() {
@@ -193,27 +233,6 @@ public class Game {
             canvas,
             this);
     entities.add(playerAircraft);
-  }
-
-  /**
-   * Core logic of running the game.
-   *
-   * <p>It offers different methods to run under different game state.
-   */
-  private void initAnimationTimer() {
-    animationTimer =
-        new AnimationTimer() {
-          @Override
-          public void handle(long now) {
-            switch (gameState) {
-              case MENU -> handleMenuState();
-              case RUNNING -> handleRunningState();
-              case PAUSE -> handlePauseState();
-              case SUCCESS -> handleSuccessState();
-              case FAIL -> handleFailState();
-            }
-          }
-        };
   }
 
   /** Restart the game when clicking the start button in the main menu. */
