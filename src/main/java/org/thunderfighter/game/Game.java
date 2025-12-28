@@ -74,34 +74,6 @@ public class Game {
     initGame();
   }
 
-  private void initGame() {
-    initEntities();
-    enemySpawner = new EnemySpawner(canvas, entities, this);
-    scoreBoard = new ScoreBoard(root, playerAircraft);
-
-    this.keyboardController = new KeyboardController(playerAircraft, this);
-    keyboardController.operation(this.scene);
-
-    ScoreManager.getInstance().reset();
-    initAnimationTimer();
-  }
-
-  /** Initialize entities and register them into the {@code entites} list. */
-  private void initEntities() {
-    entities.clear();
-    numberOfEnemy = 0;
-    playerAircraft =
-        new PlayerAircraft(
-            canvas.getWidth() / 2,
-            canvas.getHeight() - PlayerAircraft.SIZE.getHeight() - 10,
-            3,
-            10,
-            20,
-            canvas,
-            this);
-    entities.add(playerAircraft);
-  }
-
   public void setGameState(GAME_STATE gameState) {
     this.gameState = gameState;
   }
@@ -110,87 +82,20 @@ public class Game {
     return gameState;
   }
 
+  /**
+   * Toggle pause state.
+   *
+   * <p>If the current state is {@code GAME_STATE.RUNNING}, then the game state should be set to
+   * {@code GAME_STATE.PAUSE}.
+   *
+   * <p>Otherwise, the game should be resume, whose game state should be {@code GAME_STATE.RUNNING}.
+   */
   public void togglePause() {
     if (gameState == GAME_STATE.RUNNING) {
       gameState = GAME_STATE.PAUSE;
     } else {
       gameState = GAME_STATE.RUNNING;
     }
-  }
-
-  private void initAnimationTimer() {
-    animationTimer =
-        new AnimationTimer() {
-          @Override
-          public void handle(long now) {
-            switch (gameState) {
-              case MENU -> handleMenuState();
-              case RUNNING -> handleRunningState();
-              case PAUSE -> handlePauseState();
-              case SUCCESS -> handleSuccessState();
-              case FAIL -> handleFailState();
-            }
-          }
-        };
-  }
-
-  /** Restart the game when clicking the start button in the main menu. */
-  private void restartGame() {
-    ScoreManager.getInstance().reset();
-    enemyStage = PHASE.NORMAL;
-    initEntities();
-    keyboardController.setPlayer(this.playerAircraft);
-    scoreBoard.setPlayerAircraft(this.playerAircraft);
-    enemySpawner.reset();
-  }
-
-  private void handleMenuState() {
-    graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-    menu.setVisible(true);
-    overlay.setVisible(false);
-    scoreBoard.setVisible(false);
-    fromMenuStart = true;
-    scoreStored = false;
-    if (!scoreRead) {
-      UiScoreStorage.readFromFile();
-      scoreRead = true;
-    }
-  }
-
-  private void handleRunningState() {
-    // A new round of game.
-    if (fromMenuStart) {
-      restartGame();
-      fromMenuStart = false;
-    }
-    menu.setVisible(false);
-    overlay.setVisible(false);
-    scoreBoard.setVisible(true);
-    scoreRead = false;
-    update();
-    draw();
-  }
-
-  private void handlePauseState() {
-    overlay.showPause();
-  }
-
-  private void storeScore() {
-    if (!scoreStored) {
-      UiScoreStorage.addScore(ScoreManager.getInstance().getScore());
-      scoreStored = true;
-      UiScoreStorage.writeToFile();
-    }
-  }
-
-  private void handleSuccessState() {
-    overlay.showSuccess();
-    storeScore();
-  }
-
-  private void handleFailState() {
-    overlay.showFail();
-    storeScore();
   }
 
   public void start() {
@@ -203,6 +108,20 @@ public class Game {
     animationTimer.stop();
   }
 
+  /**
+   * Update frames of the game.
+   *
+   * <p>The order of updating is:
+   *
+   * <ol>
+   *   <li>Generate enemy.
+   *   <li>Determine whether the player want to shoot.
+   *   <li>Detect collisions.
+   *   <li>Update position and state of each {@link Entity}.
+   *   <li>Remove dead objects and update {@code numberOfEnemy}.
+   *   <li>Update the score board.
+   * </ol>
+   */
   public void update() {
     generateEnemy();
     if (playerAircraft.wantToShoot()) {
@@ -231,6 +150,12 @@ public class Game {
     scoreBoard.update();
   }
 
+  /**
+   * Draw each frame.
+   *
+   * <p>This method will draw the background at first, then it will draw each entity stored in
+   * {@code entites}.
+   */
   public void draw() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     graphicsContext.drawImage(backgroundImage, 0, 0, canvas.getWidth(), canvas.getHeight());
@@ -243,11 +168,136 @@ public class Game {
     return playerAircraft;
   }
 
+  /** Initialize the game at first launch. */
+  private void initGame() {
+    initEntities();
+    enemySpawner = new EnemySpawner(canvas, entities, this);
+    scoreBoard = new ScoreBoard(root, playerAircraft);
+    this.keyboardController = new KeyboardController(playerAircraft, this);
+    keyboardController.operation(this.scene);
+    ScoreManager.getInstance().reset();
+    initAnimationTimer();
+  }
+
+  /** Initialize entities and register them into the {@code entites} list. */
+  private void initEntities() {
+    entities.clear();
+    numberOfEnemy = 0;
+    playerAircraft =
+        new PlayerAircraft(
+            canvas.getWidth() / 2,
+            canvas.getHeight() - PlayerAircraft.SIZE.getHeight() - 10,
+            3,
+            10,
+            20,
+            canvas,
+            this);
+    entities.add(playerAircraft);
+  }
+
+  /**
+   * Core logic of running the game.
+   *
+   * <p>It offers different methods to run under different game state.
+   */
+  private void initAnimationTimer() {
+    animationTimer =
+        new AnimationTimer() {
+          @Override
+          public void handle(long now) {
+            switch (gameState) {
+              case MENU -> handleMenuState();
+              case RUNNING -> handleRunningState();
+              case PAUSE -> handlePauseState();
+              case SUCCESS -> handleSuccessState();
+              case FAIL -> handleFailState();
+            }
+          }
+        };
+  }
+
+  /** Restart the game when clicking the start button in the main menu. */
+  private void restartGame() {
+    ScoreManager.getInstance().reset();
+    enemyStage = PHASE.NORMAL;
+    initEntities();
+    keyboardController.setPlayer(this.playerAircraft);
+    scoreBoard.setPlayerAircraft(this.playerAircraft);
+    enemySpawner.reset();
+  }
+
+  /** Actions to be taken when the user is in menu. */
+  private void handleMenuState() {
+    graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    menu.setVisible(true);
+    overlay.setVisible(false);
+    scoreBoard.setVisible(false);
+    fromMenuStart = true;
+    scoreStored = false;
+    if (!scoreRead) {
+      UiScoreStorage.readFromFile();
+      scoreRead = true;
+    }
+  }
+
+  /** Actions to be taken during running the game. */
+  private void handleRunningState() {
+    // A new round of game.
+    if (fromMenuStart) {
+      restartGame();
+      fromMenuStart = false;
+    }
+    menu.setVisible(false);
+    overlay.setVisible(false);
+    scoreBoard.setVisible(true);
+    scoreRead = false;
+    update();
+    draw();
+  }
+
+  /** Actions to be done when the game is paused. */
+  private void handlePauseState() {
+    overlay.showPause();
+  }
+
+  /**
+   * Utility function used to store scores to the data file.
+   *
+   * <p>It avoid adding scores repeatly by using a flag {@code scoreStored}.
+   *
+   * <p>If the flag is {@code true}, it will skip writing into file. Otherwise, it will do so.
+   */
+  private void storeScore() {
+    if (!scoreStored) {
+      UiScoreStorage.addScore(ScoreManager.getInstance().getScore());
+      scoreStored = true;
+      UiScoreStorage.writeToFile();
+    }
+  }
+
+  /** Actions to be taken when the player is successed. */
+  private void handleSuccessState() {
+    overlay.showSuccess();
+    storeScore();
+  }
+
+  /** Actions to be taken if the player failed in the game. */
+  private void handleFailState() {
+    overlay.showFail();
+    storeScore();
+  }
+
+  /**
+   * Generate enemies according to different phases and scores.
+   *
+   * <p>If the number of enemy reaches the limit, this method will do nothing.
+   */
   private void generateEnemy() {
     if (numberOfEnemy >= Constant.ENEMY_NUMBER_LIMIT) {
       return;
     }
 
+    // Update the phase before entering switch-case statements.
     int currentScore = ScoreManager.getInstance().getScore();
     if (enemyStage == PHASE.NORMAL && currentScore >= Constant.GENERATE_ELITE_SCORE) {
       enemyStage = PHASE.ELITE;
@@ -255,6 +305,11 @@ public class Game {
       enemyStage = PHASE.BOSS;
     }
 
+    // | Phase  |     Enemy       |
+    // | ------ | --------------- |
+    // | NORMAL | Normal          |
+    // | ELITE  | Elite + Normal  |
+    // | BOSS   | Boss            |
     switch (enemyStage) {
       case NORMAL:
         if (enemySpawner.spawnNormal()) {

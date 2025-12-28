@@ -13,6 +13,11 @@ import org.thunderfighter.game.aircraft.player.PlayerAircraft;
 /** Collisoin Detector */
 public class CollisionDetector {
 
+  /**
+   * Detect collisions among a list of {@code AbstractEntity}.
+   *
+   * @param entities List of entities.
+   */
   public static void detectCollision(List<AbstractEntity> entities) {
     int n = entities.size();
     for (int i = 0; i < n; i++) {
@@ -78,12 +83,24 @@ public class CollisionDetector {
     }
   }
 
+  /**
+   * Handle collisions between aircrafts.
+   *
+   * <p>If both aircrafts are not Boss, then, both of them will get one point damage.
+   *
+   * <p>Otherwise, there will one player and one Boss, where the user will be killed immediately.
+   *
+   * @param a An {@link AbstractAircraft}.
+   * @param b Another {@link AbstractAircraft}.
+   */
   private static void handleAircraftCollision(AbstractAircraft a, AbstractAircraft b) {
     if (!(a instanceof BossEnemy || b instanceof BossEnemy)) {
       a.takeDamage(1);
       b.takeDamage(1);
       return;
     }
+
+    // One of the aircraft is boss.
     if (a instanceof PlayerAircraft) {
       a.takeDamage(a.getHp());
     } else {
@@ -91,6 +108,17 @@ public class CollisionDetector {
     }
   }
 
+  /**
+   * Handle collisions between {@link AbstractAircraft} and {@link AbstractBullet}.
+   *
+   * <p>This method automatically determines which object passed is {@code Aircraft} or {@code
+   * Bullet}. And it prevents both player and enemy from suicide.
+   *
+   * @param a An {@link AbstractEntity} which can be either {@link AbstractAircraft} or {@link
+   *     AbstractBullet}.
+   * @param b Another {@link AbstractEntity} which can be either {@link AbstractAircraft} or {@link
+   *     AbstractBullet}.
+   */
   private static void handleAircraftBulletCollision(AbstractEntity a, AbstractEntity b) {
     AbstractAircraft aircraft;
     AbstractBullet bullet;
