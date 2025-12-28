@@ -190,7 +190,6 @@ public class Game {
     return playerAircraft;
   }
 
-
   private Constant.PHASE enemyStage = Constant.PHASE.NORMAL;
 
   private void generateEnemy() {
