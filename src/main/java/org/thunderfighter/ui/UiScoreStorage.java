@@ -71,7 +71,6 @@ public class UiScoreStorage {
         printWriter.println(score);
       }
       printWriter.close();
-
     } catch (IOException e) {
       e.printStackTrace();
     }
