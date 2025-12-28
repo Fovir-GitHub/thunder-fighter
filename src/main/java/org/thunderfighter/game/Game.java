@@ -58,6 +58,7 @@ public class Game {
   GAME_STATE gameState;
   private boolean fromMenuStart = false;
   private boolean scoreStored = false;
+  private boolean scoreRead = false;
 
   public Game(Stage stage) {
     // TODO:
@@ -156,6 +157,10 @@ public class Game {
     scoreBoard.setVisible(false);
     fromMenuStart = true;
     scoreStored = false;
+    if (!scoreRead) {
+      UiScoreStorage.readFromFile();
+      scoreRead = true;
+    }
   }
 
   private void handleRunningState() {
@@ -167,6 +172,7 @@ public class Game {
     menu.setVisible(false);
     overlay.setVisible(false);
     scoreBoard.setVisible(true);
+    scoreRead = false;
     update();
     draw();
   }
@@ -179,6 +185,7 @@ public class Game {
     if (!scoreStored) {
       UiScoreStorage.addScore(ScoreManager.getInstance().getScore());
       scoreStored = true;
+      UiScoreStorage.writeToFile();
     }
   }
 
