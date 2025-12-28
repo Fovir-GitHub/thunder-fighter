@@ -78,8 +78,8 @@ public class BossEnemy extends AbstractEnemyAircraft {
     if (stage != lastStage) {
       switch (stage) {
         case stage1 -> shootInterval = 120;
-        case stage2 -> shootInterval = 80;
-        case stage3 -> shootInterval = 50;
+        case stage2 -> shootInterval = 150;
+        case stage3 -> shootInterval = 200;
       }
 
       shootCooldown = shootInterval;
@@ -132,7 +132,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
     worldEntities.add(
       BulletFactory.createHomingBullet(
-        c, cx, by, 0, 2.5, 120,
+        c, cx, by, 0, 2.5, 180, // track 3 seconds
         new HomingTrajectory.TargetProvider() {
           @Override
           public double getTargetX() {
@@ -166,11 +166,11 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
     worldEntities.add(
       BulletFactory.createLaserBullet(
-        c, cx - 30, by + 4, 0, 1, 90, 12)); // create Laser bullet
+        c, cx - 30, by + 4, 0, 0, 60, 20)); // create Laser bullet
 
     worldEntities.add(
       BulletFactory.createHomingBullet(
-        c, cx + 40, by + 4, 0, 2.5, 100,
+        c, cx + 40, by + 4, 0, 2.5, 120, // tracking 3 seconds
         new HomingTrajectory.TargetProvider() {
           @Override
           public double getTargetX() {
