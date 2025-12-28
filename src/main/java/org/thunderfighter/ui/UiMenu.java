@@ -32,16 +32,16 @@ public class UiMenu extends AbstractUiMenu {
     createButton(aboutButton);
 
     this.getChildren().setAll(title, startButton, historyButton, ruleButton, aboutButton);
-    //set the elements in the menu
+    // set the elements in the menu
 
-    showMenu();//show the menu
+    showMenu(); // show the menu
 
-    //set the action for each button in the menu
+    // set the action for each button in the menu
     startButton.setOnAction(
         e -> {
           game.setGameState(Constant.GAME_STATE.RUNNING);
           game.start();
-        });//control the game start, using the start method in the Game class
+        }); // control the game start, using the start method in the Game class
 
     historyButton.setOnAction(e -> UiScoreStorage.showScoreDialog());
     ruleButton.setOnAction(e -> UiDialog.showRuleDialog());
@@ -52,17 +52,17 @@ public class UiMenu extends AbstractUiMenu {
     button.setPrefWidth(150);
     button.setPrefHeight(40);
     button.setFont(Font.font(15));
-  }// the basic style for buttons
+  } // the basic style for buttons
 
   @Override
   public void showMenu() {
     this.setVisible(true);
     this.setManaged(true);
-  }// show the menu
+  } // show the menu
 
   @Override
   public void hideMenu() {
     this.setVisible(false);
     this.setManaged(false);
-  }// hide the menu
+  } // hide the menu
 }
