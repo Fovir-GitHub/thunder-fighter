@@ -7,6 +7,8 @@ import org.thunderfighter.core.abstractor.AbstractBullet;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.entity.Bullet;
+import org.thunderfighter.game.aircraft.enemy.BossEnemy;
+import org.thunderfighter.game.aircraft.player.PlayerAircraft;
 
 /** Collisoin Detector */
 public class CollisionDetector {
@@ -70,24 +72,40 @@ public class CollisionDetector {
    */
   private static void handleCollision(AbstractEntity a, AbstractEntity b) {
     if (a instanceof AbstractAircraft && b instanceof AbstractAircraft) {
-      ((AbstractAircraft) a).takeDamage(1);
-      ((AbstractAircraft) b).takeDamage(1);
+      handleAircraftCollision((AbstractAircraft) a, (AbstractAircraft) b);
     } else {
-      AbstractAircraft aircraft;
-      AbstractBullet bullet;
-      if (a instanceof AbstractAircraft) {
-        aircraft = (AbstractAircraft) a;
-        bullet = (AbstractBullet) b;
-      } else {
-        aircraft = (AbstractAircraft) b;
-        bullet = (AbstractBullet) a;
-      }
-
-      // Prevent player and enemy from suicide.
-      if (!(aircraft.isPlayer() ^ bullet.isFromPlayer())) {
-        return;
-      }
-      bullet.onHit(aircraft);
+      handleAircraftBulletCollision(a, b);
     }
+  }
+
+  private static void handleAircraftCollision(AbstractAircraft a, AbstractAircraft b) {
+    if (!(a instanceof BossEnemy || b instanceof BossEnemy)) {
+      a.takeDamage(1);
+      b.takeDamage(1);
+      return;
+    }
+    if (a instanceof PlayerAircraft) {
+      a.takeDamage(a.getHp());
+    } else {
+      b.takeDamage(b.getHp());
+    }
+  }
+
+  private static void handleAircraftBulletCollision(AbstractEntity a, AbstractEntity b) {
+    AbstractAircraft aircraft;
+    AbstractBullet bullet;
+    if (a instanceof AbstractAircraft) {
+      aircraft = (AbstractAircraft) a;
+      bullet = (AbstractBullet) b;
+    } else {
+      aircraft = (AbstractAircraft) b;
+      bullet = (AbstractBullet) a;
+    }
+
+    // Prevent player and enemy from suicide.
+    if (!(aircraft.isPlayer() ^ bullet.isFromPlayer())) {
+      return;
+    }
+    bullet.onHit(aircraft);
   }
 }
