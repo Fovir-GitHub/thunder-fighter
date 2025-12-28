@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import org.thunderfighter.core.abstractor.AbstractUiMenu;
+import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.Game;
 import org.thunderfighter.utils.Constant;
 
@@ -94,6 +95,10 @@ public class UiOverlay extends AbstractUiMenu {
   public void showSuccess() {
     applyMode(OverlayMode.SUCCESS);
     showMenu();
+    UiScoreStorage.addScore(ScoreManager.getInstance().getScore());
+    ScoreManager.getInstance().reset();
+    game.setGameState(Constant.GAME_STATE.MENU);
+
   }
 
   // Show fail overlay.
@@ -101,6 +106,9 @@ public class UiOverlay extends AbstractUiMenu {
   public void showFail() {
     applyMode(OverlayMode.FAIL);
     showMenu();
+    UiScoreStorage.addScore(ScoreManager.getInstance().getScore());
+    ScoreManager.getInstance().reset();
+    game.setGameState(Constant.GAME_STATE.MENU);
   }
 
 
