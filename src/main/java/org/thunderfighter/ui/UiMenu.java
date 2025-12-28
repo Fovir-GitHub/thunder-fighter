@@ -9,13 +9,14 @@ import org.thunderfighter.game.Game;
 import org.thunderfighter.utils.Constant;
 
 public class UiMenu extends AbstractUiMenu {
-
+  // The element of the main menu
   public final Text title = new Text("Thunder Fighter");
   public final Button startButton = new Button("Start Game");
   public final Button historyButton = new Button("History Score");
   public final Button aboutButton = new Button("About");
   public final Button ruleButton = new Button("Game Rule");
 
+  // Initialize the main menu
   public UiMenu(Game game, UiOverlay overlay) {
     this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     this.setPickOnBounds(true);
@@ -31,14 +32,16 @@ public class UiMenu extends AbstractUiMenu {
     createButton(aboutButton);
 
     this.getChildren().setAll(title, startButton, historyButton, ruleButton, aboutButton);
+    //set the elements in the menu
 
-    showMenu();
+    showMenu();//show the menu
 
+    //set the action for each button in the menu
     startButton.setOnAction(
         e -> {
           game.setGameState(Constant.GAME_STATE.RUNNING);
           game.start();
-        });
+        });//control the game start, using the start method in the Game class
 
     historyButton.setOnAction(e -> UiScoreStorage.showScoreDialog());
     ruleButton.setOnAction(e -> UiDialog.showRuleDialog());
@@ -49,17 +52,17 @@ public class UiMenu extends AbstractUiMenu {
     button.setPrefWidth(150);
     button.setPrefHeight(40);
     button.setFont(Font.font(15));
-  }
+  }// the basic style for buttons
 
   @Override
   public void showMenu() {
     this.setVisible(true);
     this.setManaged(true);
-  }
+  }// show the menu
 
   @Override
   public void hideMenu() {
     this.setVisible(false);
     this.setManaged(false);
-  }
+  }// hide the menu
 }
