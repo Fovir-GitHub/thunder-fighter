@@ -48,3 +48,5 @@ bin/
 
 .idea/
 .vscode/
+
+data/
