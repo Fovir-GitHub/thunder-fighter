@@ -6,7 +6,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.abstractor.AbstractPlayerAircraft;
+import org.thunderfighter.game.Game;
 import org.thunderfighter.game.bullet.PlayerBullet;
+import org.thunderfighter.utils.Constant.GAME_STATE;
 
 public class PlayerAircraft extends AbstractPlayerAircraft {
 
@@ -16,7 +18,7 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
   private final long damageCooldown = 1000; // damage cd
 
   public PlayerAircraft(
-      double x, double y, int hp, double speed, int shootInterval, Canvas canvas) {
+      double x, double y, int hp, double speed, int shootInterval, Canvas canvas, Game game) {
     this.x = x;
     this.y = y;
     this.hp = hp;
@@ -26,6 +28,7 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
 
     this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/PlayerAircraft.png"));
     this.canvas = canvas;
+    this.game = game;
   }
 
   @Override
@@ -75,11 +78,16 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
     worldEntities.add(bullet); // by manager instance to manage it.
   }
 
+  @Override
   public void takeDamage(int amount) {
     long currentTime = System.currentTimeMillis();
     if (currentTime - lastDamageTime >= damageCooldown) {
       this.hp -= amount;
       lastDamageTime = currentTime; // update damage cd time
+    }
+    if (hp <= 0) {
+      aliveFlag = false;
+      game.setGameState(GAME_STATE.FAIL);
     }
   }
 }

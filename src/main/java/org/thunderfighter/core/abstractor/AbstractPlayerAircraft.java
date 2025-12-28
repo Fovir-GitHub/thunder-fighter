@@ -2,6 +2,7 @@ package org.thunderfighter.core.abstractor;
 
 import java.util.List;
 import javafx.scene.canvas.Canvas;
+import org.thunderfighter.game.Game;
 
 public abstract class AbstractPlayerAircraft extends AbstractAircraft {
 
@@ -11,6 +12,7 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
   protected boolean wantToShoot = false;
   protected boolean up, down, left, right;
   protected Canvas canvas;
+  protected Game game;
 
   public void setUp(boolean up) {
     this.up = up;
