@@ -8,11 +8,11 @@ public class UiScoreStorage {
 
   public static void addScore(int score) {
     scores.add(score);
-  }
+  }// The method to add a new score to the storage
 
   public static List<Integer> getScores() {
     return new ArrayList<>(scores);
-  }
+  }//The method to get a copy of the score list
 
   public static String getFormattedScores() {
     if (scores.isEmpty()) return "No scores yet!";
@@ -22,12 +22,12 @@ public class UiScoreStorage {
     for (int score : scores) {
       string_builder.append(i + ". " + score + "\n");
       i++;
-    }
+    }// Format scores as a numbered list
 
     return string_builder.toString();
   }
 
   public static void showScoreDialog() {
     UiDialog.showInfoDialog("History Score", getFormattedScores());
-  }
+  }// Show the score dialog with formatted scores
 }
