@@ -126,10 +126,12 @@ public class Game {
                 graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
                 menu.setVisible(true);
                 overlay.setVisible(false);
+                scoreBoard.setVisible(false);
                 break;
               case RUNNING:
                 menu.setVisible(false);
                 overlay.setVisible(false);
+                scoreBoard.setVisible(true);
                 update();
                 draw();
                 break;
