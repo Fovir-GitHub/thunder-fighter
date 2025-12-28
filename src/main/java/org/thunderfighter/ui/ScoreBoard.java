@@ -67,6 +67,7 @@ public class ScoreBoard {
     livesLabel.setStyle(labelStyle);
   }
 
+  /** Update the score board. */
   public void update() {
     scoreLabel.setText("Score: " + ScoreManager.getInstance().getScore());
     livesLabel.setText("Lives: " + playerAircraft.getHp());

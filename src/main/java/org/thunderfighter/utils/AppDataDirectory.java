@@ -10,6 +10,11 @@ public class AppDataDirectory {
 
   private static final String APP_NAME = "thunder-fighter";
 
+  /**
+   * Get app data directory according to different operating systems.
+   *
+   * @return App data directory on different operating systems.
+   */
   public static Path getAppDataDirectory() {
     String os = System.getProperty("os.name").toLowerCase();
     Path appDir;
@@ -30,6 +35,11 @@ public class AppDataDirectory {
     return appDir;
   }
 
+  /**
+   * Ensure the data directory of game exists under the app data directory.
+   *
+   * @return The path of data directory.
+   */
   public static Path ensureAppDataDirectory() {
     Path dir = getAppDataDirectory();
     try {
@@ -40,6 +50,11 @@ public class AppDataDirectory {
     return dir;
   }
 
+  /**
+   * Create data file under the data file directory.
+   *
+   * @param fileName The name of data file.
+   */
   public static void createFile(String fileName) {
     Path dir = ensureAppDataDirectory();
     Path file = dir.resolve(fileName);
