@@ -144,6 +144,7 @@ public class Game {
     initEntities();
     keyboardController.setPlayer(this.playerAircraft);
     scoreBoard.setPlayerAircraft(this.playerAircraft);
+    enemySpawner.reset();
   }
 
   private void handleMenuState() {
@@ -235,21 +236,19 @@ public class Game {
     }
 
     int currentScore = ScoreManager.getInstance().getScore();
+    if (enemyStage == PHASE.NORMAL && currentScore >= Constant.GENERATE_ELITE_SCORE) {
+      enemyStage = PHASE.ELITE;
+    } else if (enemyStage == PHASE.ELITE && currentScore >= Constant.GENERATE_BOSS_SCORE) {
+      enemyStage = PHASE.BOSS;
+    }
+
     switch (enemyStage) {
       case NORMAL:
-        if (currentScore >= Constant.GENERATE_ELITE_SCORE) {
-          enemyStage = Constant.PHASE.ELITE;
-          break;
-        }
         if (enemySpawner.spawnNormal()) {
           numberOfEnemy++;
         }
         break;
       case ELITE:
-        if (currentScore >= Constant.GENERATE_BOSS_SCORE) {
-          enemyStage = Constant.PHASE.BOSS;
-          break;
-        }
         if (enemySpawner.spawnElite()) {
           numberOfEnemy++;
         }

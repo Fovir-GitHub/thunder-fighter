@@ -23,6 +23,11 @@ public class EnemySpawner {
     this.entities = entities;
   }
 
+  public void reset() {
+    normalCd = eliteCd = 0;
+    boss = null;
+  }
+
   public boolean spawnNormal() {
     if (normalCd-- > 0) {
       return false;
@@ -53,6 +58,7 @@ public class EnemySpawner {
     if (boss != null && boss.isAlive()) {
       return false;
     }
+
     boss = new BossEnemy(canvas.getWidth() / 2 - 100, 0, game);
     boss.setCanvas(canvas);
     entities.add(boss);
