@@ -24,6 +24,10 @@ public class ScoreBoard {
   public ScoreBoard(StackPane root, final PlayerAircraft playerAircraft) {
     this.playerAircraft = playerAircraft;
     pane = new StackPane();
+    // The scoreboard should never block mouse events for menu / overlay buttons.
+    // Otherwise, the top-right HUD layer may intercept clicks even when it is visually small.
+    pane.setMouseTransparent(true);
+    pane.setPickOnBounds(false);
     StackPane.setAlignment(pane, Pos.TOP_RIGHT);
     root.getChildren().add(pane);
 
