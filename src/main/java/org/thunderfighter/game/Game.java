@@ -95,7 +95,8 @@ public class Game {
             3,
             10,
             20,
-            canvas);
+            canvas,
+            this);
     entities.add(playerAircraft);
   }
 
@@ -152,9 +153,13 @@ public class Game {
     overlay.setVisible(true);
   }
 
-  private void handleSuccessState() {}
+  private void handleSuccessState() {
+    handlePauseState();
+  }
 
-  private void handleFailState() {}
+  private void handleFailState() {
+    handlePauseState();
+  }
 
   public void start() {
     if (animationTimer != null) {
