@@ -129,7 +129,7 @@ public class LaserBullet extends AbstractBullet implements Clearable {
 
   @Override
   public void onHit(Aircraft target) {
-    target.takeDamage(Integer.MAX_VALUE); // execute
+    target.takeDamage(target.getHp()); // execute
     // piercing by default
   }
 
