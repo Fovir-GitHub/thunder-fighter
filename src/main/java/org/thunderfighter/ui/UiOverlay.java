@@ -33,11 +33,7 @@ public class UiOverlay extends AbstractUiMenu {
   public final Button aboutButton = new Button("About");
   public final Button ruleButton = new Button("Game Rule");
 
-  private final Game game;
-
   public UiOverlay(Game game) {
-    this.game = game;
-
     // Make overlay cover the whole scene to prevent click-through.
     this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
     this.setPickOnBounds(true);
