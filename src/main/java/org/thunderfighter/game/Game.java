@@ -23,6 +23,7 @@ import org.thunderfighter.ui.UiMenu;
 import org.thunderfighter.ui.UiOverlay;
 import org.thunderfighter.utils.Constant;
 import org.thunderfighter.utils.Constant.GAME_STATE;
+import org.thunderfighter.utils.Constant.PHASE;
 
 /** Control and manage the game. */
 public class Game {
@@ -54,6 +55,8 @@ public class Game {
 
   GAME_STATE gameState;
   private boolean fromMenuStart = false;
+
+  private PHASE enemyStage = PHASE.NORMAL;
 
   public Game(Stage stage) {
     // TODO:
@@ -135,6 +138,7 @@ public class Game {
         };
   }
 
+  /** Restart the game when clicking the start button in the main menu. */
   private void restartGame() {
     ScoreManager.getInstance().reset();
     initEntities();
@@ -151,6 +155,7 @@ public class Game {
   }
 
   private void handleRunningState() {
+    // A new round of game.
     if (fromMenuStart) {
       restartGame();
       fromMenuStart = false;
@@ -186,7 +191,6 @@ public class Game {
 
   public void update() {
     generateEnemy();
-
     if (playerAircraft.wantToShoot()) {
       playerAircraft.shoot(entities);
     }
@@ -210,7 +214,6 @@ public class Game {
       }
     }
     entities.addAll(tempList);
-
     scoreBoard.update();
   }
 
@@ -226,15 +229,12 @@ public class Game {
     return playerAircraft;
   }
 
-  private Constant.PHASE enemyStage = Constant.PHASE.NORMAL;
-
   private void generateEnemy() {
     if (numberOfEnemy >= Constant.ENEMY_NUMBER_LIMIT) {
       return;
     }
 
     int currentScore = ScoreManager.getInstance().getScore();
-
     switch (enemyStage) {
       case NORMAL:
         if (currentScore >= Constant.GENERATE_ELITE_SCORE) {
@@ -245,7 +245,6 @@ public class Game {
           numberOfEnemy++;
         }
         break;
-
       case ELITE:
         if (currentScore >= Constant.GENERATE_BOSS_SCORE) {
           enemyStage = Constant.PHASE.BOSS;
@@ -258,7 +257,6 @@ public class Game {
           numberOfEnemy++;
         }
         break;
-
       case BOSS:
         if (enemySpawner.spawnBoss(this)) {
           numberOfEnemy++;
