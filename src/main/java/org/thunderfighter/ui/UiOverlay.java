@@ -49,7 +49,7 @@ public class UiOverlay extends AbstractUiMenu {
     }
 
     private void createButton(Button button) {
-        button.setFont(Font.font(20));
+        button.setFont(Font.font(15));
         button.setPrefWidth(220);
         button.setPrefHeight(40);
         button.setFocusTraversable(true);
@@ -57,13 +57,14 @@ public class UiOverlay extends AbstractUiMenu {
 
     @Override
     public void showMenu() {
-        this.setVisible(true);
-        this.setManaged(true);
+        setVisible(true);
+        setMouseTransparent(false);;
+        toFront();
     }
 
     @Override
     public void hideMenu() {
-        this.setVisible(false);
-        this.setManaged(false);
+        setVisible(false);
+        setMouseTransparent(true);
     }
 }
