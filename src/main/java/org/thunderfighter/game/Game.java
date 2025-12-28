@@ -59,8 +59,6 @@ public class Game {
   private boolean scoreRead = false;
 
   public Game(Stage stage) {
-    // TODO:
-    //  - Enable `canvas` to resize by following the window size change.
     overlay = new UiOverlay(this);
     menu = new UiMenu(this, overlay);
     canvas = new Canvas(800, 900);
