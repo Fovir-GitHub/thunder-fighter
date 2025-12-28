@@ -15,7 +15,6 @@ import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.core.collision.CollisionDetector;
 import org.thunderfighter.core.manager.ScoreManager;
 import org.thunderfighter.game.aircraft.player.PlayerAircraft;
-import org.thunderfighter.game.item.PlayerItemInventory;
 import org.thunderfighter.game.spawn.EnemySpawner;
 import org.thunderfighter.ui.KeyboardController;
 import org.thunderfighter.ui.ScoreBoard;
@@ -35,7 +34,6 @@ public class Game {
   private GraphicsContext graphicsContext;
   private Scene scene;
   private StackPane root;
-  private PlayerItemInventory inventory;
   private KeyboardController keyboardController;
   private UiOverlay overlay;
   private UiMenu menu;
@@ -80,12 +78,10 @@ public class Game {
 
   private void initGame() {
     initEntities();
-    inventory = new PlayerItemInventory();
     enemySpawner = new EnemySpawner(canvas, entities, this);
     scoreBoard = new ScoreBoard(root, playerAircraft);
 
-    // TODO: Add `ClearScreenHandler`.
-    this.keyboardController = new KeyboardController(playerAircraft, inventory, null, this);
+    this.keyboardController = new KeyboardController(playerAircraft, this);
     keyboardController.operation(this.scene);
 
     ScoreManager.getInstance().reset();

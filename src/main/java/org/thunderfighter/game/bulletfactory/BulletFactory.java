@@ -7,11 +7,6 @@ import org.thunderfighter.game.bullet.HomingEnemyBullet;
 import org.thunderfighter.game.bullet.LaserBullet;
 import org.thunderfighter.game.bullet.NormalEnemyBullet;
 import org.thunderfighter.game.bullet.PlayerBullet;
-import org.thunderfighter.game.item.ClearItemBullet;
-import org.thunderfighter.game.item.ClearScreenHandler;
-import org.thunderfighter.game.item.HealItemBullet;
-import org.thunderfighter.game.item.PowerItemBullet;
-import org.thunderfighter.game.item.ShieldItemBullet;
 import org.thunderfighter.game.trajectory.CurveTrajectory;
 import org.thunderfighter.game.trajectory.HomingTrajectory;
 import org.thunderfighter.game.trajectory.StraightTrajectory;
@@ -106,41 +101,6 @@ public final class BulletFactory {
 
     injectCanvas(canvas, bullet);
     // bullet.setTrajectory(new StraightTrajectory());
-    return bullet;
-  }
-
-  // -------------------------------------------------
-  // Item Bullets
-  // -------------------------------------------------
-  public static HealItemBullet createHealItem(Canvas canvas, double x, double y) {
-    HealItemBullet bullet = new HealItemBullet(x, y);
-    injectCanvas(canvas, bullet);
-    return bullet;
-  }
-
-  public static ShieldItemBullet createShieldItem(
-      Canvas canvas, double x, double y, int invincibleTicks) {
-
-    ShieldItemBullet bullet = new ShieldItemBullet(x, y, invincibleTicks);
-    injectCanvas(canvas, bullet);
-    return bullet;
-  }
-
-  public static PowerItemBullet createPowerItem(
-      Canvas canvas, double x, double y, int buffTicks, int bonusDamage) {
-
-    PowerItemBullet bullet = new PowerItemBullet(x, y, buffTicks, bonusDamage);
-
-    injectCanvas(canvas, bullet);
-    return bullet;
-  }
-
-  public static ClearItemBullet createClearItem(
-      Canvas canvas, double x, double y, ClearScreenHandler handler, int clearWindowTicks) {
-
-    ClearItemBullet bullet = new ClearItemBullet(x, y, handler, clearWindowTicks);
-
-    injectCanvas(canvas, bullet);
     return bullet;
   }
 }

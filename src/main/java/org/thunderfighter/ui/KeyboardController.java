@@ -4,25 +4,15 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import org.thunderfighter.core.abstractor.AbstractPlayerAircraft;
 import org.thunderfighter.game.Game;
-import org.thunderfighter.game.item.ClearScreenHandler;
-import org.thunderfighter.game.item.PlayerItemInventory;
 
 // Keyboard input controller for player aircraft, enable operations based on key presses
 public class KeyboardController {
 
   private AbstractPlayerAircraft player;
-  private final PlayerItemInventory inventory;
-  private final ClearScreenHandler clearScreenHandler;
   private final Game game;
 
-  public KeyboardController(
-      AbstractPlayerAircraft player,
-      PlayerItemInventory inventory,
-      ClearScreenHandler clearScreenHandler,
-      Game game) {
+  public KeyboardController(AbstractPlayerAircraft player, Game game) {
     this.player = player;
-    this.inventory = inventory;
-    this.clearScreenHandler = clearScreenHandler;
     this.game = game;
   } // create a keyboard controller for the player aircraft
 
@@ -50,18 +40,12 @@ public class KeyboardController {
               game.togglePause();
               event.consume();
             }
-            case E -> {
-              if (inventory.hasItem()) {
-                inventory.useHeld(player, clearScreenHandler);
-              }
-            }
             default -> {}
           }
         });
     // When users press the key board, operate the player aircraft
     // W, A, S, D or Arrow Keys to move the aircraft
     // Space to shoot
-    // E to use the item
 
     scene.setOnKeyReleased(
         event -> {
