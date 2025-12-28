@@ -32,7 +32,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     this.x = x;
     this.y = y; // birth coordinates
 
-    this.hp = 50;
+    this.hp = 30;
     this.speed = 1;
     this.score = 3000; // kill reward
 
@@ -71,10 +71,11 @@ public class BossEnemy extends AbstractEnemyAircraft {
   protected void onUpdate(List<AbstractEntity> worldEntities) {
     super.onUpdate(worldEntities);
 
-    if (hp >= 40) {
+    if (hp >= 20) {
       stage = Stage.stage1;
-    } else if (hp >= 20) {
+    } else if (hp >= 10) {
       stage = Stage.stage2;
+      speed = 1.2;
     } else if (hp > 0) {
       stage = Stage.stage3;
       speed = 1.8;
@@ -82,9 +83,9 @@ public class BossEnemy extends AbstractEnemyAircraft {
 
     if (stage != lastStage) {
       switch (stage) {
-        case stage1 -> shootInterval = 120;
+        case stage1 -> shootInterval = 90;
         case stage2 -> shootInterval = 150;
-        case stage3 -> shootInterval = 200;
+        case stage3 -> shootInterval = 120;
       }
 
       shootCooldown = shootInterval;
@@ -137,7 +138,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
             by,
             0,
             2.5,
-            180, // track 3 seconds
+            150, // track 2.5 seconds
             new HomingTrajectory.TargetProvider() {
               @Override
               public double getTargetX() {
@@ -153,7 +154,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
             }));
 
     for (int i = -3; i <= 3; i++) {
-      worldEntities.add(BulletFactory.createEnemyBullet(c, cx, by + 4, i * 0.7, 3.8, i == 0));
+      worldEntities.add(BulletFactory.createEnemyBullet(c, cx, by + 4, i * 0.8, 3.8, i == 0));
     }
   }
 
@@ -174,7 +175,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
             by + 4,
             0,
             2.5,
-            120, // tracking 3 seconds
+            120, // tracking 2 seconds
             new HomingTrajectory.TargetProvider() {
               @Override
               public double getTargetX() {
