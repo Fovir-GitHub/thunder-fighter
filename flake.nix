@@ -23,6 +23,7 @@
         jdkWithFX
         just
         maven
+        pngquant
         python312Packages.img2pdf
       ];
 
