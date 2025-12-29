@@ -13,6 +13,10 @@ import org.thunderfighter.utils.Constant;
 1. PAUSE: resume game
 2. SUCCESS: show victory and offer back to menu button
 3. FAIL: show game over and offer back to menu button
+We can use the showPause, showSuccess, showFail methods to show different overlays.
+When users key in p, we can call showPause to show the pause overlay.
+When users win the game, we can call showSuccess to show the success overlay.
+When users lose the game, we can call showFail to show the fail overlay.
 */
 public class UiOverlay extends AbstractUiMenu {
 
@@ -59,7 +63,7 @@ public class UiOverlay extends AbstractUiMenu {
           hideMenu();
         });
 
-    // Back to menu
+    // Back to menu(valid in SUCCESS and FAIL modes)
     restartButton.setOnAction(
         e -> {
           game.setGameState(Constant.GAME_STATE.MENU);
@@ -131,9 +135,8 @@ public class UiOverlay extends AbstractUiMenu {
         restartButton.setManaged(true);
       }
       default -> {}
-    }
+    }// For different game status, show different overlay
 
-    // Keep the same ordering; only toggle visibility
     this.getChildren()
         .setAll(title, continueButton, restartButton, historyButton, ruleButton, aboutButton);
   }
@@ -143,11 +146,11 @@ public class UiOverlay extends AbstractUiMenu {
     setVisible(true);
     setMouseTransparent(false);
     toFront();
-  }
+  }// Show the menu overlay
 
   @Override
   public void hideMenu() {
     setVisible(false);
     setMouseTransparent(true);
-  }
+  }// Hide the menu overlay
 }
