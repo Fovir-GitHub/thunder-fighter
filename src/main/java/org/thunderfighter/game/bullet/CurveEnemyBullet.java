@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/game/bullet/CurveEnemyBullet.java
+
 package org.thunderfighter.game.bullet;
 
 import java.util.List;

@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/core/manager/ScoreManager.java
+
 package org.thunderfighter.core.manager;
 
 public class ScoreManager {

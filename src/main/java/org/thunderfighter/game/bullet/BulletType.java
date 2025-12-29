@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/game/bullet/BulletType.java
+
 package org.thunderfighter.game.bullet;
 
 /**

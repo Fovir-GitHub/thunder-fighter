@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/ui/UiDialog.java
+
 package org.thunderfighter.ui;
 
 import javafx.scene.control.Alert;

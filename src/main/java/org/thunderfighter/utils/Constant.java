@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/utils/Constant.java
+
 package org.thunderfighter.utils;
 
 /** Constant */

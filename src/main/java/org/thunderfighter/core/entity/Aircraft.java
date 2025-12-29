@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/core/entity/Aircraft.java
+
 package org.thunderfighter.core.entity;
 
 import java.util.List;

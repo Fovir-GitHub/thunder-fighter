@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/core/entity/Bullet.java
+
 package org.thunderfighter.core.entity;
 
 public interface Bullet extends Entity {

@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/game/Game.java
+
 package org.thunderfighter.game;
 
 import java.util.ArrayList;

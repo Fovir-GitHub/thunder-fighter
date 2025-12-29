@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/core/collision/CollisionDetector.java
+
 package org.thunderfighter.core.collision;
 
 import java.util.List;

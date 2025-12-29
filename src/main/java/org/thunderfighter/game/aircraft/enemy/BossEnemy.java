@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/game/aircraft/enemy/BossEnemy.java
+
 package org.thunderfighter.game.aircraft.enemy;
 
 import java.util.List;

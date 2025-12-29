@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/ui/UiMenu.java
+
 package org.thunderfighter.ui;
 
 import javafx.geometry.Pos;

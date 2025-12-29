@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/ui/KeyboardController.java
+
 package org.thunderfighter.ui;
 
 import javafx.scene.Scene;

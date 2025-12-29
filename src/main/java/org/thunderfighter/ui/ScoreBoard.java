@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/ui/ScoreBoard.java
+
 package org.thunderfighter.ui;
 
 import javafx.geometry.Insets;

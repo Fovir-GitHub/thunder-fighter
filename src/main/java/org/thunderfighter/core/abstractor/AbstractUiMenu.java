@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/core/abstractor/AbstractUiMenu.java
+
 package org.thunderfighter.core.abstractor;
 
 import javafx.scene.layout.VBox;

@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/ui/UiScoreStorage.java
+
 package org.thunderfighter.ui;
 
 import java.io.IOException;

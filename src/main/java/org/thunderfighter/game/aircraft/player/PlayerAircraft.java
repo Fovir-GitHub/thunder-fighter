@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/game/aircraft/player/PlayerAircraft.java
+
 package org.thunderfighter.game.aircraft.player;
 
 import java.util.List;

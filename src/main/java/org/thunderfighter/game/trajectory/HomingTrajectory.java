@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/game/trajectory/HomingTrajectory.java
+
 package org.thunderfighter.game.trajectory;
 
 import org.thunderfighter.core.abstractor.AbstractBullet;

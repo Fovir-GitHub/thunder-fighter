@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/game/bulletfactory/BulletFactory.java
+
 package org.thunderfighter.game.bulletfactory;
 
 import javafx.scene.canvas.Canvas;

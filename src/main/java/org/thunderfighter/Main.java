@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/Main.java
+
 package org.thunderfighter;
 
 import javafx.application.Application;

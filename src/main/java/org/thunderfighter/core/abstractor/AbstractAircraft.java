@@ -1,3 +1,5 @@
+// src/main/java/org/thunderfighter/core/abstractor/AbstractAircraft.java
+
 package org.thunderfighter.core.abstractor;
 
 import java.util.List;
