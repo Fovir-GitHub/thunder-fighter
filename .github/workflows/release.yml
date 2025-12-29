@@ -50,6 +50,7 @@ jobs:
             ```bash
             java -jar ./thunder-fighter-${{ steps.version.outputs.VERSION }}.jar
             ```
+
   release-windows:
     runs-on: windows-latest
     steps:
@@ -93,7 +94,8 @@ jobs:
                    --app-version ${{ steps.version.outputs.VERSION }} \
                    --vendor "Thunder Fighter" \
                    --win-menu \
-                   --win-shortcut
+                   --win-shortcut \
+                   --icon icon.ico
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
