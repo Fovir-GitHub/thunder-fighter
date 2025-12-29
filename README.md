@@ -14,6 +14,7 @@ To install the game, please follow the guide on [Latest Release Page](https://gi
 ./
 ├── .github/
 │   └── workflows/
+├── config/
 ├── src/
 │   └── main/
 │       ├── java/
@@ -37,12 +38,11 @@ To install the game, please follow the guide on [Latest Release Page](https://gi
 │       │           ├── utils/
 │       │           └── Main.java
 │       └── resources/
-│           ├── config/
-│           ├── images/
-│           │   ├── Aircraft/
-│           │   ├── Background/
-│           │   └── Bullet/
-│           └── sounds/
+│           └── images/
+│               ├── Aircraft/
+│               ├── Background/
+│               └── Bullet/
+├── .editorconfig
 ├── .editorconfig
 ├── .envrc
 ├── .gitattribute
