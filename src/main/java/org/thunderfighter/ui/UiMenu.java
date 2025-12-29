@@ -8,6 +8,12 @@ import org.thunderfighter.core.abstractor.AbstractUiMenu;
 import org.thunderfighter.game.Game;
 import org.thunderfighter.utils.Constant;
 
+/*
+1. UiMenu class is responsible for the main menu of the Thunder Fighter game.
+2. This class extends AbstractUiMenu to implement the main menu UI.
+3. In this class, we define buttons for starting the game, viewing history scores, about information, and game rules.
+4. Therefore, we can reuse this class to create and manage the main menu of the game
+*/
 public class UiMenu extends AbstractUiMenu {
   // The element of the main menu
   public final Text title = new Text("Thunder Fighter");
@@ -18,11 +24,11 @@ public class UiMenu extends AbstractUiMenu {
 
   // Initialize the main menu
   public UiMenu(Game game, UiOverlay overlay) {
-    this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    this.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);// make the menu cover the whole window
     this.setPickOnBounds(true);
 
     this.setAlignment(Pos.CENTER);
-    this.setSpacing(20);
+    this.setSpacing(20);// set the spacing between elements in the menu
 
     String imagePath = getClass().getResource("/images/Background/log_in_bg.png").toExternalForm();
     this.setStyle(
@@ -31,7 +37,7 @@ public class UiMenu extends AbstractUiMenu {
             + "');"
             + "-fx-background-size: cover;"
             + "-fx-background-position: center;"
-            + "-fx-background-repeat: no-repeat;");
+            + "-fx-background-repeat: no-repeat;");// add background image to the menu
 
     this.title.setFont(Font.font(30));
 
@@ -39,9 +45,9 @@ public class UiMenu extends AbstractUiMenu {
     createButton(historyButton);
     createButton(ruleButton);
     createButton(aboutButton);
-
+    // Add all elements to the menu
     this.getChildren().setAll(title, startButton, historyButton, ruleButton, aboutButton);
-    // set the elements in the menu
+
 
     showMenu(); // show the menu
 
