@@ -13,6 +13,7 @@ To install the game, please follow the guide on [Latest Release Page](https://gi
 ```text
 ./
 ├── .github/
+│   └── workflows/
 ├── src/
 │   └── main/
 │       ├── java/
@@ -29,7 +30,6 @@ To install the game, please follow the guide on [Latest Release Page](https://gi
 │       │           │   │   └── player/
 │       │           │   ├── bullet/
 │       │           │   ├── bulletfactory/
-│       │           │   ├── item/
 │       │           │   ├── spawn/
 │       │           │   ├── trajectory/
 │       │           │   └── Game.java
@@ -41,8 +41,7 @@ To install the game, please follow the guide on [Latest Release Page](https://gi
 │           ├── images/
 │           │   ├── Aircraft/
 │           │   ├── Background/
-│           │   ├── Bullet/
-│           │   └── Item/
+│           │   └── Bullet/
 │           └── sounds/
 ├── .editorconfig
 ├── .envrc
@@ -50,7 +49,9 @@ To install the game, please follow the guide on [Latest Release Page](https://gi
 ├── .gitignore
 ├── flake.lock
 ├── flake.nix
+├── icon.ico
 ├── Justfile
+├── LICENSE
 ├── pom.xml
 └── README.md
 ```
@@ -76,3 +77,9 @@ mvn javafx:run
 
 Or run via your IDE by setting Main.java as the main class
 ```
+
+## Acknowledgement
+
+- [JavaFX](https://github.com/openjdk/jfx): Open source, next generation client application platform for desktop, mobile and embedded systems based on `JavaSE`.
+- [xychenger/Thunder-fighter](https://github.com/xychenger/Thunder-fighter): Provide image resources.
+- [tomskarning/thunder-strike-fighter](https://github.com/tomskarning/thunder-strike-fighter): Provide the application icon.
