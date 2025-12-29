@@ -18,16 +18,16 @@ public class CollisionDetector {
    *
    * @param entities List of entities.
    */
-  public static void detectCollision(List<AbstractEntity> entities) {
-    int n = entities.size();
+  public static void detectCollision(final List<AbstractEntity> entities) {
+    final int n = entities.size();
     for (int i = 0; i < n; i++) {
-      AbstractEntity a = entities.get(i);
+      final AbstractEntity a = entities.get(i);
       if (!a.isAlive()) {
         continue;
       }
 
       for (int j = i + 1; j < n; j++) {
-        AbstractEntity b = entities.get(j);
+        final AbstractEntity b = entities.get(j);
         if (!b.isAlive()) {
           continue;
         }
@@ -47,7 +47,7 @@ public class CollisionDetector {
    * @param b Another entity
    * @return Return `true` if collision happens. Otherwise, it will return `false`.
    */
-  private static boolean isCollision(AbstractEntity a, AbstractEntity b) {
+  private static boolean isCollision(final AbstractEntity a, final AbstractEntity b) {
     // Collision won't happen between bullets and enemies.
     if ((a instanceof Bullet && b instanceof Bullet)
         || (a instanceof AbstractEnemyAircraft && b instanceof AbstractEnemyAircraft)) {
@@ -55,8 +55,8 @@ public class CollisionDetector {
     }
 
     // Avoid `null` value raising exceptions.
-    Bounds b1 = a.getCollisionBounds();
-    Bounds b2 = b.getCollisionBounds();
+    final Bounds b1 = a.getCollisionBounds();
+    final Bounds b2 = b.getCollisionBounds();
     if (b1 != null && b2 != null) {
       return b1.intersects(b2);
     }
@@ -75,7 +75,7 @@ public class CollisionDetector {
    * @param a An entity.
    * @param b Another entity.
    */
-  private static void handleCollision(AbstractEntity a, AbstractEntity b) {
+  private static void handleCollision(final AbstractEntity a, final AbstractEntity b) {
     if (a instanceof AbstractAircraft && b instanceof AbstractAircraft) {
       handleAircraftCollision((AbstractAircraft) a, (AbstractAircraft) b);
     } else {
@@ -93,7 +93,7 @@ public class CollisionDetector {
    * @param a An {@link AbstractAircraft}.
    * @param b Another {@link AbstractAircraft}.
    */
-  private static void handleAircraftCollision(AbstractAircraft a, AbstractAircraft b) {
+  private static void handleAircraftCollision(final AbstractAircraft a, final AbstractAircraft b) {
     if (!(a instanceof BossEnemy || b instanceof BossEnemy)) {
       a.takeDamage(1);
       b.takeDamage(1);
@@ -119,7 +119,8 @@ public class CollisionDetector {
    * @param b Another {@link AbstractEntity} which can be either {@link AbstractAircraft} or {@link
    *     AbstractBullet}.
    */
-  private static void handleAircraftBulletCollision(AbstractEntity a, AbstractEntity b) {
+  private static void handleAircraftBulletCollision(
+      final AbstractEntity a, final AbstractEntity b) {
     AbstractAircraft aircraft;
     AbstractBullet bullet;
     if (a instanceof AbstractAircraft) {

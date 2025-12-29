@@ -16,7 +16,7 @@ public class AppDataDirectory {
    * @return App data directory on different operating systems.
    */
   public static Path getAppDataDirectory() {
-    String os = System.getProperty("os.name").toLowerCase();
+    final String os = System.getProperty("os.name").toLowerCase();
     Path appDir;
 
     if (os.contains("win")) {
@@ -41,10 +41,10 @@ public class AppDataDirectory {
    * @return The path of data directory.
    */
   public static Path ensureAppDataDirectory() {
-    Path dir = getAppDataDirectory();
+    final Path dir = getAppDataDirectory();
     try {
       Files.createDirectory(dir);
-    } catch (IOException e) {
+    } catch (final IOException e) {
       e.printStackTrace();
     }
     return dir;
@@ -55,12 +55,12 @@ public class AppDataDirectory {
    *
    * @param fileName The name of data file.
    */
-  public static void createFile(String fileName) {
-    Path dir = ensureAppDataDirectory();
-    Path file = dir.resolve(fileName);
+  public static void createFile(final String fileName) {
+    final Path dir = ensureAppDataDirectory();
+    final Path file = dir.resolve(fileName);
     try {
       Files.writeString(file, "");
-    } catch (IOException e) {
+    } catch (final IOException e) {
       e.printStackTrace();
     }
   }
