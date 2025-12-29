@@ -12,18 +12,12 @@ import java.util.List;
 import java.util.Scanner;
 import org.thunderfighter.utils.AppDataDirectory;
 
-/**
- * UiScoreStorage class is responsible for storing and showing history scores in Thunder Fighter.
- *
- * <ol>
- *   <li>This class provides methods to add new scores, retrieve formatted scores, and show score
- *       dialogs.
- *   <li>In this class, we define methods readFromFile to read scores from a file, and writeToFile
- *       to write scores to a file.
- *   <li>Therefore, we can reuse this class to handle score storage and show history scores in the
- *       game.
- * </ol>
- */
+/*
+UiScoreStorage class is responsible for storing and showing history scores in Thunder Fighter.
+This class provides methods to add new scores, retrieve formatted scores, and show score dialogs.
+In this class, we define methods readFromFile to read scores from a file, and writeToFile to write scores to a file.
+Therefore, we can reuse this class to handle score storage and show history scores in the game.
+*/
 public class UiScoreStorage {
   private static final List<Integer> scores = new ArrayList<>();
   private static final String fileName = "score.txt";
