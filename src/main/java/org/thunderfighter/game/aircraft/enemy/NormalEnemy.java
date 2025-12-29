@@ -8,13 +8,7 @@ import javafx.scene.image.Image;
 import org.thunderfighter.core.abstractor.AbstractEnemyAircraft;
 import org.thunderfighter.core.abstractor.AbstractEntity;
 
-/**
- * Normal Enemy
- * Characteristics:
- * - Lowest Health
- * - Only moves vertically downwards
- * - Cannot fire
- */
+/** Normal Enemy Characteristics: - Lowest Health - Only moves vertically downwards - Cannot fire */
 public class NormalEnemy extends AbstractEnemyAircraft {
 
   /** Typical enemy aircraft dimensions (width 50, height 60) */
@@ -39,28 +33,19 @@ public class NormalEnemy extends AbstractEnemyAircraft {
     this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/NormalEnemy.png"));
   }
 
-  /**
-   * Update logic per frame
-   * Currently only performing basic updates for the parent class
-   */
+  /** Update logic per frame Currently only performing basic updates for the parent class */
   @Override
   protected void onUpdate(List<AbstractEntity> worldEntities) {
     super.onUpdate(worldEntities);
   }
 
-  /**
-   * Movement logic
-   * Normal enemy aircraft always move vertically downwards
-   */
+  /** Movement logic Normal enemy aircraft always move vertically downwards */
   @Override
   protected void move() {
     y += speed;
   }
 
-  /**
-   * Firing logic
-   * Ordinary enemy aircraft do not have firing capabilities
-   */
+  /** Firing logic Ordinary enemy aircraft do not have firing capabilities */
   @Override
   protected void doShoot(List<AbstractEntity> worldEntities) {
     // Normal enemy does not shoot

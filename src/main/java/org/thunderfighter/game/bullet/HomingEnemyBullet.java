@@ -14,11 +14,11 @@ import org.thunderfighter.game.trajectory.HomingTrajectory;
 /**
  * HomingEnemyBullet
  *
- * Enemy bullet that tracks the player for a limited duration.
+ * <p>Enemy bullet that tracks the player for a limited duration.
  *
- * The bullet gradually adjusts its direction using a homing trajectory,
- * making it slower and more predictable than instant-lock bullets.
- * This design provides pressure without being unfair to the player.
+ * <p>The bullet gradually adjusts its direction using a homing trajectory, making it slower and
+ * more predictable than instant-lock bullets. This design provides pressure without being unfair to
+ * the player.
  */
 public class HomingEnemyBullet extends AbstractBullet {
 
@@ -77,8 +77,7 @@ public class HomingEnemyBullet extends AbstractBullet {
   /**
    * Updates bullet state for one game tick.
    *
-   * Decreases remaining tracking time and removes the bullet
-   * once the tracking duration expires.
+   * <p>Decreases remaining tracking time and removes the bullet once the tracking duration expires.
    */
   @Override
   public void update(List<AbstractEntity> worldEntities) {
@@ -98,7 +97,7 @@ public class HomingEnemyBullet extends AbstractBullet {
   /**
    * Called when this bullet collides with an aircraft.
    *
-   * Applies damage and destroys the bullet.
+   * <p>Applies damage and destroys the bullet.
    */
   @Override
   public void onHit(Aircraft target) {
@@ -106,9 +105,7 @@ public class HomingEnemyBullet extends AbstractBullet {
     aliveFlag = false;
   }
 
-  /**
-   * Renders the bullet sprite to the canvas.
-   */
+  /** Renders the bullet sprite to the canvas. */
   @Override
   public void draw(GraphicsContext gc) {
     if (!aliveFlag) return;

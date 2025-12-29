@@ -14,9 +14,8 @@ import org.thunderfighter.game.trajectory.HomingTrajectory;
 import org.thunderfighter.utils.Constant;
 
 /**
- * Boss Enemy
- * Boss-level enemy
- * Has multi-stage behavior; its attack patterns and movement speed change based on its health.
+ * Boss Enemy Boss-level enemy Has multi-stage behavior; its attack patterns and movement speed
+ * change based on its health.
  */
 public class BossEnemy extends AbstractEnemyAircraft {
 
@@ -36,10 +35,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
   private Game game;
 
   /**
-   * Boss's three phases
-   * Stage 1: High health
-   * Stage 2: Medium health
-   * Stage 3: Low health (Enrage)
+   * Boss's three phases Stage 1: High health Stage 2: Medium health Stage 3: Low health (Enrage)
    */
   private enum Stage {
     stage1,
@@ -76,10 +72,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     this.game = game;
   }
 
-  /**
-   * Boss's movement logic
-   * Moves back and forth between the center of the screen
-   */
+  /** Boss's movement logic Moves back and forth between the center of the screen */
   @Override
   protected void move() {
     double LEFT_BOUND = SCREEN_WIDTH * 0.25;
@@ -94,10 +87,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     }
   }
 
-  /**
-   * Triggered when the Boss dies
-   * Game state switches to victory
-   */
+  /** Triggered when the Boss dies Game state switches to victory */
   @Override
   protected void onDie() {
     super.onDie();
@@ -105,8 +95,8 @@ public class BossEnemy extends AbstractEnemyAircraft {
   }
 
   /**
-   * Update Boss status every frame
-   * Switch phases based on health, and adjust speed and firing rate accordingly
+   * Update Boss status every frame Switch phases based on health, and adjust speed and firing rate
+   * accordingly
    */
   @Override
   protected void onUpdate(List<AbstractEntity> worldEntities) {
@@ -134,10 +124,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     }
   }
 
-  /**
-   * Boss Shooting Entry
-   * Activate different shooting modes based on the current stage
-   */
+  /** Boss Shooting Entry Activate different shooting modes based on the current stage */
   @Override
   protected void doShoot(List<AbstractEntity> worldEntities) {
     switch (stage) {
@@ -154,9 +141,8 @@ public class BossEnemy extends AbstractEnemyAircraft {
   }
 
   /**
-   * First stage firing method
-   * - Three straight-line bullets in a scattering pattern
-   * - Two curved bullets
+   * First stage firing method - Three straight-line bullets in a scattering pattern - Two curved
+   * bullets
    */
   private void shootStage1(List<AbstractEntity> worldEntities) {
     Canvas c = getCanvas();
@@ -174,11 +160,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
     worldEntities.add(BulletFactory.createCurvedEnemyBullet(c, cx - 40, by, -1.2, 3.0, -0.05));
   }
 
-  /**
-   * Second stage firing method
-   * - 1 homing bullet
-   * - 7 fan-shaped straight bullets
-   */
+  /** Second stage firing method - 1 homing bullet - 7 fan-shaped straight bullets */
   private void shootStage2(List<AbstractEntity> worldEntities) {
     Canvas c = getCanvas();
     if (c == null) return;
@@ -214,10 +196,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
   }
 
   /**
-   * Third stage firing mode (Berserk)
-   * - Laser
-   * - Homing projectile
-   * - High-speed linear projectile
+   * Third stage firing mode (Berserk) - Laser - Homing projectile - High-speed linear projectile
    */
   private void shootStage3(List<AbstractEntity> worldEntities) {
     Canvas c = getCanvas();

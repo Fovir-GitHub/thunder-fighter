@@ -8,24 +8,25 @@ import org.thunderfighter.core.entity.Trajectory;
 /**
  * HomingTrajectory
  *
- * Implements a homing movement that gradually rotates the bullet's
- * velocity vector toward a moving target.
+ * <p>Implements a homing movement that gradually rotates the bullet's velocity vector toward a
+ * moving target.
  *
- * This produces smooth tracking behavior instead of instant turning,
- * which feels more natural and fair in gameplay.
+ * <p>This produces smooth tracking behavior instead of instant turning, which feels more natural
+ * and fair in gameplay.
  *
- * turnStrength recommended range: 0.05 ~ 0.20
+ * <p>turnStrength recommended range: 0.05 ~ 0.20
  */
 public class HomingTrajectory implements Trajectory {
 
   /**
    * TargetProvider
    *
-   * Supplies real-time target coordinates, typically the player.
-   * This abstraction avoids direct dependency on player classes.
+   * <p>Supplies real-time target coordinates, typically the player. This abstraction avoids direct
+   * dependency on player classes.
    */
   public interface TargetProvider {
     double getTargetX();
+
     double getTargetY();
   }
 

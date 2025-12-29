@@ -11,12 +11,8 @@ import org.thunderfighter.game.aircraft.enemy.*;
 import org.thunderfighter.utils.Constant;
 
 /**
- * Enemy Generator
- * Responsible for:
- * - Normal Enemy Generator (NormalEnemy)
- * - Elite Enemy Generator (EliteEnemy)
- * - Boss Generator (BossEnemy)
- * Uses cooldown (CD) to control the generation frequency
+ * Enemy Generator Responsible for: - Normal Enemy Generator (NormalEnemy) - Elite Enemy Generator
+ * (EliteEnemy) - Boss Generator (BossEnemy) Uses cooldown (CD) to control the generation frequency
  */
 public class EnemySpawner {
 
@@ -50,10 +46,7 @@ public class EnemySpawner {
     this.entities = entities;
   }
 
-  /**
-   * Resets the generator state
-   * Usually called when restarting the game
-   */
+  /** Resets the generator state Usually called when restarting the game */
   public void reset() {
     normalCd = eliteCd = 0;
     boss = null;
@@ -96,8 +89,7 @@ public class EnemySpawner {
   }
 
   /**
-   * Generate a Boss
-   * Only one Boss is allowed at a time
+   * Generate a Boss Only one Boss is allowed at a time
    *
    * @param game Game object (used for Boss state control)
    * @return Whether the Boss was successfully generated
@@ -115,8 +107,7 @@ public class EnemySpawner {
   }
 
   /**
-   * Generate random X coordinates
-   * Ensure enemy aircraft do not exceed the right side of the canvas
+   * Generate random X coordinates Ensure enemy aircraft do not exceed the right side of the canvas
    */
   private double randomX() {
     return rng.nextDouble() * (canvas.getWidth() - 60);

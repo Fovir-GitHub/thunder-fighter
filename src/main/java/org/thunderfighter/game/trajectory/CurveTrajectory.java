@@ -8,11 +8,11 @@ import org.thunderfighter.core.entity.Trajectory;
 /**
  * CurveTrajectory
  *
- * Implements a curved (arc-like) bullet movement by applying
- * a perpendicular acceleration and gravity-like downward force.
+ * <p>Implements a curved (arc-like) bullet movement by applying a perpendicular acceleration and
+ * gravity-like downward force.
  *
- * This trajectory is commonly used for arcing bullets,
- * falling projectiles, or stylized enemy patterns.
+ * <p>This trajectory is commonly used for arcing bullets, falling projectiles, or stylized enemy
+ * patterns.
  */
 public class CurveTrajectory implements Trajectory {
 

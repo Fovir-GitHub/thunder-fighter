@@ -14,11 +14,10 @@ import org.thunderfighter.game.trajectory.CurveTrajectory;
 /**
  * CurveEnemyBullet
  *
- * Enemy bullet that follows a curved trajectory.
+ * <p>Enemy bullet that follows a curved trajectory.
  *
- * This type of bullet is typically used for area control,
- * forcing the player to reposition rather than dodge straight lines.
- * The curvature behavior is determined by the curveFactor.
+ * <p>This type of bullet is typically used for area control, forcing the player to reposition
+ * rather than dodge straight lines. The curvature behavior is determined by the curveFactor.
  */
 public class CurveEnemyBullet extends AbstractBullet {
 
@@ -65,7 +64,7 @@ public class CurveEnemyBullet extends AbstractBullet {
   /**
    * Updates bullet state for one game tick.
    *
-   * Handles movement, lifetime ticking, and boundary checks.
+   * <p>Handles movement, lifetime ticking, and boundary checks.
    */
   @Override
   public void update(List<AbstractEntity> worldEntities) {
@@ -79,7 +78,7 @@ public class CurveEnemyBullet extends AbstractBullet {
   /**
    * Called when this bullet collides with an aircraft.
    *
-   * Applies damage and destroys the bullet.
+   * <p>Applies damage and destroys the bullet.
    */
   @Override
   public void onHit(Aircraft target) {
@@ -87,9 +86,7 @@ public class CurveEnemyBullet extends AbstractBullet {
     aliveFlag = false;
   }
 
-  /**
-   * Renders the bullet sprite to the canvas.
-   */
+  /** Renders the bullet sprite to the canvas. */
   @Override
   public void draw(GraphicsContext gc) {
     if (!aliveFlag) return;

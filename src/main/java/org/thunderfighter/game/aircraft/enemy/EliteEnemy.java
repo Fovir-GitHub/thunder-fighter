@@ -10,12 +10,8 @@ import org.thunderfighter.core.abstractor.AbstractEntity;
 import org.thunderfighter.game.bullet.NormalEnemyBullet;
 
 /**
- * EliteEnemy
- * Elite Enemy Plane
- * Characteristics:
- * - Low Health
- * - Moves vertically downwards in a straight line
- * - Periodically fires single, linear bullets
+ * EliteEnemy Elite Enemy Plane Characteristics: - Low Health - Moves vertically downwards in a
+ * straight line - Periodically fires single, linear bullets
  */
 public class EliteEnemy extends AbstractEnemyAircraft {
 
@@ -42,28 +38,19 @@ public class EliteEnemy extends AbstractEnemyAircraft {
     this.sprite = new Image(getClass().getResourceAsStream("/images/Aircraft/EliteEnemy.png"));
   }
 
-  /**
-   * Update logic per frame
-   * Currently only calling parent class logic
-   */
+  /** Update logic per frame Currently only calling parent class logic */
   @Override
   protected void onUpdate(List<AbstractEntity> worldEntities) {
     super.onUpdate(worldEntities);
   }
 
-  /**
-   * Movement logic
-   * Elite enemy aircraft only move vertically downwards
-   */
+  /** Movement logic Elite enemy aircraft only move vertically downwards */
   @Override
   protected void move() {
     y += speed;
   }
 
-  /**
-   * Shooting logic
-   * Fire a standard enemy bullet directly downwards
-   */
+  /** Shooting logic Fire a standard enemy bullet directly downwards */
   @Override
   protected void doShoot(List<AbstractEntity> worldEntities) {
     NormalEnemyBullet bullet =

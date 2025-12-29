@@ -13,12 +13,9 @@ import org.thunderfighter.game.bullet.PlayerBullet;
 import org.thunderfighter.utils.Constant.GAME_STATE;
 
 /**
- * Player-controlled aircraft
- * Features:
- * - Supports movement up, down, left, and right
- * - Diagonal movement undergoes vector normalization to ensure consistent speed
- * - Can fire at player targets
- * - Has damage cooldown
+ * Player-controlled aircraft Features: - Supports movement up, down, left, and right - Diagonal
+ * movement undergoes vector normalization to ensure consistent speed - Can fire at player targets -
+ * Has damage cooldown
  */
 public class PlayerAircraft extends AbstractPlayerAircraft {
 
@@ -57,10 +54,9 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
   }
 
   /**
-   * Player movement logic
-   * - Calculate the movement vector based on the arrow key state
-   * - Normalize the vector for diagonal movement to prevent it from being faster
-   * - Detect boundaries to prevent players from flying off-screen
+   * Player movement logic - Calculate the movement vector based on the arrow key state - Normalize
+   * the vector for diagonal movement to prevent it from being faster - Detect boundaries to prevent
+   * players from flying off-screen
    */
   @Override
   protected void move() {
@@ -102,10 +98,7 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
     this.y = tempY;
   } // to prevent the aircraft from traveling faster at an angle than straight.
 
-  /**
-   * Player shooting logic
-   * Fire a player bullet directly above the plane
-   */
+  /** Player shooting logic Fire a player bullet directly above the plane */
   @Override
   protected void doShoot(List<AbstractEntity> worldEntities) {
     PlayerBullet bullet = new PlayerBullet(x + size.getWidth() / 2 - 4, y - 10); // @params
@@ -114,9 +107,8 @@ public class PlayerAircraft extends AbstractPlayerAircraft {
   }
 
   /**
-   * Player damage logic
-   * - There is a cooldown period for taking damage (invincibility frames)
-   * - Game ends when health reaches zero
+   * Player damage logic - There is a cooldown period for taking damage (invincibility frames) -
+   * Game ends when health reaches zero
    */
   @Override
   public void takeDamage(int amount) {
