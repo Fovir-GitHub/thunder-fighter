@@ -47,10 +47,17 @@ public class UiDialog extends AbstractUiDialog {
 
   public static void showRuleDialog() {
     showInfoDialog(
-        "Game Rule",
-        "1. Use arrow keys or WASD to move the fighter.\n"
-            + "2. Press space to shoot.\n"
-            + "3. Avoid enemy fire and obstacles.\n"
-            + "4. Score points by destroying enemies.\n");
-  } // show game rule dialog in dialog
+      "Game Rule",
+      "1. Use arrow keys or WASD to move the fighter.\n"
+          + "2. Press space to shoot.\n"
+          + "3. Avoid enemy fire and obstacles.\n"
+          + "4. Score points by destroying enemies.\n"
+          + "5. When the score comes to 100, you will meet elite enemy.\n"
+          + "6. The Boss will appear when the score reaches 500.\n"
+          + "7. Boss has three stages:\n"
+          + "in first stage, it shoots less frequently;\n"
+          + "in second stage, it shoots the homing bullet;\n"
+          + "in third stage, it releases fatal laser.\n"
+          + "8. Defeat the Boss to win the game!");
+  } // show game rule dialog
 }
