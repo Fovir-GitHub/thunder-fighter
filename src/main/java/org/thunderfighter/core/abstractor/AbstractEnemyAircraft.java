@@ -55,6 +55,26 @@ public abstract class AbstractEnemyAircraft extends AbstractAircraft {
   }
 
   /**
+   * Check whether the enemy moving out of the map.
+   *
+   * <p>If it is out of the map, it is not alive.
+   *
+   * <p>Since the enemy is only generated within the width of {@code canvas}, so the {@code x} is
+   * always inside the range.
+   *
+   * <p>However, the enemy is generated above the {@code canvas}, so the upper boundary can be
+   * skipped to check.
+   *
+   * <p>In this case, this function only checks whether the {@code y} is greater than the height of
+   * {@code canvas}.
+   */
+  private final void checkBoundary() {
+    if (this.y >= canvas.getHeight()) {
+      this.aliveFlag = false;
+    }
+  }
+
+  /**
    * Per-frame update logic (enemy aircraft only)
    *
    * <p>Responsible for:
@@ -70,6 +90,7 @@ public abstract class AbstractEnemyAircraft extends AbstractAircraft {
   protected void onUpdate(List<AbstractEntity> worldEntities) {
     if (shootCooldown > 0) shootCooldown--;
     shoot(worldEntities);
+    checkBoundary();
   }
 
   /**
