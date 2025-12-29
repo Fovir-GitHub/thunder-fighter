@@ -3,6 +3,14 @@ package org.thunderfighter.ui;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
+/*
+Manages the main scene, including menu and overlay
+1. UiSceneManager class is responsible for managing the scene of the Thunder Fighter game.
+2. This class contains a StackPane as the root layout, which holds both the main menu and the overlay.
+3. In this class, we define methods to toggle the overlay visibility, show and hide the menu and overlay.
+4. Therefore, we can reuse this class to manage the main scene of the game by using the methods provided.
+*/
+
 // Manages the main scene, including menu and overlay
 public class UiSceneManager {
   private final StackPane root = new StackPane();
