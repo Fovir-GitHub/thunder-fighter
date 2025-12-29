@@ -18,12 +18,12 @@
     devShells.${system}.default = pkgs.mkShell {
       # Add packages here.
       buildInputs = with pkgs; [
-        python312Packages.img2pdf
         charm-freeze
         google-java-format
         jdkWithFX
         just
         maven
+        python312Packages.img2pdf
       ];
 
       shellHook = ''
