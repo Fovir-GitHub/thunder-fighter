@@ -4,13 +4,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import org.thunderfighter.core.abstractor.AbstractUiDialog;
 
-/*
-1. UiDialog class for displaying various dialogs in the Thunder Fighter game.
-2. This class will be used in UiScoreStorage, UiMenu and etc. to show dialogs.
-3. In this class, we define methods to show information dialogs, about dialog, and game rule dialog.
-4. Therefore, we can reuse this class to show different types of dialogs 
-   by using the methods showInfoDialog, showAboutDialog, and showRuleDialog.
-*/
+/**
+ * UiDialog class for displaying various dialogs in the Thunder Fighter game.
+ *
+ * <ol>
+ *   <li>This class will be used in UiScoreStorage, UiMenu and etc. to show dialogs.
+ *   <li>In this class, we define methods to show information dialogs, about dialog, and game rule
+ *       dialog.
+ *   <li>Therefore, we can reuse this class to show different types of dialogs by using the methods
+ *       showInfoDialog, showAboutDialog, and showRuleDialog.
+ * </ol>
+ */
 public class UiDialog extends AbstractUiDialog {
   private final Alert alert;
 
@@ -37,7 +41,7 @@ public class UiDialog extends AbstractUiDialog {
 
   public static void showAboutDialog() {
     showInfoDialog("About", "Thunder Fighter © 2025\nAll rights reserved.");
-  }// show the copyright in dialog
+  } // show the copyright in dialog
 
   public static void showRuleDialog() {
     showInfoDialog(
@@ -48,4 +52,3 @@ public class UiDialog extends AbstractUiDialog {
             + "4. Score points by destroying enemies.\n");
   } // show game rule dialog in dialog
 }
-

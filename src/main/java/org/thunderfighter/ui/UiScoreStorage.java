@@ -10,14 +10,18 @@ import java.util.List;
 import java.util.Scanner;
 import org.thunderfighter.utils.AppDataDirectory;
 
-/*
-1. UiScoreStorage class is responsible for storing and showing history scores in Thunder Fighter.
-2. This class provides methods to add new scores, retrieve formatted scores, and show score dialogs.
-3. In this class, we define methods readFromFile to read scores from a file, 
-   and writeToFile to write scores to a file.
-4. Therefore, we can reuse this class to handle score storage and show history scores in the game.
-*/  
-
+/**
+ * UiScoreStorage class is responsible for storing and showing history scores in Thunder Fighter.
+ *
+ * <ol>
+ *   <li>This class provides methods to add new scores, retrieve formatted scores, and show score
+ *       dialogs.
+ *   <li>In this class, we define methods readFromFile to read scores from a file, and writeToFile
+ *       to write scores to a file.
+ *   <li>Therefore, we can reuse this class to handle score storage and show history scores in the
+ *       game.
+ * </ol>
+ */
 public class UiScoreStorage {
   private static final List<Integer> scores = new ArrayList<>();
   private static final String fileName = "score.txt";
@@ -63,7 +67,7 @@ public class UiScoreStorage {
   public static void readFromFile() {
     if (!Files.exists(dataFile)) {
       return;
-    }// if the file does not exist, return
+    } // if the file does not exist, return
 
     try {
       Scanner scanner = new Scanner(dataFile);
@@ -77,12 +81,12 @@ public class UiScoreStorage {
     } catch (IOException e) {
       e.printStackTrace();
     }
-  }// Read scores from the file and store them in the score list
+  } // Read scores from the file and store them in the score list
 
   public static void writeToFile() {
     if (!Files.exists(dataFile)) {
       AppDataDirectory.createFile(fileName);
-    }// if the file does not exist, create it
+    } // if the file does not exist, create it
 
     try {
       PrintWriter printWriter = new PrintWriter(dataFile.toString());
@@ -93,6 +97,6 @@ public class UiScoreStorage {
       printWriter.close();
     } catch (IOException e) {
       e.printStackTrace();
-    }// Write scores from the score list to the file
+    } // Write scores from the score list to the file
   }
 }

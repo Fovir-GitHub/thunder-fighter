@@ -8,16 +8,21 @@ import org.thunderfighter.core.abstractor.AbstractUiMenu;
 import org.thunderfighter.game.Game;
 import org.thunderfighter.utils.Constant;
 
-/*
- Create 3 modes:
-1. PAUSE: resume game
-2. SUCCESS: show victory and offer back to menu button
-3. FAIL: show game over and offer back to menu button
-We can use the showPause, showSuccess, showFail methods to show different overlays.
-When users key in p, we can call showPause to show the pause overlay.
-When users win the game, we can call showSuccess to show the success overlay.
-When users lose the game, we can call showFail to show the fail overlay.
-*/
+/**
+ *
+ *
+ * <ol>
+ *   Create 3 modes:
+ *   <li>PAUSE: resume game
+ *   <li>SUCCESS: show victory and offer back to menu button
+ *   <li>FAIL: show game over and offer back to menu button
+ * </ol>
+ *
+ * We can use the showPause, showSuccess, showFail methods to show different overlays. When users
+ * key in p, we can call showPause to show the pause overlay. When users win the game, we can call
+ * showSuccess to show the success overlay. When users lose the game, we can call showFail to show
+ * the fail overlay.
+ */
 public class UiOverlay extends AbstractUiMenu {
 
   /** Overlay modes, deciding title text and visible buttons. */
@@ -135,7 +140,7 @@ public class UiOverlay extends AbstractUiMenu {
         restartButton.setManaged(true);
       }
       default -> {}
-    }// For different game status, show different overlay
+    } // For different game status, show different overlay
 
     this.getChildren()
         .setAll(title, continueButton, restartButton, historyButton, ruleButton, aboutButton);
@@ -146,11 +151,11 @@ public class UiOverlay extends AbstractUiMenu {
     setVisible(true);
     setMouseTransparent(false);
     toFront();
-  }// Show the menu overlay
+  } // Show the menu overlay
 
   @Override
   public void hideMenu() {
     setVisible(false);
     setMouseTransparent(true);
-  }// Hide the menu overlay
+  } // Hide the menu overlay
 }
