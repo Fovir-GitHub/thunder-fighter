@@ -16,18 +16,31 @@ import org.thunderfighter.game.trajectory.StraightTrajectory;
 /**
  * BulletFactory
  *
- * <p>Centralized factory responsible for creating all bullets and item-bullets.
+ * Centralized factory responsible for creating all bullet instances.
  *
- * <p>Game-layer factory: - Hides construction details - Assigns trajectories - Injects Canvas into
- * bullets (via AbstractEntity.setCanvas)
+ * Responsibilities:
+ * - Encapsulates bullet construction logic
+ * - Assigns appropriate trajectories
+ * - Injects Canvas dependency into bullets
+ *
+ * This class belongs to the game layer and prevents bullet creation
+ * logic from being scattered across entities.
  */
 public final class BulletFactory {
 
+  /** Utility class: prevent instantiation */
   private BulletFactory() {}
 
   // -------------------------------------------------
   // Internal helper
   // -------------------------------------------------
+
+  /**
+   * Injects Canvas into a bullet instance if available.
+   *
+   * This avoids forcing every bullet constructor to depend on Canvas
+   * and keeps rendering concerns centralized.
+   */
   private static <T extends AbstractBullet> T injectCanvas(Canvas canvas, T bullet) {
     if (canvas != null) {
       bullet.setCanvas(canvas);
@@ -38,6 +51,10 @@ public final class BulletFactory {
   // -------------------------------------------------
   // Player Bullets
   // -------------------------------------------------
+
+  /**
+   * Creates a standard straight-moving player bullet.
+   */
   public static PlayerBullet createPlayerBullet(Canvas canvas, double x, double y) {
     PlayerBullet bullet = new PlayerBullet(x, y);
     injectCanvas(canvas, bullet);
@@ -48,6 +65,12 @@ public final class BulletFactory {
   // -------------------------------------------------
   // Enemy Bullets
   // -------------------------------------------------
+
+  /**
+   * Creates a normal enemy bullet with fixed initial velocity.
+   *
+   * @param large whether to use large bullet visuals
+   */
   public static NormalEnemyBullet createEnemyBullet(
       Canvas canvas, double x, double y, double dx, double dy, boolean large) {
 
@@ -57,6 +80,9 @@ public final class BulletFactory {
     return bullet;
   }
 
+  /**
+   * Creates an enemy bullet that follows a curved trajectory.
+   */
   public static CurveEnemyBullet createCurvedEnemyBullet(
       Canvas canvas, double x, double y, double dx, double dy, double curveFactor) {
 
@@ -67,9 +93,10 @@ public final class BulletFactory {
   }
 
   /**
-   * Homing enemy bullet.
+   * Creates a homing enemy bullet.
    *
-   * <p>Tracks target for limited ticks, then disappears.
+   * The bullet gradually turns toward the target for a limited
+   * number of ticks before expiring.
    */
   public static HomingEnemyBullet createHomingBullet(
       Canvas canvas,
@@ -90,6 +117,13 @@ public final class BulletFactory {
   // -------------------------------------------------
   // Laser Bullets (Boss)
   // -------------------------------------------------
+
+  /**
+   * Creates a laser-type bullet, typically used by bosses.
+   *
+   * Laser bullets usually manage their own lifetime and rendering
+   * and therefore may not require a trajectory.
+   */
   public static LaserBullet createLaserBullet(
       Canvas canvas,
       double x,

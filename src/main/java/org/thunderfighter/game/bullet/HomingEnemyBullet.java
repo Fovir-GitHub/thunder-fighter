@@ -14,19 +14,31 @@ import org.thunderfighter.game.trajectory.HomingTrajectory;
 /**
  * HomingEnemyBullet
  *
- * <p>Tracks player for a limited time (trackingTicks). Slower than normal bullets by design (tune
- * initDx/initDy and homing factor).
+ * Enemy bullet that tracks the player for a limited duration.
+ *
+ * The bullet gradually adjusts its direction using a homing trajectory,
+ * making it slower and more predictable than instant-lock bullets.
+ * This design provides pressure without being unfair to the player.
  */
 public class HomingEnemyBullet extends AbstractBullet {
 
   private static final int DAMAGE = 1;
 
-  /** Homing bullet sprite. */
   private static final Image SPRITE =
       new Image(HomingEnemyBullet.class.getResourceAsStream("/images/Bullet/enemy_bullet.png"));
 
   private int trackingTicks;
 
+  /**
+   * Constructs a homing enemy bullet.
+   *
+   * @param startX initial x position
+   * @param startY initial y position
+   * @param initDx initial horizontal velocity
+   * @param initDy initial vertical velocity
+   * @param trackingTicks number of ticks the bullet will track the target
+   * @param provider supplies real-time target position
+   */
   public HomingEnemyBullet(
       double startX,
       double startY,
@@ -35,26 +47,39 @@ public class HomingEnemyBullet extends AbstractBullet {
       int trackingTicks,
       HomingTrajectory.TargetProvider provider) {
 
+    // Initial position
     this.x = startX;
     this.y = startY;
     this.originX = startX;
     this.originY = startY;
 
+    // Bullet dimensions
     this.size = new Dimension2D(12, 24);
 
+    // Initial velocity and speed
     this.dx = initDx;
     this.dy = initDy;
     this.speed = Math.hypot(initDx, initDy);
 
+    // Enemy bullet flag
     this.fromPlayer = false;
 
+    // Assign homing trajectory
     this.trajectory = new HomingTrajectory(provider, 0.10);
 
+    // Ensure tracking duration is at least one tick
     this.trackingTicks = Math.max(1, trackingTicks);
 
+    // Infinite lifetime unless expired or destroyed
     this.lifeTicks = -1;
   }
 
+  /**
+   * Updates bullet state for one game tick.
+   *
+   * Decreases remaining tracking time and removes the bullet
+   * once the tracking duration expires.
+   */
   @Override
   public void update(List<AbstractEntity> worldEntities) {
     if (!aliveFlag) return;
@@ -70,12 +95,20 @@ public class HomingEnemyBullet extends AbstractBullet {
     killIfOutOfBounds();
   }
 
+  /**
+   * Called when this bullet collides with an aircraft.
+   *
+   * Applies damage and destroys the bullet.
+   */
   @Override
   public void onHit(Aircraft target) {
     target.takeDamage(DAMAGE);
     aliveFlag = false;
   }
 
+  /**
+   * Renders the bullet sprite to the canvas.
+   */
   @Override
   public void draw(GraphicsContext gc) {
     if (!aliveFlag) return;
