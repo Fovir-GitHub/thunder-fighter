@@ -10,20 +10,15 @@ import org.thunderfighter.core.abstractor.AbstractUiMenu;
 import org.thunderfighter.game.Game;
 import org.thunderfighter.utils.Constant;
 
-/**
- *
- *
- * <ol>
- *   Create 3 modes:
- *   <li>PAUSE: resume game
- *   <li>SUCCESS: show victory and offer back to menu button
- *   <li>FAIL: show game over and offer back to menu button
- * </ol>
- *
- * We can use the showPause, showSuccess, showFail methods to show different overlays. When users
- * key in p, we can call showPause to show the pause overlay. When users win the game, we can call
- * showSuccess to show the success overlay. When users lose the game, we can call showFail to show
- * the fail overlay.
+/*
+Create 3 modes:
+PAUSE: resume game
+SUCCESS: show victory and offer back to menu button
+FAIL: show game over and offer back to menu button
+We can use the showPause, showSuccess, showFail methods to show different overlays.
+When users key in p, we can call showPause to show the pause overlay. 
+When users win the game, we can call showSuccess to show the success overlay. 
+When users lose the game, we can call showFail to show the fail overlay.
  */
 public class UiOverlay extends AbstractUiMenu {
 
