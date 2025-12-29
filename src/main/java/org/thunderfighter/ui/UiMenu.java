@@ -10,15 +10,11 @@ import org.thunderfighter.core.abstractor.AbstractUiMenu;
 import org.thunderfighter.game.Game;
 import org.thunderfighter.utils.Constant;
 
-/**
+/*
  * UiMenu class is responsible for the main menu of the Thunder Fighter game.
- *
- * <ol>
- *   <li>This class extends AbstractUiMenu to implement the main menu UI.
- *   <li>In this class, we define buttons for starting the game, viewing history scores, about
- *       information, and game rules.
- *   <li>Therefore, we can reuse this class to create and manage the main menu of the game
- * </ol>
+ * This class extends AbstractUiMenu to implement the main menu UI.
+ * In this class, we define buttons for starting the game, viewing history scores, about information, and game rules.
+ * Therefore, we can reuse this class to create and manage the main menu of the game
  */
 public class UiMenu extends AbstractUiMenu {
   // The element of the main menu
