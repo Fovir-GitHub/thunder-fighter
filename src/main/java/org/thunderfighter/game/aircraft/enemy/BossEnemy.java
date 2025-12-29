@@ -11,23 +11,50 @@ import org.thunderfighter.game.bulletfactory.BulletFactory;
 import org.thunderfighter.game.trajectory.HomingTrajectory;
 import org.thunderfighter.utils.Constant;
 
+/**
+ * Boss Enemy
+ * Boss-level enemy
+ * Has multi-stage behavior; its attack patterns and movement speed change based on its health.
+ */
 public class BossEnemy extends AbstractEnemyAircraft {
 
-  public static final Dimension2D SIZE = new Dimension2D(200, 150); // @params
+  /** Boss dimensions (width 200, height 150) */
+  public static final Dimension2D SIZE = new Dimension2D(200, 150);
 
+  /** Move to the right now or not */
   private boolean movingRight = true;
+
+  /** Screen width, used to limit the Boss's horizontal movement range */
   private static final double SCREEN_WIDTH = 800;
-  private Stage lastStage = null; // @params
+
+  /** The previous stage, used to detect if the stage has changed */
+  private Stage lastStage = null;
+
+  /** The main game object, used to obtain the player's plane and modify the game state */
   private Game game;
 
+  /**
+   * Boss's three phases
+   * Stage 1: High health
+   * Stage 2: Medium health
+   * Stage 3: Low health (Enrage)
+   */
   private enum Stage {
     stage1,
     stage2,
     stage3
   }
 
+  /** Current stage of the Boss */
   private Stage stage = Stage.stage1;
 
+  /**
+   * Constructor
+   *
+   * @param x Initial X coordinate
+   * @param y Initial Y coordinate
+   * @param game Game object
+   */
   public BossEnemy(double x, double y, Game game) {
     this.x = x;
     this.y = y; // birth coordinates
@@ -47,6 +74,10 @@ public class BossEnemy extends AbstractEnemyAircraft {
     this.game = game;
   }
 
+  /**
+   * Boss's movement logic
+   * Moves back and forth between the center of the screen
+   */
   @Override
   protected void move() {
     double LEFT_BOUND = SCREEN_WIDTH * 0.25;
@@ -61,12 +92,20 @@ public class BossEnemy extends AbstractEnemyAircraft {
     }
   }
 
+  /**
+   * Triggered when the Boss dies
+   * Game state switches to victory
+   */
   @Override
   protected void onDie() {
     super.onDie();
     game.setGameState(Constant.GAME_STATE.SUCCESS);
   }
 
+  /**
+   * Update Boss status every frame
+   * Switch phases based on health, and adjust speed and firing rate accordingly
+   */
   @Override
   protected void onUpdate(List<AbstractEntity> worldEntities) {
     super.onUpdate(worldEntities);
@@ -93,6 +132,10 @@ public class BossEnemy extends AbstractEnemyAircraft {
     }
   }
 
+  /**
+   * Boss Shooting Entry
+   * Activate different shooting modes based on the current stage
+   */
   @Override
   protected void doShoot(List<AbstractEntity> worldEntities) {
     switch (stage) {
@@ -108,6 +151,11 @@ public class BossEnemy extends AbstractEnemyAircraft {
     }
   }
 
+  /**
+   * First stage firing method
+   * - Three straight-line bullets in a scattering pattern
+   * - Two curved bullets
+   */
   private void shootStage1(List<AbstractEntity> worldEntities) {
     Canvas c = getCanvas();
     if (c == null) return;
@@ -124,6 +172,11 @@ public class BossEnemy extends AbstractEnemyAircraft {
     worldEntities.add(BulletFactory.createCurvedEnemyBullet(c, cx - 40, by, -1.2, 3.0, -0.05));
   }
 
+  /**
+   * Second stage firing method
+   * - 1 homing bullet
+   * - 7 fan-shaped straight bullets
+   */
   private void shootStage2(List<AbstractEntity> worldEntities) {
     Canvas c = getCanvas();
     if (c == null) return;
@@ -138,7 +191,7 @@ public class BossEnemy extends AbstractEnemyAircraft {
             by,
             0,
             2.5,
-            150, // track 2.5 seconds
+            150, // Tracking bullet (locks onto player for 2.5 seconds)
             new HomingTrajectory.TargetProvider() {
               @Override
               public double getTargetX() {
@@ -158,6 +211,12 @@ public class BossEnemy extends AbstractEnemyAircraft {
     }
   }
 
+  /**
+   * Third stage firing mode (Berserk)
+   * - Laser
+   * - Homing projectile
+   * - High-speed linear projectile
+   */
   private void shootStage3(List<AbstractEntity> worldEntities) {
     Canvas c = getCanvas();
     if (c == null) return;
