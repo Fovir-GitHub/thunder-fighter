@@ -78,6 +78,10 @@ mvn javafx:run
 Or run via your IDE by setting Main.java as the main class
 ```
 
+## API Document
+
+Please visit [ThunderFighter JavaDoc](https://fovir-github.github.io/thunder-fighter/) to see the document.
+
 ## Acknowledgement
 
 - [JavaFX](https://github.com/openjdk/jfx): Open source, next generation client application platform for desktop, mobile and embedded systems based on `JavaSE`.
