@@ -1,0 +1,35 @@
+.button {
+  -fx-background-color: #6c5ce7;
+  -fx-text-fill: white;
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+  -fx-padding: 10 20 10 20;
+  -fx-background-radius: 5;
+  -fx-border-radius: 5;
+  -fx-background-insets: 0;
+  -fx-effect: dropshadow(gaussian, #a29bfe, 5, 0, 0, 5);
+}
+
+.button:hover {
+  -fx-background-color: #7d70f0;
+}
+
+.button:pressed {
+  -fx-translate-y: 5;
+  -fx-effect: dropshadow(gaussian, #a29bfe, 5, 0, 0, 0);
+  -fx-background-color: #5a4fcf;
+}
+
+.title {
+  -fx-font-size: 36px;
+  -fx-font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+  -fx-font-weight: bold;
+  -fx-text-fill: #ffffff;
+  -fx-stroke: #1e272e;
+  -fx-stroke-width: 1px;
+  -fx-background-color: rgba(0, 0, 0, 0.5);
+  -fx-padding: 15 30 15 30;
+  -fx-background-radius: 15;
+  -fx-border-radius: 15;
+  -fx-alignment: center;
+}

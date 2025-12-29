@@ -71,6 +71,8 @@ public class Game {
     gameState = GAME_STATE.MENU;
 
     this.scene = new Scene(root);
+    String css = getClass().getResource("/css/styles.css").toExternalForm();
+    scene.getStylesheets().add(css);
 
     stage.setScene(this.scene);
     stage.show();

@@ -4,8 +4,7 @@ package org.thunderfighter.ui;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.control.Label;
 import org.thunderfighter.core.abstractor.AbstractUiMenu;
 import org.thunderfighter.game.Game;
 import org.thunderfighter.utils.Constant;
@@ -36,7 +35,7 @@ public class UiOverlay extends AbstractUiMenu {
 
   private OverlayMode mode = OverlayMode.PAUSE;
 
-  public final Text title = new Text("Paused");
+  public final Label title = new Label("Paused");
 
   public final Button continueButton = new Button("Continue");
   public final Button restartButton = new Button("Back to Menu");
@@ -52,8 +51,7 @@ public class UiOverlay extends AbstractUiMenu {
     this.setAlignment(Pos.CENTER);
     this.setSpacing(20);
 
-    this.title.setFont(Font.font(30));
-
+    this.title.getStyleClass().add("title");
     createButton(continueButton);
     createButton(historyButton);
     createButton(restartButton);
@@ -83,7 +81,6 @@ public class UiOverlay extends AbstractUiMenu {
   }
 
   private void createButton(Button button) {
-    button.setFont(Font.font(15));
     button.setPrefWidth(220);
     button.setPrefHeight(40);
     button.setFocusTraversable(true);

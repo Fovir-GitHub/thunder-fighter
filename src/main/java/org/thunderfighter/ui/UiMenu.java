@@ -4,8 +4,7 @@ package org.thunderfighter.ui;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.control.Label;
 import org.thunderfighter.core.abstractor.AbstractUiMenu;
 import org.thunderfighter.game.Game;
 import org.thunderfighter.utils.Constant;
@@ -22,7 +21,7 @@ import org.thunderfighter.utils.Constant;
  */
 public class UiMenu extends AbstractUiMenu {
   // The element of the main menu
-  public final Text title = new Text("Thunder Fighter");
+  public final Label title = new Label("Thunder Fighter");
   public final Button startButton = new Button("Start Game");
   public final Button historyButton = new Button("History Score");
   public final Button aboutButton = new Button("About");
@@ -45,14 +44,14 @@ public class UiMenu extends AbstractUiMenu {
             + "-fx-background-position: center;"
             + "-fx-background-repeat: no-repeat;"); // add background image to the menu
 
-    this.title.setFont(Font.font(30));
+    this.title.getStyleClass().add("title");
 
     createButton(startButton);
     createButton(historyButton);
     createButton(ruleButton);
     createButton(aboutButton);
     // Add all elements to the menu
-    this.getChildren().setAll(title, startButton, historyButton, ruleButton, aboutButton);
+    this.getChildren().addAll(title, startButton, historyButton, ruleButton, aboutButton);
 
     showMenu(); // show the menu
 
@@ -69,9 +68,8 @@ public class UiMenu extends AbstractUiMenu {
   }
 
   private void createButton(Button button) {
-    button.setPrefWidth(150);
+    button.setPrefWidth(200);
     button.setPrefHeight(40);
-    button.setFont(Font.font(15));
   } // the basic style for buttons
 
   @Override
