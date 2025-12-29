@@ -6,9 +6,12 @@ import org.thunderfighter.core.manager.ScoreManager;
 /**
  * Abstract Enemy Aircraft Class
  *
- * <p>Inherited from {@link AbstractAircraft}, serving as the common parent class for all enemy aircraft.
- * Provides common shooting controls, cooldown logic, and kill score calculation for all enemy aircraft.
- * * <p>Subclasses only need to focus on the specific movement methods and shooting implementation ({@link #doShoot(List)}).
+ * <p>Inherited from {@link AbstractAircraft}, serving as the common parent class for all enemy
+ * aircraft. Provides common shooting controls, cooldown logic, and kill score calculation for all
+ * enemy aircraft. *
+ *
+ * <p>Subclasses only need to focus on the specific movement methods and shooting implementation
+ * ({@link #doShoot(List)}).
  */
 public abstract class AbstractEnemyAircraft extends AbstractAircraft {
 
@@ -37,7 +40,8 @@ public abstract class AbstractEnemyAircraft extends AbstractAircraft {
   /**
    * Attempt to fire
    *
-   * <p>Firing logic will only be executed if the enemy aircraft has the ability to fire and the cooldown has ended.
+   * <p>Firing logic will only be executed if the enemy aircraft has the ability to fire and the
+   * cooldown has ended.
    *
    * @param worldEntities All entities in the current world
    */
@@ -54,9 +58,10 @@ public abstract class AbstractEnemyAircraft extends AbstractAircraft {
    * Per-frame update logic (enemy aircraft only)
    *
    * <p>Responsible for:
+   *
    * <ul>
-   * <li>Decrease firing cooldown</li>
-   * <li>Trigger firing attempt</li>
+   *   <li>Decrease firing cooldown
+   *   <li>Trigger firing attempt
    * </ul>
    *
    * @param worldEntities All entities in the current world
@@ -80,8 +85,8 @@ public abstract class AbstractEnemyAircraft extends AbstractAircraft {
   /**
    * Actual firing logic
    *
-   * <p> Implemented by a specific enemy subclass, used to generate bullets,
-   * Set ballistics or special attack behaviors.
+   * <p>Implemented by a specific enemy subclass, used to generate bullets, Set ballistics or
+   * special attack behaviors.
    *
    * @param worldEntities All entities in the current world
    */

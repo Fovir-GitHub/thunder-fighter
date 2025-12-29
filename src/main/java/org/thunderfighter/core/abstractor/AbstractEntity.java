@@ -10,8 +10,9 @@ import org.thunderfighter.core.entity.Entity;
 /**
  * Abstract base class for entities
  *
- * <p>The common parent class for all interactive objects in the game, such as airplanes, bullets, and items.
- * This class defines the basic attributes of entities, including position, speed, size, survival status, and collision boundaries.
+ * <p>The common parent class for all interactive objects in the game, such as airplanes, bullets,
+ * and items. This class defines the basic attributes of entities, including position, speed, size,
+ * survival status, and collision boundaries.
  *
  * <p>The specific update logic and drawing methods are implemented by subclasses.
  */
@@ -110,7 +111,6 @@ public abstract class AbstractEntity implements Entity {
    *
    * @return y-coordinate
    */
-
   public double getY() {
     return this.y;
   }
@@ -118,18 +118,18 @@ public abstract class AbstractEntity implements Entity {
   /**
    * Update logic for each frame
    *
-   * <p> Specific behaviors are implemented by subclasses, for example:
+   * <p>Specific behaviors are implemented by subclasses, for example:
+   *
    * <ul>
-   * <li>Position update</li>
-   * <li>State change</li>
-   * <li>Collision detection</li>
+   *   <li>Position update
+   *   <li>State change
+   *   <li>Collision detection
    * </ul>
    *
    * @param worldEntities All entities in the current world
    */
   @Override
-  public abstract void update(
-      List<AbstractEntity> worldEntities);
+  public abstract void update(List<AbstractEntity> worldEntities);
 
   /**
    * Draw the entity

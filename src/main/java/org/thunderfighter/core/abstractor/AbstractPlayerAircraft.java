@@ -7,8 +7,8 @@ import org.thunderfighter.game.Game;
 /**
  * Abstract player aircraft class
  *
- * <p>Inherited from {@link AbstractAircraft}, used for player-controlled aircraft.
- * Provides player input state management, shooting cooldown logic, and shooting behavior templates.
+ * <p>Inherited from {@link AbstractAircraft}, used for player-controlled aircraft. Provides player
+ * input state management, shooting cooldown logic, and shooting behavior templates.
  *
  * <p>Specific shooting methods are implemented by subclasses using {@link #doShoot(List)}.
  */
@@ -114,8 +114,8 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
   /**
    * Per-frame update logic
    *
-   * <p>Responsible for basic update logic of the player's aircraft, such as firing cooldown reduction.
-   * Specific movement logic is implemented by {@link #move()}.
+   * <p>Responsible for basic update logic of the player's aircraft, such as firing cooldown
+   * reduction. Specific movement logic is implemented by {@link #move()}.
    *
    * @param worldEntities All entities in the current world
    */
@@ -129,7 +129,8 @@ public abstract class AbstractPlayerAircraft extends AbstractAircraft {
   /**
    * Actual shooting implementation
    *
-   * <p> Implemented by a specific player aircraft subclass, used to generate bullets or perform special attacks.
+   * <p>Implemented by a specific player aircraft subclass, used to generate bullets or perform
+   * special attacks.
    *
    * @param worldEntities All entities in the current world
    */
