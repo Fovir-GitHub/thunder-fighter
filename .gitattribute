@@ -1,37 +1,43 @@
-# Sources
-*.c     text diff=cpp eol=lf
-*.cc    text diff=cpp eol=lf
-*.cxx   text diff=cpp eol=lf
-*.cpp   text diff=cpp eol=lf
-*.cpi   text diff=cpp eol=lf
-*.c++   text diff=cpp eol=lf
-*.hpp   text diff=cpp eol=lf
-*.h     text diff=cpp eol=lf
-*.h++   text diff=cpp eol=lf
-*.hh    text diff=cpp eol=lf
+# Java sources
+*.java          text diff=java eol=lf
+*.kt            text diff=kotlin eol=lf
+*.groovy        text diff=java eol=lf
+*.scala         text diff=java eol=lf
+*.gradle        text diff=java eol=lf
+*.gradle.kts    text diff=kotlin eol=lf
 
-# Compiled Object files
-*.slo   binary
-*.lo    binary
-*.o     binary
-*.obj   binary
+# These files are text and should be normalized (Convert crlf => lf)
+*.css           text diff=css
+*.scss          text diff=css
+*.sass          text
+*.df            text
+*.htm           text diff=html
+*.html          text diff=html
+*.js            text
+*.mjs           text
+*.cjs           text
+*.jsp           text
+*.jspf          text
+*.jspx          text
+*.properties    text
+*.tld           text
+*.tag           text
+*.tagx          text
+*.xml           text
 
-# Precompiled Headers
-*.gch   binary
-*.pch   binary
+# These files are binary and should be left untouched
+# (binary is a macro for -text -diff)
+*.class         binary
+*.dll           binary
+*.ear           binary
+*.jar           binary
+*.so            binary
+*.war           binary
+*.jks           binary
 
-# Compiled Dynamic libraries
-*.so    binary
-*.dylib binary
-*.dll   binary
+# Common build-tool wrapper scripts ('.cmd' versions are handled by 'Common.gitattributes')
+mvnw            text eol=lf
+gradlew         text eol=lf
 
-# Compiled Static libraries
-*.lai   binary
-*.la    binary
-*.a     binary
-*.lib   binary
-
-# Executables
-*.exe   binary
-*.out   binary
-*.app   binary
+# These are explicitly windows files and should use crlf
+*.bat           text eol=crlf
