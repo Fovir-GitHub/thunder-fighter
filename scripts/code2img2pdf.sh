@@ -14,3 +14,5 @@ find "$SRC" -type f -name '*.java' | while read -r file; do
     --output "${out%.java}.png" \
     < "$file"
 done
+
+find "$DST" -type f -name '*.png' -print0 | sort -z | xargs -0 img2pdf --output code.pdf
