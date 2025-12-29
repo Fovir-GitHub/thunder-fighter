@@ -69,8 +69,9 @@ public class Game {
     graphicsContext = canvas.getGraphicsContext2D();
     root = new StackPane(canvas, overlay, menu);
     gameState = GAME_STATE.MENU;
-
     this.scene = new Scene(root);
+
+    // Load CSS style.
     String css = getClass().getResource("/css/styles.css").toExternalForm();
     scene.getStylesheets().add(css);
 
