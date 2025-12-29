@@ -26,19 +26,25 @@ public class ScoreBoard {
    * @param root The root pane.
    * @param playerAircraft Player's aircraft to display the lives.
    */
-  public ScoreBoard(StackPane root, final PlayerAircraft playerAircraft) {
+  public ScoreBoard(final StackPane root, final PlayerAircraft playerAircraft) {
     this.playerAircraft = playerAircraft;
     initScoreBoardContainer();
 
     root.getChildren().add(scoreBoardContainer);
   }
 
-  public void setPlayerAircraft(PlayerAircraft playerAircraft) {
+  public void setPlayerAircraft(final PlayerAircraft playerAircraft) {
     this.playerAircraft = playerAircraft;
   }
 
-  public void setVisible(boolean visible) {
+  public void setVisible(final boolean visible) {
     scoreBoardContainer.setVisible(visible);
+  }
+
+  /** Update the score board. */
+  public void update() {
+    scoreLabel.setText("Score: " + ScoreManager.getInstance().getScore());
+    livesLabel.setText("Lives: " + playerAircraft.getHp());
   }
 
   /** Initialize the score board and set its style. */
@@ -50,13 +56,13 @@ public class ScoreBoard {
     scoreBoardContainer.setPrefWidth(200);
     scoreBoardContainer.setMaxWidth(200);
     scoreBoardContainer.setMaxHeight(100);
-    Color bgColor = Color.rgb(0, 0, 0, 0.6);
-    CornerRadii radii = new CornerRadii(15);
+    final Color bgColor = Color.rgb(0, 0, 0, 0.6);
+    final CornerRadii radii = new CornerRadii(15);
     scoreBoardContainer.setBackground(
         new Background(new BackgroundFill(bgColor, radii, Insets.EMPTY)));
     scoreBoardContainer.setPadding(new Insets(15));
     scoreBoardContainer.setMouseTransparent(true);
-    String labelStyle =
+    final String labelStyle =
         "-fx-font-family: 'Arial Black'; -fx-font-size: 20px; -fx-text-fill: white; -fx-effect:"
             + " dropshadow(gaussian, black, 4, 0, 2, 2);";
     scoreLabel = new Label("Score: " + ScoreManager.getInstance().getScore());
@@ -65,11 +71,5 @@ public class ScoreBoard {
     livesLabel = new Label("Lives: " + playerAircraft.getHp());
     scoreBoardContainer.getChildren().addAll(scoreLabel, livesLabel);
     livesLabel.setStyle(labelStyle);
-  }
-
-  /** Update the score board. */
-  public void update() {
-    scoreLabel.setText("Score: " + ScoreManager.getInstance().getScore());
-    livesLabel.setText("Lives: " + playerAircraft.getHp());
   }
 }

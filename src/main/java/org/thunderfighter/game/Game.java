@@ -30,15 +30,15 @@ public class Game {
 
   // GUI related.
   private AnimationTimer animationTimer;
-  private Canvas canvas;
-  private GraphicsContext graphicsContext;
-  private Scene scene;
-  private StackPane root;
+  private final Canvas canvas;
+  private final GraphicsContext graphicsContext;
+  private final Scene scene;
+  private final StackPane root;
   private KeyboardController keyboardController;
-  private UiOverlay overlay;
-  private UiMenu menu;
+  private final UiOverlay overlay;
+  private final UiMenu menu;
   private ScoreBoard scoreBoard;
-  private Image backgroundImage =
+  private final Image backgroundImage =
       new Image(getClass().getResourceAsStream("/images/Background/bg.png"));
 
   private long lastTime = 0;
@@ -47,7 +47,7 @@ public class Game {
   private PlayerAircraft playerAircraft;
 
   // Manage all enetities.
-  private List<AbstractEntity> entities = new ArrayList<>();
+  private final List<AbstractEntity> entities = new ArrayList<>();
 
   // Enemy related.
   private EnemySpawner enemySpawner;
@@ -60,7 +60,7 @@ public class Game {
   private boolean scoreStored = false;
   private boolean scoreRead = false;
 
-  public Game(Stage stage) {
+  public Game(final Stage stage) {
     overlay = new UiOverlay(this);
     menu = new UiMenu(this, overlay);
     canvas = new Canvas(800, 900);
@@ -76,7 +76,7 @@ public class Game {
     initGame();
   }
 
-  public void setGameState(GAME_STATE gameState) {
+  public void setGameState(final GAME_STATE gameState) {
     this.gameState = gameState;
   }
 
@@ -132,10 +132,10 @@ public class Game {
 
     CollisionDetector.detectCollision(entities);
 
-    Iterator<AbstractEntity> it = entities.iterator();
-    List<AbstractEntity> tempList = new ArrayList<>();
+    final Iterator<AbstractEntity> it = entities.iterator();
+    final List<AbstractEntity> tempList = new ArrayList<>();
     while (it.hasNext()) {
-      AbstractEntity entity = it.next();
+      final AbstractEntity entity = it.next();
       if (entity instanceof AbstractEnemyAircraft) {
         entity.update(tempList);
       } else {
@@ -161,7 +161,7 @@ public class Game {
   public void draw() {
     graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     graphicsContext.drawImage(backgroundImage, 0, 0, canvas.getWidth(), canvas.getHeight());
-    for (AbstractEntity entity : entities) {
+    for (final AbstractEntity entity : entities) {
       entity.draw(graphicsContext);
     }
   }
@@ -179,7 +179,7 @@ public class Game {
     animationTimer =
         new AnimationTimer() {
           @Override
-          public void handle(long now) {
+          public void handle(final long now) {
             // If this is the first run, initialize the timestamp.
             if (lastTime == 0) {
               lastTime = now;
@@ -188,7 +188,7 @@ public class Game {
 
             // Calculate the time interval (nanoseconds) required for each frame.
             // 1seconds = 1,000,000,000 ns
-            long interval = 1_000_000_000 / Constant.TPS;
+            final long interval = 1_000_000_000 / Constant.TPS;
 
             // The logic is executed only when the difference
             // between the current time and the previous time is greater than or equal to the
@@ -317,7 +317,7 @@ public class Game {
     }
 
     // Update the phase before entering switch-case statements.
-    int currentScore = ScoreManager.getInstance().getScore();
+    final int currentScore = ScoreManager.getInstance().getScore();
     if (enemyStage == PHASE.NORMAL && currentScore >= Constant.GENERATE_ELITE_SCORE) {
       enemyStage = PHASE.ELITE;
     } else if (enemyStage == PHASE.ELITE && currentScore >= Constant.GENERATE_BOSS_SCORE) {
