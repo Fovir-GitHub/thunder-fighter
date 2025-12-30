@@ -1,6 +1,6 @@
 player:
   hp: 3
-  speed: 5
+  speed: 10
   shootInterval: 20
   bulletType: straight
   size: [60, 80]
@@ -18,20 +18,22 @@ enemy:
     speed: 2
     score: 50
     canShoot: true
-    shootInterval: 60
+    shootInterval: 120
     bulletType: straight
     size: [60, 80]
 
 boss:
-  hp: 300
+  hp: 30
   speed: 1
   score: 500
-  shootInterval: 40
   size: [200, 150]
   phases:
-    - hpThreshold: 200
+    - hpThreshold: 30
       pattern: fan
-    - hpThreshold: 100
-      pattern: spiral
-    - hpThreshold: 50
-      pattern: circle
+      shootInterval: 90
+    - hpThreshold: 20
+      pattern: fan, homing
+      shootInterval: 150
+    - hpThreshold: 10
+      pattern: laser, homing, straight
+      shootInterval: 120
