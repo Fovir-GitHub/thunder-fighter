@@ -5,12 +5,6 @@ game:
   height: 900
   TPS: 120
 
-player:
-  maxHp: 3
-  defaultAttack: 1
-  speed: 10
-  shootInterval: 20
-
 difficulty:
   ENEMY_NUMBER_LIMIT: 16
   generateScore:
