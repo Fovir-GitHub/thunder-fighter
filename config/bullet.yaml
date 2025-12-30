@@ -1,25 +1,45 @@
 bullets:
   player:
+    speed: 12
+    damage: 1
+    trajectory: straight
+    class: PlayerBullet
+
+  NormalEnemy:
     speed: 8
     damage: 1
     trajectory: straight
+    class: PlayerBullet
 
-  enemy:
-    speed: 4
+  Laser:
+    speed: 0
+    damage: MAX_INT
+    trajectory: straight
+    class: LaserBullet
+
+
+  Homing:
+    speed: not found # dx/dy
     damage: 1
+    thickness: 20
+
+  curved:
+    speed: not found
+    damage: 1
+    trajectory: curve
+    class: CurveEnemyBullet
 
 trajectories:
   straight:
     class: StraightTrajectory
+    params: none
 
-  fan:
-    class: FanTrajectory
-    count: 5
-    angleRange: 60
+  homing:
+    class: HomingTrajectory
+    params:
+      not found
 
-  spiral:
-    class: SpiralTrajectory
-    rotateSpeed: 0.1
-
-  tracking:
-    class: TrackingTrajectory
+  curve:
+    class: CurveTrajectory
+    params:
+      not found
