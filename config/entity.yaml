@@ -3,33 +3,68 @@ interfaces:
   - Aircraft
   - Bullet
   - Trajectory
+  - Clearable
 
 abstract_classes:
   - AbstractEntity
   - AbstractAircraft
+  - AbstractPlayerAircraft
+  - AbstractEnemyAircraft
   - AbstractBullet
-  - AbstractProp
+  - AbstractUiDialog
+  - AbstractUiMenu
 
 inheritance:
-  PlayerAircraft:
-    extends: AbstractAircraft
+  AbstractEntity:
+    implements: [Entity]
+
+  AbstractAircraft:
+    extends: AbstractEntity
     implements: [Aircraft]
 
+  AbstractBullet:
+    extends: AbstractEntity
+    implements: [Bullet]
+
+  AbstractPlayerAircraft:
+    extends: AbstractAircraft
+
+  AbstractEnemyAircraft:
+    extends: AbstractAircraft
+
+  PlayerAircraft:
+    extends: AbstractPlayerAircraft
+
   NormalEnemy:
-    extends: EnemyAircraft
+    extends: AbstractEnemyAircraft
 
   EliteEnemy:
-    extends: EnemyAircraft
+    extends: AbstractEnemyAircraft
 
   BossEnemy:
-    extends: EnemyAircraft
+    extends: AbstractEnemyAircraft
 
   PlayerBullet:
     extends: AbstractBullet
 
-  EnemyBullet:
+  NormalEnemyBullet:
     extends: AbstractBullet
 
-  ShieldProp:
-    extends: AbstractProp
-    implements: [Bullet]
+  LaserBullet:
+    extends: AbstractBullet
+    implements: [Clearable]
+
+  CurveEnemyBullet:
+    extends: AbstractBullet
+
+  HomingEnemyBullet:
+    extends: AbstractBullet
+
+  StraightTrajectory:
+    implements: [Trajectory]
+
+  HomingTrajectory:
+    implements: [Trajectory]
+
+  CurveTrajectory:
+    implements: [Trajectory]
