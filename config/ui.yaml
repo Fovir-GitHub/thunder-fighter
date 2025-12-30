@@ -4,12 +4,38 @@ menu:
     - name: start
       text: "Start game"
     - name: history
-      text: "History"
-    - name: setting
-      text: "Set"
+      text: "History Score"
+    - name: rule
+      text: "Game Rule"
     - name: about
       text: "About"
 
+pause:
+  title: "Pause"
+  buttons:
+    - name: continue
+      text: "Continue"
+    - name: history
+      text: "History Score"
+    - name: rule
+      text: "Game Rule"
+    - name: about
+      text: "About"
+
+
+rule:
+  text: |
+    1. Use arrow keys or WASD to move the fighter.
+    2. Press space to shoot.
+    3. Avoid enemy fire and obstacles.
+    4. Score points by destroying enemies.
+    5. When the score comes to 100, you will meet elite enemy.
+    6. The Boss will appear when the score reaches 500.
+    7. Boss has three stages:
+      in first stage, it shoots less frequently;
+      in second stage, it shoots the homing bullet;
+      in third stage, it releases fatal laser.
+    8. Defeat the Boss to win the game!
 about:
   text: |
     Thunder Fighter
