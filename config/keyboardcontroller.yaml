@@ -1,0 +1,14 @@
+keyboard:
+  button:
+    - "w"/"↑":
+      control the aircraft to go up.
+    - "a"/"←":
+      control the aircraft to go left.
+    - "s"/"↓":
+      control the aircraft to go down.
+    - "d"/"→":
+      control the aircraft to go right.
+    - "space":
+      shoot the bullets.
+    - "p":
+      pause the game.
