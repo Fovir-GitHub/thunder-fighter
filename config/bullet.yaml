@@ -5,11 +5,11 @@ bullets:
     trajectory: straight
     class: PlayerBullet
 
-  NormalEnemy:
+  Enemy:
     speed: 8
     damage: 1
     trajectory: straight
-    class: PlayerBullet
+    class: NormalEnemyBullet
 
   Laser:
     speed: 0
@@ -19,12 +19,13 @@ bullets:
 
 
   Homing:
-    speed: not found # dx/dy
+    speed: 8
     damage: 1
     thickness: 20
+    class: HomingEnemyBullet
 
   curved:
-    speed: not found
+    speed: 8
     damage: 1
     trajectory: curve
     class: CurveEnemyBullet
@@ -32,14 +33,19 @@ bullets:
 trajectories:
   straight:
     class: StraightTrajectory
-    params: none
+    params: {}
 
   homing:
-    class: HomingTrajectory
-    params:
-      not found
+  class: HomingTrajectory
+  params:
+    turnStrength: 0.12
+
 
   curve:
-    class: CurveTrajectory
-    params:
-      not found
+  class: CurveTrajectory
+  params:
+    factor: 0.12
+    gravity: 0.65
+    keepSpeed: true
+    minDownVy: 4.0
+    maxSpeed: 18.0
