@@ -22,18 +22,18 @@ enemy:
     bulletType: straight
     size: [60, 80]
 
-boss:
-  hp: 30
-  speed: 1
-  score: 500
-  size: [200, 150]
-  phases:
-    - hpThreshold: 30
-      pattern: fan
-      shootInterval: 90
-    - hpThreshold: 20
-      pattern: fan, homing
-      shootInterval: 150
-    - hpThreshold: 10
-      pattern: laser, homing, straight
-      shootInterval: 120
+  boss:
+    hp: 30
+    speed: 1
+    score: 500
+    size: [200, 150]
+    phases:
+      - hpThreshold: 30
+        pattern: fan
+        shootInterval: 90
+      - hpThreshold: 20
+        pattern: fan, homing
+        shootInterval: 150
+      - hpThreshold: 10
+        pattern: laser, homing, straight
+        shootInterval: 120
