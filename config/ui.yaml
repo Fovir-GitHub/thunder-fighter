@@ -22,6 +22,29 @@ pause:
     - name: about
       text: "About"
 
+success:
+  title: "Victory!"
+  buttons:
+    - name: restart
+      text: "Back to Menu"
+    - name: history
+      text: "History Score"
+    - name: rule
+      text: "Game Rule"
+    - name: about
+      text: "About"
+
+fail:
+  title: "Game Over"
+  buttons:
+    - name: restart
+      text: "Back to Menu"
+    - name: history
+      text: "History Score"
+    - name: rule
+      text: "Game Rule"
+    - name: about
+      text: "About"
 
 rule:
   text: |
@@ -36,6 +59,7 @@ rule:
       in second stage, it shoots the homing bullet;
       in third stage, it releases fatal laser.
     8. Defeat the Boss to win the game!
+
 about:
   text: |
     Thunder Fighter
